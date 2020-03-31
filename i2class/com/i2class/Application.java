@@ -1313,6 +1313,14 @@ public class Application implements Runnable, Serializable
 	}
 	
 	
+	public IRHost getDefaultHost() {
+		ResourceBundle prop = getResourceBundle();
+		String hostType = prop==null ? "JDBC" : prop.getString("I2HostType");
+		if ("AS400".equals(hostType)) 
+			return getAS400();
+		return getConnection();
+	}
+	
 	/**
 	 * Return a default AS400 object.
 	 */
@@ -4138,11 +4146,12 @@ public class Application implements Runnable, Serializable
 	public RfileDisk newDiskFile(Connection connection, String fileName) {
 		return new RfileJDBC(connection, fileName);
 	}
-	public RfileDisk newDiskFile(IHost host, String fileName) {
+	public RfileDisk newDiskFile(IRHost host, String fileName) {
+		Object hostObject = host.getHost();
 		if (host instanceof I2AS400)
-			return newDiskFile(((I2AS400)host).as400, fileName);
+			return newDiskFile((AS400)hostObject, fileName);
 		else if (host instanceof I2Connection)
-			return newDiskFile(((I2Connection)host).conn, fileName);
+			return newDiskFile((Connection)hostObject, fileName);
 		return null;
 	}
 	
@@ -4152,11 +4161,12 @@ public class Application implements Runnable, Serializable
 	public RfileKeyed newKeyedFile(Connection connection, String fileName) {
 		return new RfileIndex(connection, fileName);
 	}
-	public RfileKeyed newKeyedFile(IHost host, String fileName) {
+	public RfileKeyed newKeyedFile(IRHost host, String fileName) {
+		Object hostObject = host.getHost();
 		if (host instanceof I2AS400)
-			return newKeyedFile(((I2AS400)host).as400, fileName);
+			return newKeyedFile((AS400)hostObject, fileName);
 		else if (host instanceof I2Connection)
-			return newKeyedFile(((I2Connection)host).conn, fileName);
+			return newKeyedFile((Connection)hostObject, fileName);
 		return null;
 	}
 	
