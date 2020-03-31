@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="src" path=""/>
+	<classpathentry kind="lib" path="C:/RIO/riopdf.jar"/>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
+	<classpathentry combineaccessrules="false" kind="src" path="/IBM Webfacing Runtime"/>
+	<classpathentry kind="con" path="ISERIES_TOOLBOX"/>
+	<classpathentry kind="var" path="WAS_50_PLUGIN_DIR/j2ee.jar"/>
+	<classpathentry kind="output" path=""/>
+</classpath>
