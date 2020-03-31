@@ -2,18 +2,17 @@ package com.i2class;
 import com.ibm.as400.access.*;
 
 /**
- * A class representation of an I-spec (Input specification).
- * An input-specification programmatically describes field layouts in a record. 
+ * A class representation of a program-described (internally described) record.
  * @author Andrew Clark
  */
-public class RecordIspec extends Record400
+public class RecordInternal extends Record400
 {
 	protected byte[] buffer;
 	/**
 	 * RinternalRecord constructor comment.
 	 * @param recordName java.lang.String
 	 */
-	public RecordIspec(String recordName, int rcdLen)
+	public RecordInternal(String recordName, int rcdLen)
 	{
 		super(recordName);
 		addFieldDescription(
