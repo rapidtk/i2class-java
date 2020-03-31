@@ -1,16 +1,16 @@
 package com.i2class;
 
 /**
- * A mutable class that represents binary numeric data stored in a fixed character string.
+ * A mutable class that represents a java float stored in fixed-length data.
  * @author Andrew Clark 
  */
-public class fixedFloat extends fixedInt {
+public class float_f extends int_f {
 
 	/**
 	 * Construct a value with the specified length
 	 * @param sz The length of the binary value (4=float, 8=double)
 	 */
-	public fixedFloat(int sz) {
+	public float_f(int sz) {
 		super(sz);
 	}
 	

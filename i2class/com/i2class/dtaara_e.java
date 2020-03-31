@@ -16,7 +16,7 @@ import com.ibm.as400.access.AS400;
  * @author ANDREWC
  *
  */
-public class fixedDtaaraExternal extends fixedDtaara {
+public class dtaara_e extends dtaara_f {
 
 	/** The record format that describes this data structure. */
 	IRecordFormat recordFormat;
@@ -24,19 +24,19 @@ public class fixedDtaaraExternal extends fixedDtaara {
 	Vector fixedDataTypes = new Vector();
 	
 	/** Create a remote data area object. */
-	public fixedDtaaraExternal(IRecordFormat rcdFmt, AS400 system, String dtaaraName)
+	public dtaara_e(IRecordFormat rcdFmt, AS400 system, String dtaaraName)
 	{
 		super(rcdFmt.size(), system, dtaaraName);
 		recordFormat = rcdFmt;
 	}
 	/** Create a local data area object. */
-	public fixedDtaaraExternal(IRecordFormat rcdFmt, Connection host, String dtaaraName)
+	public dtaara_e(IRecordFormat rcdFmt, Connection host, String dtaaraName)
 	{
 		super(rcdFmt.size(), host, dtaaraName);
 		recordFormat = rcdFmt;
 	}
 	/** Create a remote (JDBC) data area object. */
-	public fixedDtaaraExternal(IRecordFormat rcdFmt, I2Connection rconn, String dtaaraName)
+	public dtaara_e(IRecordFormat rcdFmt, I2Connection rconn, String dtaaraName)
 	{
 		super(rcdFmt.size(), rconn, dtaaraName);
 		recordFormat = rcdFmt;

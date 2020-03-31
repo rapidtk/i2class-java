@@ -4,7 +4,7 @@ package com.i2class;
  * A mutable class that represents binary data stored in a fixed character string.
  * @author Andrew Clark 
  */
-public class binary extends fixedInt {
+public class binary extends int_f {
 	
 	private static final long serialVersionUID = 6140337025199662671L;
 	

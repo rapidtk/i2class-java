@@ -11,7 +11,7 @@ import java.math.*;
 
 /**
  * An interface to a packed decimal TYPE(*DEC) data area.
- * @see fixedDtaara
+ * @see dtaara_f
  * @see packed
  */
 public class packedDtaara extends packed {
@@ -64,7 +64,7 @@ public static void chgdtaara(AS400 host, String dtaara, double value) throws Exc
 public static void chgdtaara(Connection host, String dtaara, double value) throws Exception
 {
 	String s = Double.toString(value);
-	fixedDtaara.chgdtaara(host, dtaara, s);
+	dtaara_f.chgdtaara(host, dtaara, s);
 }
 /**
  * Get an instance of the specified (packed decimal) data area from the OS/400 host
@@ -108,7 +108,7 @@ public static BigDecimal rtvdtaara(AS400 host, String dtaara) throws Exception
  */
 public static BigDecimal rtvdtaara(Connection host, String dtaara) throws Exception
 {
-	String value = fixedDtaara.rtvdtaara(host, dtaara);
+	String value = dtaara_f.rtvdtaara(host, dtaara);
 	BigDecimal bd = numeric.newBigDecimal(value);
 	return bd;
 }

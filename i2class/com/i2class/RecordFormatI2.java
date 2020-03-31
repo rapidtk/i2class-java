@@ -28,7 +28,7 @@ class RecordFormatI2 extends RecordI2 implements IRecordFormat
 		}
 		public FixedData getFixedType()
 		{
-			return new fixedInt(2);
+			return new int_f(2);
 		}
 	}
 	/** 4-byte binary value. */
@@ -40,7 +40,7 @@ class RecordFormatI2 extends RecordI2 implements IRecordFormat
 		}
 		public FixedData getFixedType()
 		{
-			return new fixedInt(4);
+			return new int_f(4);
 		}
 	}
 	/** 8-byte binary value. */
@@ -52,7 +52,7 @@ class RecordFormatI2 extends RecordI2 implements IRecordFormat
 		}
 		public FixedData getFixedType()
 		{
-			return new fixedInt(8);
+			return new int_f(8);
 		}
 	}
 	public class AS400PackedDecimal extends I2DataType
@@ -85,7 +85,7 @@ class RecordFormatI2 extends RecordI2 implements IRecordFormat
 		}
 		public FixedData getFixedType()
 		{
-			return new fixedInt(4);
+			return new int_f(4);
 		}
 	}
 	public class AS400Text extends I2DataType

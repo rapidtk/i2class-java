@@ -105,7 +105,7 @@ public class Record400
 				((ZonedDecimalFieldDescription) fd).getDecimalPositions());
 		// Binary 
 		else if (fd instanceof BinaryFieldDescription)
-			return new fixedInt(fd.getDataType().getByteLength());
+			return new int_f(fd.getDataType().getByteLength());
 		// Everything else (treat as character)
 		return new fixed(fd.getLength());
 	}

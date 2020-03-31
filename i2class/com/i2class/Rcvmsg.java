@@ -33,9 +33,9 @@ public class Rcvmsg extends AbstractCommand {
 	private Pgmmsg pgmmsg;
 	
 	private final static fixed FORMAT_NAME=new fixed(10, "RCVM0100");
-	private final static fixedInt WAIT_TIME = new fixedInt(4);
+	private final static int_f WAIT_TIME = new int_f(4);
 	private final static fixed MSG_KEY = new fixed(4);
-	private final static fixedInt ERRCOD = new fixedInt(4);
+	private final static int_f ERRCOD = new int_f(4);
 	
 	
 	/**

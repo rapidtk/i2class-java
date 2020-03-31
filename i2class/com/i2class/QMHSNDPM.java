@@ -31,8 +31,8 @@ public class QMHSNDPM extends Application {
 	 * @param errcod Error code
 	 * @throws Exception
 	 */
-	public void call(fixed msgid, fixed msgf, fixed msgdta, fixedInt msgLength, fixed msgType, fixed callStackEntry,
-	 fixedInt callStackCounter, fixed msgKey, FixedData errcod) throws Exception {
+	public void call(fixed msgid, fixed msgf, fixed msgdta, int_f msgLength, fixed msgType, fixed callStackEntry,
+	 int_f callStackCounter, fixed msgKey, FixedData errcod) throws Exception {
 	 	Sndpgmmsg sndpgmmsg = new Sndpgmmsg();
 	 	sndpgmmsg.setApp(prvApp());
 	 	sndpgmmsg.setMsgid(msgid);

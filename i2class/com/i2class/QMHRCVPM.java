@@ -29,8 +29,8 @@ public class QMHRCVPM extends Application {
 	 * @param errcod Error code
 	 * @throws Exception
 	 */
-	public void call(FixedData msgInfo, fixedInt msgInfoLen, fixed fmtName, fixed callStackEntry,
-	 fixedInt callStackCounter, fixed msgType, fixed msgKey, fixedInt waitTime, fixed msgAction, FixedData errcod) {
+	public void call(FixedData msgInfo, int_f msgInfoLen, fixed fmtName, fixed callStackEntry,
+	 int_f callStackCounter, fixed msgType, fixed msgKey, int_f waitTime, fixed msgAction, FixedData errcod) {
 	 	// Find call stack
 		Application csapp=Pgmmsg.findCallStack(prvApp(), callStackEntry.toString(), callStackCounter.intValue());
 		// Find program message

@@ -23,7 +23,7 @@ public class RfilePDF extends RfilePrinter
 	static final int MARGIN_SIZE = 36; // 36 points = 1/2"
 	private Rectangle r;
 	//private int fontSize=RecordPDF.DEFAULT_FONT_SIZE;
-	fixedInt fontSize = new fixedInt(2, RecordPDF.DEFAULT_FONT_SIZE);
+	int_f fontSize = new int_f(2, RecordPDF.DEFAULT_FONT_SIZE);
 
 	/**
 	 * Write RPG-like output to a PDF file
@@ -155,8 +155,8 @@ public class RfilePDF extends RfilePrinter
 	public class Handle
 	{
 		public Rectangle 	rectangle;
-		public fixedInt	marginSize;
-		public fixedInt	fontSize; 
+		public int_f	marginSize;
+		public int_f	fontSize; 
 
 		public Document 	document;
 		public PdfWriter 	writer;

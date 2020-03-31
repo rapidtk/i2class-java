@@ -186,7 +186,7 @@ public class Sndpgmmsg extends AbstractCommand {
 				if (i>0)
 					msgqString = msgqString.substring(i+1);
 				// The message key is always the hashCode equivalent of the value
-				fixedInt msgKey = new fixedInt(4, pgmmsg.hashCode()); 
+				int_f msgKey = new int_f(4, pgmmsg.hashCode()); 
 				QueueTable.resolveQueue(app, msgqString+".msgq").sendObject(pgmmsg, msgKey);
 			}
 		}

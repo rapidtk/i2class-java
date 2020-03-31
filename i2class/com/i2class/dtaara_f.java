@@ -9,24 +9,24 @@ import com.ibm.as400.access.*;
  * They can be used to store data that is easily manipulated without the
  * overhead associated with a database file.
  */
-public class fixedDtaara extends fixed
+public class dtaara_f extends fixed
 {
 
 	protected ICharacterDtaara dtaara;
 	/** Create a remote data area object. */
-	public fixedDtaara(int sz, AS400 system, String dtaaraName)
+	public dtaara_f(int sz, AS400 system, String dtaaraName)
 	{
 		super(sz);
 		dtaara = getDtaara(system, dtaaraName);
 	}
 	/** Create a local data area object. */
-	public fixedDtaara(int sz, Connection host, String dtaaraName)
+	public dtaara_f(int sz, Connection host, String dtaaraName)
 	{
 		super(sz);
 		dtaara = getDtaara(dtaaraName);
 	}
 	/** Create a remote (JDBC) data area object. */
-	public fixedDtaara(int sz, I2Connection rconn, String dtaaraName)
+	public dtaara_f(int sz, I2Connection rconn, String dtaaraName)
 	{
 		super(sz);
 		dtaara = getDtaara(rconn, dtaaraName);

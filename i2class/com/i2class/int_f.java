@@ -2,16 +2,16 @@ package com.i2class;
 
 import java.math.*;
 /**
- * A mutable class that represents integer data stored in a fixed character string.
+ * A mutable class that represents a java int stored in fixed-length data.
  * @author Andrew Clark 
  */
-public class fixedInt extends AbstractNumericCoded
+public class int_f extends AbstractNumericCoded
 {
 	/**
 	 * Construct a value with the specified length
 	 * @param sz The length of the integer value (2=short, 4=int, 8=long)
 	 */
-	public fixedInt(int sz)
+	public int_f(int sz)
 	{
 		super(sz, len(sz), 0);
 	}
@@ -19,7 +19,7 @@ public class fixedInt extends AbstractNumericCoded
 	 * Construct a value with the specified length that overlays another value.
 	 * @param sz The length of the integer value (2=short, 4=int, 8=long)
 	 */
-	public fixedInt(int sz, pointer overlay)
+	public int_f(int sz, pointer overlay)
 	{
 		super(sz, len(sz), 0, overlay);
 	}
@@ -28,7 +28,7 @@ public class fixedInt extends AbstractNumericCoded
 	 * @param sz The length of the integer value (2=short, 4=int, 8=long)
 	 * @param value Initial value
 	 */
-	public fixedInt(int sz, long value)
+	public int_f(int sz, long value)
 	{
 		this(sz);
 		assign(value);
@@ -38,7 +38,7 @@ public class fixedInt extends AbstractNumericCoded
 	 * to the specified figurative constant.
 	 * @param sz The length of the integer value (2=short, 4=int, 8=long)
 	 */
-	public fixedInt(int sz, FigConstNum fc)
+	public int_f(int sz, FigConstNum fc)
 	{
 		this(sz);
 		assign(fc);
@@ -125,7 +125,7 @@ public class fixedInt extends AbstractNumericCoded
 	/**
 	 * Move a integer value to the right-most bytes of this variable.
 	 */
-	public FixedData move(fixedInt value)
+	public FixedData move(int_f value)
 	{
 		//return super.move((FixedData) value);
 		// If the value that is being moved is >= the length of this value and has the same scale 
@@ -143,7 +143,7 @@ public class fixedInt extends AbstractNumericCoded
 	/**
 	 * Move a integer value to the left-most bytes of this variable.
 	 */
-	public FixedData movel(fixedInt value)
+	public FixedData movel(int_f value)
 	{
 		//return super.move((FixedData) value);
 		// If the value that is being moved is >= the length of this value and has the same scale 
