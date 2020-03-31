@@ -4034,12 +4034,12 @@ public class Application implements Runnable, Serializable
 	
 	public pointer overlay(FixedData overlaidField, int offset)
 	{
-		return new pointer(overlaidField, offset);
+		return new pointer(overlaidField, offset-1);
 	}
 	
 	public pointer overlay(FixedData overlaidField)
 	{
-		return overlay(overlaidField, 0);
+		return overlay(overlaidField, 1);
 	}
 	
 	// Set the Program Status data structure
