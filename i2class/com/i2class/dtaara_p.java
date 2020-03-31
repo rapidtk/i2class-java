@@ -14,24 +14,24 @@ import java.math.*;
  * @see dtaara_f
  * @see packed
  */
-public class packedDtaara extends packed {
+public class dtaara_p extends packed {
 
 private IDecimalDtaara dtaara;
 
 /** Create a remote packed decimal data area object. */
-public packedDtaara(int sz, int precision, AS400 system, String dtaaraName)
+public dtaara_p(int sz, int precision, AS400 system, String dtaaraName)
 {
 	super(sz, precision);
 	dtaara = getDtaara(system, dtaaraName);
 }
 /** Create a local decimal data area object. */
-public packedDtaara(int sz, int precision, Connection host, String dtaaraName)
+public dtaara_p(int sz, int precision, Connection host, String dtaaraName)
 {
 	super(sz, precision);
 	dtaara = new DecimalDataAreaFile(dtaaraName);
 }
 /** Create a packed decimal data area object on a JDBC host. */
-public packedDtaara(int sz, int precision, I2Connection rconn, String dtaaraName)
+public dtaara_p(int sz, int precision, I2Connection rconn, String dtaaraName)
 {
 	super(sz, precision);
 	try
