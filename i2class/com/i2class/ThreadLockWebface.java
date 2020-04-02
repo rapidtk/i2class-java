@@ -725,7 +725,7 @@ public class ThreadLockWebface
 			out.println("</SCRIPT>");
 			out.println("</HEAD>");
 			out.println("<BODY>");
-			if (!(e instanceof EReturn))
+			if (!(e instanceof ApplicationReturn))
 			{
 				out.println("<H1>Error 500</H1>");
 				out.println(

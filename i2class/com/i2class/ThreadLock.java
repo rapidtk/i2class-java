@@ -287,7 +287,7 @@ public class ThreadLock implements Serializable
 		{
 			terminated = e;
 			PrintStream s;
-			if (e instanceof EReturn)
+			if (e instanceof ApplicationReturn)
 				s=I2Logger.logger.psLog;
 			else
 				s=I2Logger.logger.psError;
