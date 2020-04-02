@@ -1315,7 +1315,7 @@ public class Application implements Runnable, Serializable
 	
 	public IRHost getDefaultHost() {
 		ResourceBundle prop = getResourceBundle();
-		String hostType = prop==null ? "JDBC" : prop.getString("I2HostType");
+		String hostType = prop==null ? "JDBC" : prop.getString("HostType");
 		if ("AS400".equals(hostType)) 
 			return getAS400();
 		return getConnection();
@@ -1352,11 +1352,11 @@ public class Application implements Runnable, Serializable
 				{
 					ResourceBundle prop = getResourceBundle();
 					if (password.equals("*PROPERTY"))
-						password = prop.getString("I2HostPWD");
+						password = prop.getString("HostPWD");
 					if (usrid.equals("*PROPERTY"))
-						usrid = prop.getString("I2HostUID");
+						usrid = prop.getString("HostUID");
 					if (hostName.equals("*PROPERTY"))
-						hostName = prop.getString("I2HostName");
+						hostName = prop.getString("HostName");
 				}
 			}
 
@@ -1441,7 +1441,7 @@ public class Application implements Runnable, Serializable
 	{
 		IHost host=null;
 		hostPool.lockHostPool();
-		// Ouch!!! Can't just cache based upon URL, but must also used user id so that authority isn't shared
+		// Ouch!!! Can't just cache based upon URL, but must also use user id so that authority isn't shared
 		String key = usrid + '\t' + url;
 		// See if this connection is already in the connection pool
 		host = (IHost)hostPool.get(key);
@@ -2832,7 +2832,7 @@ public class Application implements Runnable, Serializable
 		{
 			// First, try to load from I2.properties
 			ResourceBundle prop = getResourceBundle();
-			className = prop.getString("I2Class");
+			className = prop.getString("DriverClass");
 		}
 		Class driverClass=null;
 		try
@@ -3662,11 +3662,11 @@ public class Application implements Runnable, Serializable
 				// First, try to load from I2.properties
 				ResourceBundle prop = getResourceBundle();
 				if (password.equals("*PROPERTY"))
-					password = prop.getString("I2HostPWD");
+					password = prop.getString("HostPWD");
 				if (usrid.equals("*PROPERTY"))
-					usrid = prop.getString("I2HostUID");
+					usrid = prop.getString("HostUID");
 				if (url.equals("*PROPERTY"))
-					url = prop.getString("I2ConnectionString");
+					url = prop.getString("HostURL");
 			}
 			// Get the connection from the cache
 			rconn = (I2Connection)retrieveI2Host(url, usrid, password);
@@ -4142,6 +4142,7 @@ public class Application implements Runnable, Serializable
 	{
 		return parms;
 	}
+	
 	
 	public IDiskFile newDiskFile(AS400 as400, String fileName) {
 		return new RfileDB400(as400, fileName);
