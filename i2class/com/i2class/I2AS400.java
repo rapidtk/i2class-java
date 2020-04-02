@@ -5,7 +5,7 @@ import java.sql.SQLException;
 import com.ibm.as400.access.AS400;
 
 /** An I2 AS400 object that contains the instance of the Application that it was instantiated from. */
-public class I2AS400 extends AS400 implements IRHost {
+public class I2AS400 extends AS400 implements Host {
 	AS400 as400;
 	Application app;
 	I2AS400(AS400 as400, Application app)

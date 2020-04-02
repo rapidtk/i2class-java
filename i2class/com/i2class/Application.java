@@ -733,7 +733,7 @@ public class Application implements Runnable, Serializable
 				INLR=ON;
 				// Close the connection to all hosts 
 				while (appRHosts.size()>0)
-					Rreturn((IRHost)appRHosts.remove(0));
+					Rreturn((Host)appRHosts.remove(0));
 				hostApplicationCount--;
 				if (I2Logger.logger.isDetailable())
 					I2Logger.logger.detail("Finalized " + this + ' ' + hostApplicationCount);
@@ -1313,7 +1313,7 @@ public class Application implements Runnable, Serializable
 	}
 	
 	
-	public IRHost getDefaultHost() {
+	public Host getDefaultHost() {
 		ResourceBundle prop = getResourceBundle();
 		String hostType = prop==null ? "JDBC" : prop.getString("I2HostType");
 		if ("AS400".equals(hostType)) 
@@ -1571,12 +1571,12 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Retrieve a I2 host object (either I2Connection or I2AS400) from the connection pool. */
-	protected IRHost retrieveI2Host(String url, String usrid, String password) throws Exception
+	protected Host retrieveI2Host(String url, String usrid, String password) throws Exception
 	{
 		if (I2Logger.logger.isTraceable())
 			I2Logger.logger.trace("Retrieving I2 host " + url);
 		// Use the connection from the previous application object, if it is compatible
-		IRHost rhost;
+		Host rhost;
 		if (url.startsWith("jdbc:"))
 			rhost = new I2Connection(this, url, usrid, password);
 		//...otherwise, this is an AS400 request.
@@ -1590,7 +1590,7 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Remove a I2 host from the connection pool. */
-	protected void removeI2Host(IRHost rhost)
+	protected void removeI2Host(Host rhost)
 	{
 		if (I2Logger.logger.isTraceable())
 			I2Logger.logger.trace("Removing I2 host " + rhost);
@@ -3771,14 +3771,14 @@ public class Application implements Runnable, Serializable
 	
 	public void RETURN(Connection conn) throws Pgmmsg
 	{
-		Rreturn((IRHost)conn);
+		Rreturn((Host)conn);
 	}
 	public void RETURN(AS400 as400) throws Pgmmsg
 	{
-		Rreturn((IRHost)as400);
+		Rreturn((Host)as400);
 	}
 	
-	protected void Rreturn(IRHost rhost) throws Pgmmsg
+	protected void Rreturn(Host rhost) throws Pgmmsg
 	{
 		// Set job switches
 		StringBuffer sws = new StringBuffer("00000000");
@@ -4146,7 +4146,7 @@ public class Application implements Runnable, Serializable
 	public RfileDisk newDiskFile(Connection connection, String fileName) {
 		return new RfileJDBC(connection, fileName);
 	}
-	public RfileDisk newDiskFile(IRHost host, String fileName) {
+	public RfileDisk newDiskFile(Host host, String fileName) {
 		Object hostObject = host.getHost();
 		if (host instanceof I2AS400)
 			return newDiskFile((AS400)hostObject, fileName);
@@ -4161,7 +4161,7 @@ public class Application implements Runnable, Serializable
 	public RfileKeyed newKeyedFile(Connection connection, String fileName) {
 		return new RfileIndex(connection, fileName);
 	}
-	public RfileKeyed newKeyedFile(IRHost host, String fileName) {
+	public RfileKeyed newKeyedFile(Host host, String fileName) {
 		Object hostObject = host.getHost();
 		if (host instanceof I2AS400)
 			return newKeyedFile((AS400)hostObject, fileName);
