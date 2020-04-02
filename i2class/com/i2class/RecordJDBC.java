@@ -9,7 +9,7 @@ import java.util.Vector;
  * @author Andrew Clark
  * @see RfileJDBC
  */
-public class RecordJDBC extends RecordFormatI2
+public class RecordJDBC extends RrecordX2
 {
 	String fieldList;
 	//RfileJDBC file;

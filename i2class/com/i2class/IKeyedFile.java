@@ -4,7 +4,7 @@ package com.i2class;
  * An interface to a keyed database file.
  * @author Andrew Clark 
  */
-public interface RfileKeyed extends RfileDisk
+public interface IKeyedFile extends IDiskFile
 {
 	/**
 	 * CHAIN (position and read) to a specific record.  Use setKey() to set the key value.  Each record format will implement its own setKey method.

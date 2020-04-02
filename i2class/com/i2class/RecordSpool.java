@@ -8,7 +8,7 @@ import java.io.*;
  * @author Andrew Clark
  * @see com.i2class.RfileSpool
  */
-public class RecordSpool extends RecordPrinter implements IRecord
+public class RecordSpool extends RrecordPrint implements IRecord
 {
 	SCS5256Writer printer;
 	SpooledFile splf;

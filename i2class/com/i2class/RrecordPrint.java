@@ -13,7 +13,7 @@ package com.i2class;
  * The edit code '3' applied to 9321.32 would output '9,321.32'.
  * @author Andrew Clark
  */
-abstract public class RecordPrinter extends RecordFormatI2
+abstract public class RrecordPrint extends RrecordX2
 {
 	
 	/** 
@@ -171,7 +171,7 @@ abstract public class RecordPrinter extends RecordFormatI2
 	public static String editNumeric(INumeric n, String edtwrd)
 	{
 		char buffer[] = new char[edtwrd.length()];
-		RecordPrinter.editBuffer(0, n, edtwrd, buffer);
+		RrecordPrint.editBuffer(0, n, edtwrd, buffer);
 		return new String(buffer);
 	}
 	
@@ -306,7 +306,7 @@ abstract public class RecordPrinter extends RecordFormatI2
 	public int page = 1;
 
 	int pageWidth;
-	public RecordPrinter(String recordName)
+	public RrecordPrint(String recordName)
 	{
 		super(recordName);
 		maxColumn = outputBuffer.length - 1;
@@ -332,7 +332,7 @@ abstract public class RecordPrinter extends RecordFormatI2
 	 * at the specified index. */
 	private void edit(int bufOffset, INumeric n, String edtWrd)
 	{
-		RecordPrinter.editBuffer(bufOffset, n, edtWrd, outputBuffer);
+		RrecordPrint.editBuffer(bufOffset, n, edtWrd, outputBuffer);
 	}
 	
 	/** Flush the contents of the current output buffer to the page. */

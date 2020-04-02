@@ -9,7 +9,7 @@ import java.util.*;
  * @author Andrew Clark
  * @see RfileWorkstn
  */
-public class RecordWorkstn extends RecordFormatI2
+public class RecordWorkstn extends RrecordX2
 {
 	//RdspfThread file;
 	Vector fldValues = new Vector();

@@ -2,9 +2,9 @@ package com.i2class;
 
 /**
  * A generic print output class.
- * @see RecordPrinter
+ * @see RrecordPrint
  */
-abstract public class RfilePrinter extends Rfile
+abstract public class RfilePrint extends Rfile
 {
 	String overflowIndicator;
 	int page; // This should be set to 1 on open()
@@ -24,7 +24,7 @@ abstract public class RfilePrinter extends Rfile
 	{
 		super.setRecord(rcd);
 		// Update the date/time values of the record
-		RecordPrinter record = (RecordPrinter)rcd;
+		RrecordPrint record = (RrecordPrint)rcd;
 		if (app != null)
 		{
 			record.TIME = app.TIME;

@@ -283,8 +283,8 @@ public class RecordWebface
 			znd = /*I2*/file.app.UDATE;
 		// If a separator is specified, then edit... 
 		if (separatorType == SeparatorType.HAS_SEPARATOR) {
-			String edtwrd = RecordPrinter.getEdtWrd(znd, 'Y', ' ');
-			String edtZnd = RecordPrinter.editNumeric(znd, edtwrd);
+			String edtwrd = RrecordPrint.getEdtWrd(znd, 'Y', ' ');
+			String edtZnd = RrecordPrint.editNumeric(znd, edtwrd);
 			return edtZnd;
 		}
 		// ...otherwise, just return toString()
@@ -306,7 +306,7 @@ public class RecordWebface
 		else
 			znd = /*I2*/file.app.UDATE;
 		// Edit value and return  
-		String edtZnd = RecordPrinter.editNumeric(znd, edtwrd);
+		String edtZnd = RrecordPrint.editNumeric(znd, edtwrd);
 		return edtZnd;
 	}
 		
@@ -397,9 +397,9 @@ public class RecordWebface
 							String edtwrd = fvd.getEditWord();
 							if (edtwrd == "") {
 								char edtcde = fvd.getEditCode();
-								edtwrd = RecordPrinter.getEdtWrd(znd, edtcde, ' ');
+								edtwrd = RrecordPrint.getEdtWrd(znd, edtcde, ' ');
 							}
-							value = RecordPrinter.editNumeric(znd, edtwrd);
+							value = RrecordPrint.editNumeric(znd, edtwrd);
 						}
 						// ...otherwise, return number with no 0-trim
 						else
@@ -551,7 +551,7 @@ public class RecordWebface
 		}
 		String currentTime = timeFormatter.format(new Date());
 		timeZoned.move(currentTime);
-		String editedTime = RecordPrinter.editNumeric(timeZoned, "  :  :  ");
+		String editedTime = RrecordPrint.editNumeric(timeZoned, "  :  :  ");
 		return editedTime;
 	}
 

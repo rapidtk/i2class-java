@@ -10,7 +10,7 @@ import java.util.*;
  * @author Andrew Clark
  */
 public class RfileJDBC
-	extends RfileCycle implements RfileDisk /*extends com.ibm.Connection.access.KeyedFile*/
+	extends RfileCycle implements IDiskFile /*extends com.ibm.Connection.access.KeyedFile*/
 {
 	//protected RecordJDBC dbRecord;
 	/** 

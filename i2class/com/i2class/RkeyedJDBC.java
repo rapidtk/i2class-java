@@ -10,7 +10,7 @@ import com.ibm.as400.access.AS400JDBCDriver;
  * A database file class for keyed JDBC access.
  * @author Andrew Clark
  */
-public abstract class RfileKeyedJDBC extends RfileJDBC implements RfileKeyed
+public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 {
 	// This is set on open from dbRecord
 	protected int maxKeyCount;
@@ -23,11 +23,11 @@ public abstract class RfileKeyedJDBC extends RfileJDBC implements RfileKeyed
 	 * @param indexName The name of the index that contains the key to use for this file. 
 	 * @param tableName The name of the table that contains the actual data.
 	 */
-	public RfileKeyedJDBC(java.sql.Connection system, String indexName, String tableName) 
+	public RkeyedJDBC(java.sql.Connection system, String indexName, String tableName) 
 	{
 		super(system, tableName);
 	}
-	public RfileKeyedJDBC(java.sql.Connection system, String lfileName) 
+	public RkeyedJDBC(java.sql.Connection system, String lfileName) 
 	{
 		super(system, lfileName);
 	}

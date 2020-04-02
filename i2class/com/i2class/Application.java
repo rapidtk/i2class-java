@@ -733,7 +733,7 @@ public class Application implements Runnable, Serializable
 				INLR=ON;
 				// Close the connection to all hosts 
 				while (appRHosts.size()>0)
-					Rreturn((Host)appRHosts.remove(0));
+					Rreturn((IRHost)appRHosts.remove(0));
 				hostApplicationCount--;
 				if (I2Logger.logger.isDetailable())
 					I2Logger.logger.detail("Finalized " + this + ' ' + hostApplicationCount);
@@ -1208,7 +1208,7 @@ public class Application implements Runnable, Serializable
 	/** Return a string edited according to the edit code. */
 	static public String editc(INumeric value, char edtCde, char fillChar)
 	{
-		String edtwrd = RecordPrinter.getEdtWrd(value, edtCde, fillChar);
+		String edtwrd = RrecordPrint.getEdtWrd(value, edtCde, fillChar);
 		return editw(value, edtwrd);
 	}
 	/** Return a string edited according to the edit code. */
@@ -1237,7 +1237,7 @@ public class Application implements Runnable, Serializable
 	/** Return a string edited according to the edit word. */
 	static public String editw(INumeric value, String edtwrd)
 	{
-		return RecordPrinter.editNumeric(value, edtwrd);
+		return RrecordPrint.editNumeric(value, edtwrd);
 	}
 	/** Return a string edited according to the edit word. */
 	static public String editw(long value, String edtwrd)
@@ -1313,7 +1313,7 @@ public class Application implements Runnable, Serializable
 	}
 	
 	
-	public Host getDefaultHost() {
+	public IRHost getDefaultHost() {
 		ResourceBundle prop = getResourceBundle();
 		String hostType = prop==null ? "JDBC" : prop.getString("I2HostType");
 		if ("AS400".equals(hostType)) 
@@ -1571,12 +1571,12 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Retrieve a I2 host object (either I2Connection or I2AS400) from the connection pool. */
-	protected Host retrieveI2Host(String url, String usrid, String password) throws Exception
+	protected IRHost retrieveI2Host(String url, String usrid, String password) throws Exception
 	{
 		if (I2Logger.logger.isTraceable())
 			I2Logger.logger.trace("Retrieving I2 host " + url);
 		// Use the connection from the previous application object, if it is compatible
-		Host rhost;
+		IRHost rhost;
 		if (url.startsWith("jdbc:"))
 			rhost = new I2Connection(this, url, usrid, password);
 		//...otherwise, this is an AS400 request.
@@ -1590,7 +1590,7 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Remove a I2 host from the connection pool. */
-	protected void removeI2Host(Host rhost)
+	protected void removeI2Host(IRHost rhost)
 	{
 		if (I2Logger.logger.isTraceable())
 			I2Logger.logger.trace("Removing I2 host " + rhost);
@@ -3038,7 +3038,7 @@ public class Application implements Runnable, Serializable
 
 	/** 
 	 * Set the key cache size for certain keyed database files opened by this application.
-	 * @see RfileSearch#loadKeyCache
+	 * @see RseekJDBC#loadKeyCache
 	 * @deprecated
 	 */
 	protected static void setKeyCacheSize(int keyCacheSize) {
@@ -3544,14 +3544,14 @@ public class Application implements Runnable, Serializable
 	/**
 	 * For RPG Cycle processing, add a detail file/format pair. 
 	 */
-	public void addDetailFormat(RfilePrinter file, RecordPrinter record)
+	public void addDetailFormat(RfilePrint file, RrecordPrint record)
 	{
 		detailFormats = addOutputFormat(detailFormats, file, record);
 	}
 	/**
 	 * For RPG Cycle processing, add a output file and its associated overflow indicator.
 	 */
-	public void addOutputFile(RfilePrinter file, String overflowIndicator)
+	public void addOutputFile(RfilePrint file, String overflowIndicator)
 	{
 		file.setOverflowIndicator(overflowIndicator);
 	}
@@ -3560,8 +3560,8 @@ public class Application implements Runnable, Serializable
 	 */
 	private Vector addOutputFormat(
 		Vector v,
-		RfilePrinter file,
-		RecordPrinter record)
+		RfilePrint file,
+		RrecordPrint record)
 	{
 		if (v == null)
 			v = new Vector();
@@ -3599,7 +3599,7 @@ public class Application implements Runnable, Serializable
 	/**
 	 * For RPG Cycle processing, add a total file/format pair. 
 	 */
-	public void addTotalFormat(RfilePrinter file, RecordPrinter record)
+	public void addTotalFormat(RfilePrint file, RrecordPrint record)
 	{
 		totalFormats = addOutputFormat(totalFormats, file, record);
 	}
@@ -3768,20 +3768,20 @@ public class Application implements Runnable, Serializable
 	}
 	
 	// Can't just do RETURN(IHost) because previous version of I2 actually used Connection, not I2Connection
-	public void RETURN(Host host) throws Pgmmsg
+	public void RETURN(IRHost host) throws Pgmmsg
 	{
 		Rreturn(host);
 	}
 	public void RETURN(Connection conn) throws Pgmmsg
 	{
-		RETURN((Host)conn);
+		RETURN((IRHost)conn);
 	}
 	public void RETURN(AS400 as400) throws Pgmmsg
 	{
-		RETURN((Host)as400);
+		RETURN((IRHost)as400);
 	}
 	
-	protected void Rreturn(Host rhost) throws Pgmmsg
+	protected void Rreturn(IRHost rhost) throws Pgmmsg
 	{
 		// Set job switches
 		StringBuffer sws = new StringBuffer("00000000");
@@ -4143,13 +4143,13 @@ public class Application implements Runnable, Serializable
 		return parms;
 	}
 	
-	public RfileDisk newDiskFile(AS400 as400, String fileName) {
+	public IDiskFile newDiskFile(AS400 as400, String fileName) {
 		return new RfileDB400(as400, fileName);
 	}
-	public RfileDisk newDiskFile(Connection connection, String fileName) {
+	public IDiskFile newDiskFile(Connection connection, String fileName) {
 		return new RfileJDBC(connection, fileName);
 	}
-	public RfileDisk newDiskFile(Host host, String fileName) {
+	public IDiskFile newDiskFile(IRHost host, String fileName) {
 		Object hostObject = host.getHost();
 		if (host instanceof I2AS400)
 			return newDiskFile((AS400)hostObject, fileName);
@@ -4158,13 +4158,13 @@ public class Application implements Runnable, Serializable
 		return null;
 	}
 	
-	public RfileKeyed newKeyedFile(AS400 as400, String fileName) {
-		return new RfileDB400(as400, fileName);
+	public IKeyedFile newKeyedFile(AS400 as400, String fileName) {
+		return new Rindex400(as400, fileName);
 	}
-	public RfileKeyed newKeyedFile(Connection connection, String fileName) {
-		return new RfileIndex(connection, fileName);
+	public IKeyedFile newKeyedFile(Connection connection, String fileName) {
+		return new RindexJDBC(connection, fileName);
 	}
-	public RfileKeyed newKeyedFile(Host host, String fileName) {
+	public IKeyedFile newKeyedFile(IRHost host, String fileName) {
 		Object hostObject = host.getHost();
 		if (host instanceof I2AS400)
 			return newKeyedFile((AS400)hostObject, fileName);

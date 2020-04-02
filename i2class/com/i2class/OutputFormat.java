@@ -5,9 +5,9 @@ package com.i2class;
  */
 class OutputFormat
 {
-	RfilePrinter file;
-	RecordPrinter record;
-	OutputFormat(RfilePrinter file, RecordPrinter record)
+	RfilePrint file;
+	RrecordPrint record;
+	OutputFormat(RfilePrint file, RrecordPrint record)
 	{
 		this.file = file;
 		this.record = record;

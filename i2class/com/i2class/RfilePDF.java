@@ -9,7 +9,7 @@ import com.lowagie.text.pdf.*;
  * Write out RPG-like 'green bar' output to a PDF file.
  * @author: Andrew Clark
  */
-public class RfilePDF extends RfilePrinter
+public class RfilePDF extends RfilePrint
 {
 	private Document document;
 	private PdfWriter writer;

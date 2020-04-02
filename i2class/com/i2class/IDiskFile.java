@@ -28,7 +28,7 @@ package com.i2class;
  * @see Rfile
  * @author Andrew Clark 
  */
-public interface RfileDisk
+public interface IDiskFile
 {
 	/** 
 	 * Commit any changes (updates/deletes) made to a file opened with commitment control.

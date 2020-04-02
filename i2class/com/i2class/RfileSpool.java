@@ -6,7 +6,7 @@ import com.ibm.as400.access.*;
  * Write out RPG-like 'green bar' (column based) output to a OS/400 spool file.
  * @see RecordSpool
  */
-public class RfileSpool extends RfilePrinter
+public class RfileSpool extends RfilePrint
 {
 	private SCS5256Writer file;
 	private PrinterFile prtf;

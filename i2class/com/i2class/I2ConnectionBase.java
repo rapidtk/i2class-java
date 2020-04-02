@@ -5,7 +5,7 @@ import java.util.Map;
 
 import com.i2class.cmd.*;
 /** An I2 Connection object that contains the instance of the Application that it was instantiated from. */
-public class I2ConnectionBase implements Host, Cloneable
+public class I2ConnectionBase implements IRHost, Cloneable
 {
 	// Constants indicating the type of database connected to
 	static final int SERVER_SQLSERVER=1;

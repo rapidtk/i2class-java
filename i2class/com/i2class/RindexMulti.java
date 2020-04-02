@@ -7,11 +7,11 @@ import java.sql.Connection;
 import java.util.Vector;
 
 /**
- * Limited support for multi-format logical files.
+ * Limited support for multi-format logical files in JDBC.
  * @author ANDREWC
  *
  */
-public class RfileMultiFormat extends RfileIndex
+public class RindexMulti extends RindexJDBC
 {
 
 	private Vector m_formats = new Vector(2);
@@ -20,7 +20,7 @@ public class RfileMultiFormat extends RfileIndex
 	 * @param system
 	 * @param lfileName
 	 */
-	public RfileMultiFormat(Connection system, String lfileName)
+	public RindexMulti(Connection system, String lfileName)
 	{
 		super(system, lfileName);
 	}

@@ -10,7 +10,7 @@ import com.ibm.as400.access.AS400JDBCDriver;
  * A database file class for keyed JDBC access that uses an SQL index to approximate positioning.
  * @author Andrew Clark
  */
-public class RfileIndex extends RfileKeyedJDBC
+public class RindexJDBC extends RkeyedJDBC
 {
 	/** Prepared statements mapped to the SQL strings from preparedStrings[][] */
 	private HashMap preparedStatements = new HashMap();
@@ -19,11 +19,11 @@ public class RfileIndex extends RfileKeyedJDBC
 	/**  The current and last index into the prepared string array. */
 	private int pindex, pkeyCount;
 
-	public RfileIndex(java.sql.Connection system, String indexName, String tableName)
+	public RindexJDBC(java.sql.Connection system, String indexName, String tableName)
 	{
 		super(system, tableName);
 	}
-	public RfileIndex(java.sql.Connection system, String lfileName)
+	public RindexJDBC(java.sql.Connection system, String lfileName)
 	{
 		super(system, lfileName);
 	}

@@ -7,7 +7,7 @@ import java.sql.SQLException;
  * @author ANDREWC
  *
  */
-public interface Host {
+public interface IRHost {
 	// Close the connection to the host
 	public void close() throws SQLException;
 	// The 'base' host object (e.g. java.sql.Connection or com.ibm.as400.AS400)

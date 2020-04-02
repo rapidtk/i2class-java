@@ -6,11 +6,11 @@ import java.io.Serializable;
  * A base record class for I2 (not AS400) records.
  * @author Andrew Clark
  */
-class RecordI2 implements IRecord, Serializable
+class RrecordX implements IRecord, Serializable
 {
 	String recordName;
 	Rfile file;
-	RecordI2(String recordName)
+	RrecordX(String recordName)
 	{
 		this.recordName=recordName;
 	}

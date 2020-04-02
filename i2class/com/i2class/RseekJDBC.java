@@ -10,7 +10,7 @@ import com.ibm.as400.access.AS400JDBCDriver;
  * A database file class for keyed JDBC access that uses a binary search to find a certain key.
  * @author Andrew Clark
  */
-public class RfileSearch extends RfileKeyedJDBC
+public class RseekJDBC extends RkeyedJDBC
 {
 	private int _seekDiff;
 	
@@ -35,11 +35,11 @@ public class RfileSearch extends RfileKeyedJDBC
 	 * @param indexName The name of the index that contains the key to use for this file. 
 	 * @param tableName The name of the table that contains the actual data.
 	 */
-	public RfileSearch(java.sql.Connection system, String indexName, String tableName)
+	public RseekJDBC(java.sql.Connection system, String indexName, String tableName)
 	{
 		super(system, tableName);
 	}
-	public RfileSearch(java.sql.Connection system, String lfileName)
+	public RseekJDBC(java.sql.Connection system, String lfileName)
 	{
 		super(system, lfileName);
 	}

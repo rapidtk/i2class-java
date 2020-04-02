@@ -8,7 +8,7 @@ import com.lowagie.text.pdf.*;
  * @author Andrew Clark
  * @see RfilePDF
  */
-public class RecordPDF extends RecordPrinter
+public class RecordPDF extends RrecordPrint
 {
 	Document document;
 	PdfContentByte contentByte;

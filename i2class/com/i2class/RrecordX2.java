@@ -5,7 +5,7 @@ package com.i2class;
  * @author Andrew Clark
  */
 import java.util.Vector;
-class RecordFormatI2 extends RecordI2 implements IRecordFormat
+class RrecordX2 extends RrecordX implements IRecordFormat
 {
 	private int addOffset;
 	Vector fldNames = new Vector();
@@ -15,7 +15,7 @@ class RecordFormatI2 extends RecordI2 implements IRecordFormat
 	static protected final int KEY_DESCEND=1;
 	static protected final int KEY_ABSVAL=2;
 
-	public RecordFormatI2(String recordName)
+	public RrecordX2(String recordName)
 	{
 		super(recordName);
 	}
