@@ -3768,14 +3768,17 @@ public class Application implements Runnable, Serializable
 	}
 	
 	// Can't just do RETURN(IHost) because previous version of I2 actually used Connection, not I2Connection
-	
+	public void RETURN(Host host) throws Pgmmsg
+	{
+		Rreturn(host);
+	}
 	public void RETURN(Connection conn) throws Pgmmsg
 	{
-		Rreturn((Host)conn);
+		RETURN((Host)conn);
 	}
 	public void RETURN(AS400 as400) throws Pgmmsg
 	{
-		Rreturn((Host)as400);
+		RETURN((Host)as400);
 	}
 	
 	protected void Rreturn(Host rhost) throws Pgmmsg
