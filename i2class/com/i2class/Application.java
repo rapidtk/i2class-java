@@ -1312,15 +1312,6 @@ public class Application implements Runnable, Serializable
 		return found;
 	}
 	
-	
-	public IRHost getDefaultHost() {
-		ResourceBundle prop = getResourceBundle();
-		String hostType = prop==null ? "JDBC" : prop.getString("HostType");
-		if ("AS400".equals(hostType)) 
-			return getAS400();
-		return getConnection();
-	}
-	
 	/**
 	 * Return a default AS400 object.
 	 */
@@ -4143,6 +4134,15 @@ public class Application implements Runnable, Serializable
 		return parms;
 	}
 	
+	/* This is an aborted attempt to make the file access generic so that JDBC vs 400 access could be 
+	 * decided at run-time, instead of at conversion time; class structure really doesn't support it...
+	public IRHost getDefaultHost() {
+		ResourceBundle prop = getResourceBundle();
+		String hostType = prop==null ? "JDBC" : prop.getString("HostType");
+		if ("AS400".equals(hostType)) 
+			return getAS400();
+		return getConnection();
+	}
 	
 	public IDiskFile newDiskFile(AS400 as400, String fileName) {
 		return new RfileDB400(as400, fileName);
@@ -4173,6 +4173,7 @@ public class Application implements Runnable, Serializable
 			return newKeyedFile((Connection)hostObject, fileName);
 		return null;
 	}
+	*/
 	
 	
 	/** Return a temporary zoned object that can be used by print(), etc. */
