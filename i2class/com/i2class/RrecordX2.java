@@ -5,6 +5,7 @@ package com.i2class;
  * @author Andrew Clark
  */
 import java.util.Vector;
+
 class RrecordX2 extends RrecordX implements IRecordFormat
 {
 	private int addOffset;
@@ -26,6 +27,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(5, 0);
 		}
+		@Override
 		public FixedData getFixedType()
 		{
 			return new int_f(2);
@@ -38,6 +40,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(10, 0);
 		}
+		@Override
 		public FixedData getFixedType()
 		{
 			return new int_f(4);
@@ -50,6 +53,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(19, 0);
 		}
+		@Override
 		public FixedData getFixedType()
 		{
 			return new int_f(8);
@@ -61,6 +65,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(size, precision);
 		}
+		@Override
 		public FixedData getFixedType()
 		{
 			return new packed(size, precision);
@@ -72,6 +77,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(size, precision);
 		}
+		@Override
 		public FixedData getFixedType()
 		{
 			return new zoned(size, precision);
@@ -81,11 +87,24 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 	{
 		public AS400Float4()
 		{
-			super(31, 15);
+			super(30, 9);
 		}
+		@Override
 		public FixedData getFixedType()
 		{
-			return new int_f(4);
+			return new float_f(4);
+		}
+	}
+	public class AS400Float8 extends I2DataType
+	{
+		public AS400Float8()
+		{
+			super(63, 17);
+		}
+		@Override
+		public FixedData getFixedType()
+		{
+			return new float_f(8);
 		}
 	}
 	public class AS400Text extends I2DataType
@@ -94,6 +113,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(length, -1);
 		}
+		@Override
 		public FixedData getFixedType()
 		{
 			return new fixed(size);
@@ -142,6 +162,10 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 	public class FloatFieldDescription extends I2FieldDescription
 	{
 		public FloatFieldDescription(AS400Float4 field, String fieldName)
+		{
+			super(field, fieldName);
+		}
+		public FloatFieldDescription(AS400Float8 field, String fieldName)
 		{
 			super(field, fieldName);
 		}
