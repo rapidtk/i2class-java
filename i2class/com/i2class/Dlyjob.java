@@ -8,7 +8,7 @@ import java.sql.Connection;
 
 /**
  * A Delay Job class.
- * @author ANDREWC
+ * 
  *
  */
 public class Dlyjob {

@@ -6,12 +6,12 @@ import java.util.Arrays;
 /**
  * The base class for all fixed-length, mutable I2 data.
  * 
- * @author Andrew Clark
+ * 
  */
 public abstract class FixedData implements Comparable, Cloneable, IFixed, Serializable
 {
 	/** The pointer to the actual buffer of data. */
-	pointer m_ptr;
+	FixedPointer m_ptr;
 	/** The actual length of the data */
 	int m_size;
 	
@@ -34,7 +34,7 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 
 	protected void construct(int sz)
 	{
-		m_ptr = new pointer(new byte[sz], 0);
+		m_ptr = new FixedPointer(new byte[sz], 0);
 		m_size = sz;
 	}
 	/**
@@ -49,7 +49,7 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	 * Create a fixed length type that overlays another field. 
 	 * @param sz The maximum size of the data (in bytes)
 	 */
-	protected FixedData(int sz, pointer overlay)
+	protected FixedData(int sz, FixedPointer overlay)
 	{
 		m_ptr = overlay;
 		m_size = sz;
@@ -133,7 +133,7 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 		try
 		{
 			FixedData fStr = (FixedData) (super.clone());
-			fStr.m_ptr = new pointer(new byte[msize()], 0);
+			fStr.m_ptr = new FixedPointer(new byte[msize()], 0);
 			fStr.arrayCopy(0, this);
 			return fStr;
 		}
@@ -162,21 +162,21 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	/**
 	 * Return the I2 date at the specified 0-based offset
 	 */
-	public fixed dateAt(int offset)
+	public FixedChar dateAt(int offset)
 	{
 		return fixedAt(offset, 10);
 	}
 	/**
 	 * Return the I2 time at the specified 0-based offset
 	 */
-	public fixed timeAt(int offset)
+	public FixedChar timeAt(int offset)
 	{
 		return fixedAt(offset, 8);
 	}
 	/**
 	 * Return the I2 timestamp at the specified 0-based offset
 	 */
-	public fixed timestampAt(int offset)
+	public FixedChar timestampAt(int offset)
 	{
 		return fixedAt(offset, 26);
 	}
@@ -192,9 +192,9 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 		return (compareTo(str) == 0);
 	}
 	/** Return the I2 fixed data type at the specified 0-based index. */
-	protected fixed fixedAt(int offset, int len)
+	protected FixedChar fixedAt(int offset, int len)
 	{
-		fixed f = new fixed(len, getBytes(), offset);
+		FixedChar f = new FixedChar(len, getBytes(), offset);
 		return f;
 	}
 	/** Return a binary value at the specified 0-based index. */
@@ -398,7 +398,7 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	}
 	/**
 	 * Move Array - move a string to the the byte array associated with this fixed-length string.
-	 * @see #movea(fixed fStr, int index)
+	 * @see #movea(FixedChar fStr, int index)
 	 */
 	public void movea(FixedData fStr, INumeric index)
 	{
@@ -406,7 +406,7 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	}
 	/**
 	 * Move Array - move a string to the the byte array associated with this fixed-length string.
-	 * @see #movea(fixed fStr, int index)
+	 * @see #movea(FixedChar fStr, int index)
 	 */
 	public void movea(String str, int index)
 	{
@@ -415,7 +415,7 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	}
 	/**
 	 * Move Array - move a string to the the byte array associated with this fixed-length string.
-	 * @see #movea(fixed fStr, int index)
+	 * @see #movea(FixedChar fStr, int index)
 	 */
 	public void movea(String str, INumeric index)
 	{
@@ -632,9 +632,9 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	 * @param sz the size of the packed decimal value to return
 	 * @param scale the scale of the packed decimal value to return
 	 */
-	protected packed packedAt(int index, int sz, int precision)
+	protected PackedDecimal packedAt(int index, int sz, int precision)
 	{
-		return new packed(sz, precision, getBytes(), index);
+		return new PackedDecimal(sz, precision, getBytes(), index);
 	}
 	/** A 'stub' implemented to read the contents of any subfields that 'overlay' this fixed-length string. */
 	protected void readSubfields()
@@ -686,12 +686,12 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 		updateThis();
 	}
 	/** Set the character value at the specified 0-based index to the left-most value of a fixed-length string. */
-	public void setCharAt(int index, fixed value)
+	public void setCharAt(int index, FixedChar value)
 	{
 		setCharAt(index, value.charAt(0));
 	}
 	/** Set the character value at the specified 0-based index to the left-most value of a fixed-length string. */
-	public void setCharAt(INumeric index, fixed value)
+	public void setCharAt(INumeric index, FixedChar value)
 	{
 		setCharAt(index.intValue(), value);
 	}
@@ -854,9 +854,9 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	}
 	
 	/** Return the zoned decimal 'subfield' at the specified 0-based index. */
-	protected zoned zonedAt(int index, int sz, int precision)
+	protected ZonedDecimal zonedAt(int index, int sz, int precision)
 	{
-		return new zoned(sz, precision, getBytes(), index);
+		return new ZonedDecimal(sz, precision, getBytes(), index);
 	}
 
 	// This is a stub (currently) implemented only by varying

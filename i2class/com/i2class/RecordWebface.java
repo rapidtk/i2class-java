@@ -18,7 +18,7 @@ import com.ibm.etools.iseries.webfacing.xml.XDocument;
 
 /**
  * A WebFacing display file record format class.
- * @author Andrew Clark
+ * 
  * @version 5.0
  * @see com.i2class.RfileWorkstn
  */
@@ -35,7 +35,7 @@ public class RecordWebface
 	Vector errmsgs = new Vector();
 	String contextPath;
 	static private SimpleDateFormat timeFormatter;
-	static private zoned timeZoned;
+	static private ZonedDecimal timeZoned;
 	// This can be different than the recordName because of webFacing name rules
 
 	/**
@@ -275,7 +275,7 @@ public class RecordWebface
 		DateType dateType,
 		CenturyType centuryType,
 		SeparatorType separatorType) {
-		zoned znd;
+		ZonedDecimal znd;
 		// Use DATE for 4-digit dates, otherwise use UDATE
 		if (centuryType == CenturyType.FOUR_DIGITS)
 			znd = /*I2*/file.app.DATE;
@@ -299,7 +299,7 @@ public class RecordWebface
 		com.ibm.as400ad.webfacing.runtime.host.DateType arg1,
 		com.ibm.as400ad.webfacing.runtime.host.CenturyType centuryType,
 		String edtwrd) {
-		zoned znd;
+		ZonedDecimal znd;
 		// Use DATE for 4-digit dates, otherwise use UDATE
 		if (centuryType == CenturyType.FOUR_DIGITS)
 			znd = /*I2*/file.app.DATE;
@@ -316,7 +316,7 @@ public class RecordWebface
 	{
 		String dateString = getString(index);
 		String datfmt400 = datfmt400(index);
-		date d = new date(datfmt400, dateString);
+		FixedDate d = new FixedDate(datfmt400, dateString);
 		return new java.sql.Date(d.toDate().getTime());
 	}
 			
@@ -326,7 +326,7 @@ public class RecordWebface
 	{
 		String dateString = getString(index);
 		String datfmt400 = datfmt400(index);
-		time t = new time(datfmt400, dateString);
+		FixedTime t = new FixedTime(datfmt400, dateString);
 		return new java.sql.Time(t.toDate().getTime());
 	}
 
@@ -387,8 +387,8 @@ public class RecordWebface
 					else if (fieldLength != valueLength
 						|| hasEdit
 						|| Application.check("0123456789", value) != 0) {
-						zoned znd =
-							new zoned(
+						ZonedDecimal znd =
+							new ZonedDecimal(
 								fieldLength,
 								fdd.getDecimalPrecision(),
 								new BigDecimal(value.trim())); // Since the check, above, failed, this isn't a 'simple' number and numeric.newBigDecimal() won't help 
@@ -547,7 +547,7 @@ public class RecordWebface
 	public String getSystemTime() {
 		if (timeFormatter == null) {
 			timeFormatter = new SimpleDateFormat("HHmmss");
-			timeZoned = new zoned(6, 0);
+			timeZoned = new ZonedDecimal(6, 0);
 		}
 		String currentTime = timeFormatter.format(new Date());
 		timeZoned.move(currentTime);
@@ -712,7 +712,7 @@ public class RecordWebface
 				status=2;
 			}
 			file.infds.getOverlay()[368] = (byte) hex;
-			file.infds.setFixedAt(10, new zoned(5,0,status));
+			file.infds.setFixedAt(10, new ZonedDecimal(5,0,status));
 			file.infds.updateThis();
 		}
 
@@ -1025,12 +1025,12 @@ public class RecordWebface
 	}
 
 	// For date/time data types, we have to set the text string based upon the date/time format of the field
-	public void setText(int fieldIndex, date value) throws SQLException
+	public void setText(int fieldIndex, FixedDate value) throws SQLException
 	{
 		String datfmt400 = datfmt400(fieldIndex);
 		if (datfmt400.compareTo(value.m_datfmt400)!=0)
 		{
-			date d = new date(datfmt400);
+			FixedDate d = new FixedDate(datfmt400);
 			try {
 				d.assign(value);
 				value = d;
@@ -1261,7 +1261,7 @@ public class RecordWebface
 	/* (non-Javadoc)
 	 * @see com.asc.rio.RecordThread#writeINDDS(com.asc.rio.fixed)
 	 */
-	void writeINDDS(fixed indds)
+	void writeINDDS(FixedChar indds)
 	{
 		if (indds!=null)
 		{

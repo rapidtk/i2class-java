@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * A queue that is backed by a SQL table containing its serialized form.
  * 
- * @author ANDREWC
+ * 
  *
  */
 public class QueueTable extends Queue implements Serializable {

@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * ADDLIBLE (Add library list) processing.
- * @author ANDREWC
+ * 
  */
 public class Chglibl extends AbstractCommand {
 
@@ -40,7 +40,7 @@ public class Chglibl extends AbstractCommand {
 		setLibl(libl);
 		exec();
 	}
-	public void exec(fixed libl) throws Exception {
+	public void exec(FixedChar libl) throws Exception {
 		exec(libl.toString());
 	}
 

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 /**
  * A mutable fixed-length and scale Numeric type.
- * @author Andrew Clark
+ * 
  */
 public abstract class AbstractNumeric extends FixedData implements INumeric
 {
@@ -30,10 +30,10 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 		// This could be different then length because of packed decimal data
 		// If less than 18 digits of precision are required, then we can return the 'fast' decimal type...
 		if (digits<=18)
-			tempDecimal_ = new numeric(digits, scale);
+			tempDecimal_ = new ShortDecimal(digits, scale);
 		// ...otherwise we have to fall back to the 'slow' BigDecimal-backed decimalBig type.
 		else
-			tempDecimal_ = new longDecimal(digits, scale);
+			tempDecimal_ = new LongDecimal(digits, scale);
 	}
 	/**
 	 * Create a Numeric value with the specified length and scale that overlays another field.
@@ -41,7 +41,7 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	 * @param digits The total number of digits
 	 * @param scale The number of digits to the right of the decimal point
 	 */
-	AbstractNumeric(int size, int digits, int scale, pointer overlay)
+	AbstractNumeric(int size, int digits, int scale, FixedPointer overlay)
 	{
 		super(size, overlay);
 		construct(digits, scale);
@@ -97,7 +97,7 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	 */
 	public void assign(FigConst value)
 	{
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.fillArray(value.fillChar);
 		if (z != this)
 			assign(z);
@@ -157,7 +157,7 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 		}
 		if (o instanceof java.lang.Number)
 		{
-			BigDecimal bd = numeric.newBigDecimal(o.toString());
+			BigDecimal bd = ShortDecimal.newBigDecimal(o.toString());
 			return toBigDecimal().compareTo(bd);
 		}
 		if (o instanceof FigConstNum)
@@ -209,30 +209,30 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	/**
 	 * Divide and return a new object.
 	 */
-	static longDecimal dividedBy(BigDecimal value1, BigDecimal value2)
+	static LongDecimal dividedBy(BigDecimal value1, BigDecimal value2)
 	{
 		int scale = java.lang.Math.max(value1.scale(), value2.scale());
 		BigDecimal bd = value1.divide(value2, scale, BigDecimal.ROUND_HALF_UP);
-		return new longDecimal(31, bd.scale(), bd);
+		return new LongDecimal(31, bd.scale(), bd);
 	}
 	/**
 	 * Divide and return a new object.
 	 */
-	public longDecimal dividedBy(double value)
+	public LongDecimal dividedBy(double value)
 	{
-		return dividedBy(numeric.newBigDecimal(value));
+		return dividedBy(ShortDecimal.newBigDecimal(value));
 	}
 	/**
 	 * Divide and return a new object.
 	 */
-	public longDecimal dividedBy(INumeric value)
+	public LongDecimal dividedBy(INumeric value)
 	{
 		return dividedBy(value.toBigDecimal());
 	}
 	/**
 	 * Divide and return a new object.
 	 */
-	public longDecimal dividedBy(BigDecimal value)
+	public LongDecimal dividedBy(BigDecimal value)
 	{
 		return dividedBy(toBigDecimal(), value);
 	}
@@ -297,12 +297,12 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	}
 	
 	/** Move a date data type to a numeric value. */
-	abstract public FixedData move(date value);
+	abstract public FixedData move(FixedDate value);
 	
 	/** Return the fixed-length date value with no separators appropriate for MOVE/MOVEL opcodes. */
-	static protected fixed moveDateString(date value)
+	static protected FixedChar moveDateString(FixedDate value)
 	{
-		return value.CharJava(date.datfmt0(value));
+		return value.CharJava(FixedDate.datfmt0(value));
 	}
 
 
@@ -310,29 +310,29 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	/**
 	 * Subtract and return a new object.
 	 */
-	static longDecimal minus(BigDecimal value1, BigDecimal value2)
+	static LongDecimal minus(BigDecimal value1, BigDecimal value2)
 	{
 		BigDecimal bd = value1.subtract(value2);
-		return new longDecimal(31, bd.scale(), bd);
+		return new LongDecimal(31, bd.scale(), bd);
 	}
 	/**
 	 * Subtract and return a new object.
 	 */
-	public longDecimal minus(double value)
+	public LongDecimal minus(double value)
 	{
-		return minus(numeric.newBigDecimal(value));
+		return minus(ShortDecimal.newBigDecimal(value));
 	}
 	/**
 	 * Subtract and return a new object.
 	 */
-	public longDecimal minus(INumeric value)
+	public LongDecimal minus(INumeric value)
 	{
 		return minus(value.toBigDecimal());
 	}
 	/**
 	 * Subtract and return a new object.
 	 */
-	public longDecimal minus(BigDecimal value)
+	public LongDecimal minus(BigDecimal value)
 	{
 		return minus(toBigDecimal(), value);
 	}
@@ -377,35 +377,35 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 
 
 	/** Add two BigDecimal objects and return a longDecimal value. */
-	static longDecimal plus(BigDecimal value1, BigDecimal value2)
+	static LongDecimal plus(BigDecimal value1, BigDecimal value2)
 	{
 		BigDecimal bd = value1.add(value2);
-		return new longDecimal(31, bd.scale(), bd);
+		return new LongDecimal(31, bd.scale(), bd);
 	}
 	/**
 	 * Add and return a new object (similar to BigDecimal add).
 	 */
-	public longDecimal plus(double value)
+	public LongDecimal plus(double value)
 	{
-		return plus(numeric.newBigDecimal(value));
+		return plus(ShortDecimal.newBigDecimal(value));
 	}
 	/**
 	 * Add and return a new object (similar to BigDecimal add).
 	 */
-	public longDecimal plus(INumeric value)
+	public LongDecimal plus(INumeric value)
 	{
 		return plus(value.toBigDecimal());
 	}
 	/**
 	 * Add and return a new object (similar to BigDecimal add).
 	 */
-	public longDecimal plus(BigDecimal value)
+	public LongDecimal plus(BigDecimal value)
 	{
 		return plus(toBigDecimal(), value);
 	}
 	
 	/** Assign a zoned value of equal scale to this number. */
-	abstract protected void assignZoned(zoned z);
+	abstract protected void assignZoned(ZonedDecimal z);
 	
 	/**
 	 * Set the numeric scale of the object.
@@ -451,29 +451,29 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	/**
 	 * Multiply and return a new object.
 	 */
-	static longDecimal times(BigDecimal value1, BigDecimal value2)
+	static LongDecimal times(BigDecimal value1, BigDecimal value2)
 	{
 		BigDecimal bd = value1.multiply(value2);
-		return new longDecimal(31, bd.scale(), bd);
+		return new LongDecimal(31, bd.scale(), bd);
 	}
 	/**
 	 * Multiply and return a new object.
 	 */
-	public longDecimal times(double value)
+	public LongDecimal times(double value)
 	{
-		return times(numeric.newBigDecimal(value));
+		return times(ShortDecimal.newBigDecimal(value));
 	}
 	/**
 	 * Multiply and return a new object.
 	 */
-	public longDecimal times(INumeric value)
+	public LongDecimal times(INumeric value)
 	{
 		return times(value.toBigDecimal());
 	}
 	/**
 	 * Multiply and return a new object.
 	 */
-	public longDecimal times(BigDecimal value)
+	public LongDecimal times(BigDecimal value)
 	{
 		return times(toBigDecimal(), value);
 	}
@@ -528,7 +528,7 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	}
 	
 	/** Allow CL-style assignment from a fixed variable type. */
-	public void chgvar(fixed f)
+	public void chgvar(FixedChar f)
 	{
 		/*
 		String s =f.toString().trim();

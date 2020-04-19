@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * An AID class for things like CF03 and PAGEDOWN.
- * @author Andrew Clark
+ * 
  */
 class DefinitionAID extends DefinitionKeyword {
 	int responseIndicator;

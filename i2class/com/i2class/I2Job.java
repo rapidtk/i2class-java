@@ -11,7 +11,7 @@ import java.util.Date;
 
 /**
  * A wrapper that allows each I2 stack to operator in its own OS/400-like 'job'.
- * @author ANDREWC
+ * 
  *
  */
 public class I2Job implements Serializable {
@@ -62,7 +62,7 @@ public class I2Job implements Serializable {
 	{
 		if (jobDateString==null)
 		{
-			date d = new date(getJobDatfmt()+'0'); // e.g. *MDY0
+			FixedDate d = new FixedDate(getJobDatfmt()+'0'); // e.g. *MDY0
 			jobDateString = d.format(jobDate);
 		}
 		return jobDateString;

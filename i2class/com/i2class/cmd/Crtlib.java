@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * CRTLIB (create library) processing.
- * @author ANDREWC
+ * 
  */
 public class Crtlib extends AbstractCommand {
 
@@ -39,7 +39,7 @@ public class Crtlib extends AbstractCommand {
 		setLib(lib);
 		exec();
 	}
-	public void exec(fixed lib) throws Exception {
+	public void exec(FixedChar lib) throws Exception {
 		exec(lib.toString());
 	}
 
@@ -55,7 +55,7 @@ public class Crtlib extends AbstractCommand {
 		catch (SQLException e)
 		{
 			// CPF0001 -- Error found on &1 command
-			fixed msgdta = new fixed(10, "CRTLIB");
+			FixedChar msgdta = new FixedChar(10, "CRTLIB");
 			throw new Pgmmsg("CPF0001", "QCPFMSG", msgdta);
 		}
 	}

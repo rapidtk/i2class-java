@@ -6,10 +6,10 @@ import java.text.SimpleDateFormat;
  * A formatted date class used by TIME, TIMESTAMP, and UTIMESTAMP.
  * FmtTime is different than FmtDate because it provides a current value instead of a static snapshot.
  * This class is used by the RPG opcode TIME and %BIF %TIME
- * @author Andrew Clark
+ * 
  * @see FmtDate
  */
-public class FmtTime extends zoned
+public class FmtTime extends ZonedDecimal
 {
 	private SimpleDateFormat m_simpleDateFormat;
 	/**

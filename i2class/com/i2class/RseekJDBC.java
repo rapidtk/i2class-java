@@ -8,7 +8,7 @@ import com.ibm.as400.access.AS400JDBCDriver;
 
 /**
  * A database file class for keyed JDBC access that uses a binary search to find a certain key.
- * @author Andrew Clark
+ * 
  */
 public class RseekJDBC extends RkeyedJDBC
 {
@@ -148,7 +148,7 @@ public class RseekJDBC extends RkeyedJDBC
 					rs.absolute(rrn);
 					// 'Trick' cache into being build by checking current record (we don't care about the return value)
 					checkKey(((RecordJDBC)irecord).key, 0, true);
-					cachedKeys.put(new ComparableArray(_checkKey), numeric.newInteger(rrn));
+					cachedKeys.put(new ComparableArray(_checkKey), ShortDecimal.newInteger(rrn));
 					rrn += blockSize;
 				} 
 			}
@@ -212,7 +212,7 @@ public class RseekJDBC extends RkeyedJDBC
 			*/
 			_cacheckKey = new ComparableArray(_checkKey);
 			if (!cachedKeys.containsKey(_cacheckKey))
-				cachedKeys.put(_cacheckKey, numeric.newInteger(_absoluteRow));
+				cachedKeys.put(_cacheckKey, ShortDecimal.newInteger(_absoluteRow));
 		}
 		return diff;
 	}

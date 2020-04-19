@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * CRTMSGQ (Create message queue) processing.
- * @author ANDREWC
+ * 
  */
 public class Crtmsgq extends AbstractCommand {
 
@@ -39,7 +39,7 @@ public class Crtmsgq extends AbstractCommand {
 		setMsgq(msgq);
 		exec();
 	}
-	public void exec(fixed msgq) throws Exception {
+	public void exec(FixedChar msgq) throws Exception {
 		exec(msgq.toString());
 	}
 
@@ -63,9 +63,9 @@ public class Crtmsgq extends AbstractCommand {
 			queueName=m_msgq;
 		}
 		
-		fixed msgdta = new fixed(30, queueName);
-		msgdta.setFixedAt(10, new fixed(10, libName));
-		msgdta.setFixedAt(20, new fixed(7, "DTAQ"));
+		FixedChar msgdta = new FixedChar(30, queueName);
+		msgdta.setFixedAt(10, new FixedChar(10, libName));
+		msgdta.setFixedAt(20, new FixedChar(7, "DTAQ"));
 		String qFileName = schemaName + '"' + queueName + ".msgq\"";
 		String ddl = "CREATE TABLE " + qFileName + " (data BLOB, maxlen INT, force CHAR(4))";
 		try {

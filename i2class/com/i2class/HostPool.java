@@ -6,7 +6,7 @@ import java.util.*;
  * 
  * A synchronized host pool object. 
  * 
- * @author ANDREWC
+ * 
  */
 class HostPool extends Hashtable {
 

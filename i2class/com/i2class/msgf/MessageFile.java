@@ -10,7 +10,7 @@ import com.i2class.*;
 
 /**
  * A message file class.
- * @author ANDREWC
+ * 
  */
 public class MessageFile extends java.util.ResourceBundle {
 	

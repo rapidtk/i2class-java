@@ -12,7 +12,7 @@ import com.i2class.*;
 
 /**
  * CRTLIB (create library) processing.
- * @author ANDREWC
+ * 
  */
 public class Dltdtaara extends AbstractCommand {
 
@@ -40,7 +40,7 @@ public class Dltdtaara extends AbstractCommand {
 		setDtaara(dtaara);
 		exec();
 	}
-	public void exec(fixed dtaara) throws Exception {
+	public void exec(FixedChar dtaara) throws Exception {
 		exec(dtaara.toString());
 	}
 
@@ -61,9 +61,9 @@ public class Dltdtaara extends AbstractCommand {
 			String sqlState = e.getSQLState();
 			if (sqlState.compareTo("42704")==0) // An undefined object name was detected
 			{
-				fixed msgdta = new fixed(27, q.fileName);
-				msgdta.setFixedAt(10, new fixed(10, q.libName));
-				msgdta.setFixedAt(20, new fixed(7, "*DTAARA"));
+				FixedChar msgdta = new FixedChar(27, q.fileName);
+				msgdta.setFixedAt(10, new FixedChar(10, q.libName));
+				msgdta.setFixedAt(20, new FixedChar(7, "*DTAARA"));
 				throw new Pgmmsg("CPF2105", "QCPFMSG", msgdta);
 			}
 			else

@@ -9,7 +9,7 @@ import javax.servlet.http.*;
 
 /**
  * RTVSYSVAL (Retrieve system value) processing.
- * @author Andrew Clark
+ * 
  */
 public class Rtvsysval
 {

@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * A base data type for AS400xxx field definitions.
- * @author Andrew Clark
+ * 
  */
 public abstract class I2DataType implements Serializable 
 {

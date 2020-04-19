@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * CRTDUPOBJ (create duplicate object) processing.
- * @author ANDREWC
+ * 
  */
 public class Crtdupobj extends AbstractCommand {
 
@@ -50,14 +50,14 @@ public class Crtdupobj extends AbstractCommand {
 	public void setTolib(String tolib) {
 		m_tolib = Application.trimr(tolib);
 	}
-	public void setTolib(fixed tolib) {
+	public void setTolib(FixedChar tolib) {
 		setTolib(tolib.toString());
 	}
 
 	public void setNewobj(String newobj) {
 		m_newobj = Application.trimr(newobj);
 	}
-	public void setNewobj(fixed newobj) {
+	public void setNewobj(FixedChar newobj) {
 		setNewobj(newobj.toString());
 	}
 
@@ -65,7 +65,7 @@ public class Crtdupobj extends AbstractCommand {
 	{
 		m_data = Application.trimr(data);
 	}
-	public void setData(fixed data)
+	public void setData(FixedChar data)
 	{
 		setData(data.toString());
 	}

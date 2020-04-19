@@ -7,7 +7,6 @@ import java.util.*;
 
 /**
  * A database file class for sequential JDBC access.
- * @author Andrew Clark
  */
 public class RfileJDBC
 	extends RfileCycle implements IDiskFile /*extends com.ibm.Connection.access.KeyedFile*/
@@ -384,8 +383,8 @@ public class RfileJDBC
 		if (rsNew == null)
 		{
 			//QfileName q = rconn.qfileName(fileName);
-			fixed msgdta = new fixed(59);
-			fixed fileName = new fixed(10, m_qfilename.fileName);
+			FixedChar msgdta = new FixedChar(59);
+			FixedChar fileName = new FixedChar(10, m_qfilename.fileName);
 			msgdta.setFixedAt(49, fileName);
 			throw new Pgmmsg("RPG1211", "QRPGMSGE", msgdta);
 		}
@@ -413,7 +412,7 @@ public class RfileJDBC
 		}
 	}
 	
-	public boolean Delete() throws Exception
+	public boolean delete() throws Exception
 	{
 		if (_updatable)
 			rs.deleteRow();
@@ -437,17 +436,17 @@ public class RfileJDBC
 		//lastRecord--;
 		return true;
 	}
-	public boolean Delete(RecordJDBC r) throws Exception
+	public boolean delete(RecordJDBC r) throws Exception
 	{
 		setRecordFormat(r);
-		return Delete();
+		return delete();
 	}
-	public boolean Delete(RecordJDBC r, long rrn) throws Exception
+	public boolean delete(RecordJDBC r, long rrn) throws Exception
 	{
 		//Make sure that the result set is actually open
 		openResultSet();
 		rs.absolute((int) rrn);
-		return Delete(r);
+		return delete(r);
 	}
 	/**
 	 * Return the WHERE clause that corresponds to the identity columns in the database

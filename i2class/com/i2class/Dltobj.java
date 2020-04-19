@@ -11,7 +11,7 @@ import com.i2class.cmd.*;
 
 /**
  * DLTF (delete file) processing.
- * @author ANDREWC
+ * 
  */
 public class Dltobj extends AbstractCommand {
 
@@ -21,7 +21,7 @@ public class Dltobj extends AbstractCommand {
 	private static final String[] TABLE_TYPES={"TABLE", "VIEW"};
 	
 	private Sndpgmmsg sndpgmmsg;
-	private fixed m_msgdta;
+	private FixedChar m_msgdta;
 	
 	/**
 	 * 
@@ -77,10 +77,10 @@ public class Dltobj extends AbstractCommand {
 	
 		// Create message object to use for all commands
 		sndpgmmsg = new Sndpgmmsg(getApp());
-		m_msgdta=new fixed(27);
-		m_msgdta.setFixedAt(0, new fixed(10, objPattern));
-		m_msgdta.setFixedAt(10, new fixed(10, schemaPattern));
-		m_msgdta.setFixedAt(20, new fixed(7, m_objtype.substring(1))); // Don't include '*' with object type
+		m_msgdta=new FixedChar(27);
+		m_msgdta.setFixedAt(0, new FixedChar(10, objPattern));
+		m_msgdta.setFixedAt(10, new FixedChar(10, schemaPattern));
+		m_msgdta.setFixedAt(20, new FixedChar(7, m_objtype.substring(1))); // Don't include '*' with object type
 		sndpgmmsg.setMsgdta(m_msgdta);
 		// Create statement to use for DELETEs
 		try
@@ -151,8 +151,8 @@ public class Dltobj extends AbstractCommand {
 	// Delete a single file
 	private void deleteFile(String schemaPattern, String tableName) throws Exception
 	{
-		m_msgdta.setFixedAt(0, new fixed(10, tableName));
-		m_msgdta.setFixedAt(10, new fixed(10, schemaPattern));
+		m_msgdta.setFixedAt(0, new FixedChar(10, tableName));
+		m_msgdta.setFixedAt(10, new FixedChar(10, schemaPattern));
 		String schemaName = schemaPattern + '.';
 		//String ddl = "DROP TABLE " + schemaName + ".\"" + tableName + '"';
 		try {

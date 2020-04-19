@@ -1,11 +1,12 @@
 package com.i2class;
 
 /**
- * A fixed length substring class used on the left side of a eval.  
- * Example eval %subst(cname:1:10)='X' -> new subst(cname,1,10).assign("X")
- * @author Andrew Clark
+ * A fixed length substring class used on the left side of an eval statement.
+ * <p>  
+ * Example: eval %subst(cname:1:10)='X' -> new subst(cname,1,10).assign("X")
+ * </p>
  */
-public class subst extends fixed
+public class subst extends FixedChar
 {
 	private int offset;
 	private int length;
@@ -15,19 +16,19 @@ public class subst extends fixed
 	 * @param start The start of the substring
 	 * @param len The length of the substring
 	 */
-	public subst(fixed fStr, int start, int len)
+	public subst(FixedChar fStr, int start, int len)
 	{
-		super(len, new pointer(fStr, start-1));
+		super(len, new FixedPointer(fStr, start-1));
 	}
-	public subst(fixed fStr, INumeric start, int len)
+	public subst(FixedChar fStr, INumeric start, int len)
 	{
 		this(fStr, start.intValue(), len);
 	}
-	public subst(fixed fStr, int start, INumeric len)
+	public subst(FixedChar fStr, int start, INumeric len)
 	{
 		this(fStr, start, len.intValue());
 	}
-	public subst(fixed fStr, INumeric start, INumeric len)
+	public subst(FixedChar fStr, INumeric start, INumeric len)
 	{
 		this(fStr, start.intValue(), len.intValue());
 	}

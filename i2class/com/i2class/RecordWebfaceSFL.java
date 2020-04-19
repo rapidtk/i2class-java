@@ -9,7 +9,7 @@ import com.ibm.as400ad.code400.dom.constants.*;
 
 /**
  * A WebFaced subfile class.
- * @author Andrew Clark
+ * 
  * @version 4/24/2002 1:15:43 PM
  */
 public class RecordWebfaceSFL extends RecordWebface implements IRecordSFL
@@ -128,7 +128,7 @@ public class RecordWebfaceSFL extends RecordWebface implements IRecordSFL
 		{
 			String expression = kd.getIndicatorExpression();
 			if (evaluateIndicatorExpression(expression))
-				sfl_.addChangedSFLNXTCHG(numeric.newInteger(recno));
+				sfl_.addChangedSFLNXTCHG(ShortDecimal.newInteger(recno));
 		}
 		
 		

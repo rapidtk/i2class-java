@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.io.*;
 /**
  * A packed decimal data area class that stores data in a remote database file.
- * @author Andrew Clark
+ * 
  */
 class DecimalDataAreaJDBC extends DataAreaJDBC implements IDecimalDtaara
 {

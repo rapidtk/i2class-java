@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * CHKOBJ (check object) processing.
- * @author ANDREWC
+ * 
  */
 public class Chkobj extends AbstractCommand {
 
@@ -43,14 +43,14 @@ public class Chkobj extends AbstractCommand {
 	public void setMbr(String mbr) {
 		m_mbr = Application.trimr(mbr);
 	}
-	public void setMbr(fixed mbr) {
+	public void setMbr(FixedChar mbr) {
 		setMbr(mbr.toString());
 	}
 
 	public void setAut(String aut) {
 		m_aut = Application.trimr(aut);
 	}
-	public void setAut(fixed aut) {
+	public void setAut(FixedChar aut) {
 		setAut(aut.toString());
 	}
 	
@@ -135,13 +135,13 @@ public class Chkobj extends AbstractCommand {
 		}
 		
 		// We only get here if the object (CPF9801) or member (CPF9815) was not found
-		fixed msgdta = new fixed(30);
-		msgdta.setFixedAt(0, new fixed(10, objName));
-		msgdta.setFixedAt(10, new fixed(10, q.libName));
+		FixedChar msgdta = new FixedChar(30);
+		msgdta.setFixedAt(0, new FixedChar(10, objName));
+		msgdta.setFixedAt(10, new FixedChar(10, q.libName));
 		if (msgid.compareTo("CPF9815")==0)
-			msgdta.setFixedAt(20, new fixed(10, m_mbr));
+			msgdta.setFixedAt(20, new FixedChar(10, m_mbr));
 		else if (msgid.compareTo("CPF9801")==0)
-			msgdta.setFixedAt(20, new fixed(7, m_objtype.substring(1)));
+			msgdta.setFixedAt(20, new FixedChar(7, m_objtype.substring(1)));
 		throw new Pgmmsg(msgid, "QCPFMSG", msgdta);
 	}
 	

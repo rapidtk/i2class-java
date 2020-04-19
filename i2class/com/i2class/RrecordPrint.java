@@ -1,5 +1,9 @@
 package com.i2class;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * A generic text print record.
  * <P>
@@ -11,7 +15,7 @@ package com.i2class;
  * that they are applied to.  
  * For example, the edit code '3' applied to the value 1000 output as the value '1,000'.  
  * The edit code '3' applied to 9321.32 would output '9,321.32'.
- * @author Andrew Clark
+ * 
  */
 abstract public class RrecordPrint extends RrecordX2
 {
@@ -73,13 +77,13 @@ abstract public class RrecordPrint extends RrecordX2
 		char *str;
 		str=n.overlay;
 		*/
-		zoned strBuf = n.toZoned();
+		ZonedDecimal strBuf = n.toZoned();
 		int str = 0;
 		boolean negative = (strBuf.signum() < 0);
 		if (negative)
 		{
 			//str++;
-			strBuf = (zoned)strBuf.negate();
+			strBuf = (ZonedDecimal)strBuf.negate();
 		}
 		// Loop past any leading zeros
 		int j = 0;
@@ -339,7 +343,7 @@ abstract public class RrecordPrint extends RrecordX2
 	abstract public void flush() throws /*java.io.IO*/ Exception;
 	
 	/** Convert a long value to a zoned with an appropriate scale. */
-	private zoned longToZoned(long value)
+	private ZonedDecimal longToZoned(long value)
 	{
 		// Calculate the scale of the number, and use that precision to print out the value
 		int scale = 1;
@@ -348,7 +352,7 @@ abstract public class RrecordPrint extends RrecordX2
 		if (value >= 10)
 			//scale = (int)(Math.log(value) / Math.log(10))+1;
 			scale = (int)Application.log10(value)+1;
-		zoned z = new zoned(scale, 0, value);
+		ZonedDecimal z = new ZonedDecimal(scale, 0, value);
 		return z;
 	}
 	
@@ -435,7 +439,7 @@ abstract public class RrecordPrint extends RrecordX2
 	public void print(long n, int col, char edtCde, char fillChar)
 	{
 
-		zoned z = longToZoned(n);
+		ZonedDecimal z = longToZoned(n);
 		print(z, col, edtCde, fillChar);
 	}
 	/** Print out a (right-adjusted) numeric value at the specified column after applying the specified edit word. */
@@ -453,7 +457,7 @@ abstract public class RrecordPrint extends RrecordX2
 		}
 		if (scale == 0)
 			scale = 1;
-		zoned z = new zoned(scale, 0, n);
+		ZonedDecimal z = new ZonedDecimal(scale, 0, n);
 		print(z, col, edtWrd);
 	}
 	/** Print a (right-adjusted) value at the current column value.*/
@@ -545,7 +549,7 @@ abstract public class RrecordPrint extends RrecordX2
 	/** Print a left-adjusted value at the specified column. */
 	public void printl(String str, int col)
 	{
-		fixed f = new fixed(str.length(), str);
+		FixedChar f = new FixedChar(str.length(), str);
 		printl(f, col);
 	}
 

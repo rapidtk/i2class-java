@@ -6,7 +6,7 @@ package com.i2class;
 
 /**
  * An interface to any object (file, dataarea) that is closable by Application.closeAllFiles.
- * @author ANDREWC
+ * 
  *
  */
 public interface IClosable

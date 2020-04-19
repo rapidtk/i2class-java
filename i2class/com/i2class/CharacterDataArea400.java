@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * An OS/400 character data area TYPE(*CHAR) class.
- * @author Andrew Clark 
+ *  
  */
 class CharacterDataArea400 extends com.ibm.as400.access.CharacterDataArea implements ICharacterDtaara {
 /**

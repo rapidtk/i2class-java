@@ -10,7 +10,7 @@ import java.util.*;
 
 /**
  * RCVPGMMSG (Receive program message) processing.
- * @author ANDREWC
+ * 
  */
 public class Rcvmsg extends AbstractCommand {
 
@@ -19,23 +19,23 @@ public class Rcvmsg extends AbstractCommand {
 	private String m_msgtype="*ANY";
 	private String m_rmv="*YES";
 	private int m_wait=0;
-	private fixed m_msgkey;
+	private FixedChar m_msgkey;
 
-	private fixed m_keyvar;
-	private fixed m_msg;
+	private FixedChar m_keyvar;
+	private FixedChar m_msg;
 	private INumeric m_msglen;
 	private FixedData m_msgdta;
 	private INumeric m_msgdtalen;
-	private fixed m_msgid;
-	private fixed m_msgf;
-	private fixed m_msgflib;
+	private FixedChar m_msgid;
+	private FixedChar m_msgf;
+	private FixedChar m_msgflib;
 	
 	private Pgmmsg pgmmsg;
 	
-	private final static fixed FORMAT_NAME=new fixed(10, "RCVM0100");
-	private final static int_f WAIT_TIME = new int_f(4);
-	private final static fixed MSG_KEY = new fixed(4);
-	private final static int_f ERRCOD = new int_f(4);
+	private final static FixedChar FORMAT_NAME=new FixedChar(10, "RCVM0100");
+	private final static FixedBinary WAIT_TIME = new FixedBinary(4);
+	private final static FixedChar MSG_KEY = new FixedChar(4);
+	private final static FixedBinary ERRCOD = new FixedBinary(4);
 	
 	
 	/**
@@ -57,7 +57,7 @@ public class Rcvmsg extends AbstractCommand {
 	public void setPgmq(String pgmq) {
 		m_pgmq = Application.trimr(pgmq);
 	}
-	public void setKeyvar(fixed keyvar) {
+	public void setKeyvar(FixedChar keyvar) {
 		m_keyvar = keyvar;
 	}
 	public void setMsgtype(String msgtype) {
@@ -66,7 +66,7 @@ public class Rcvmsg extends AbstractCommand {
 	public void setRmv(String rmv) {
 		m_rmv = Application.trimr(rmv);
 	}
-	public void setMsg(fixed msg)
+	public void setMsg(FixedChar msg)
 	{
 		m_msg = msg;
 	}
@@ -82,15 +82,15 @@ public class Rcvmsg extends AbstractCommand {
 	{
 		m_msgdtalen = msgdtalen;
 	}
-	public void setMsgid(fixed msgid)
+	public void setMsgid(FixedChar msgid)
 	{
 		m_msgid = msgid;
 	}
-	public void setMsgf(fixed msgf)
+	public void setMsgf(FixedChar msgf)
 	{
 		m_msgf = msgf;
 	}
-	public void setMsgflib(fixed msgflib)
+	public void setMsgflib(FixedChar msgflib)
 	{
 		m_msgflib = msgflib;
 	}

@@ -8,7 +8,7 @@ import com.ibm.as400.access.AS400JDBCDriver;
 
 /**
  * A database file class for keyed JDBC access that uses an SQL index to approximate positioning.
- * @author Andrew Clark
+ * 
  */
 public class RindexJDBC extends RkeyedJDBC
 {

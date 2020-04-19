@@ -6,7 +6,7 @@ import java.math.*;
  * Implement <code>*ZERO</code> functionallity.
  * For numeric values, *ZEROS is the same as 0.
  * For fixed-length strings, *ZEROS is a string of character '0' that is the same length as the fixed string.
- * @author Andrew Clark
+ * 
  */
 public class Zeros extends FigConstNum
 {

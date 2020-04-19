@@ -5,7 +5,7 @@ package com.i2class;
 
 /**
  * A qualified file name tuple.
- * @author ANDREWC
+ * 
  */
 public class QfileName {
 

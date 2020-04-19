@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 /**
  * A mutable fixed-length and scale Numeric type.
- * @author Andrew Clark
+ * 
  */
 public interface INumeric
 {
@@ -149,41 +149,41 @@ public interface INumeric
 	/**
 	 * Return the zoned decimal equivalent of this value.
 	 */
-	public abstract zoned toZoned();
+	public abstract ZonedDecimal toZoned();
 	
 	/**
 	 * Return the decimal value of this object. 
 	 */
 	public DecimalData toDecimal();
 	/** Divide this decimal value by another one and return a new object. */
-	public abstract longDecimal dividedBy(BigDecimal value);
+	public abstract LongDecimal dividedBy(BigDecimal value);
 	/** Divide this decimal value by another one and return a new object. */
-	public abstract longDecimal dividedBy(double value);
+	public abstract LongDecimal dividedBy(double value);
 	/** Divide this decimal value by another one and return a new object. */
-	public abstract longDecimal dividedBy(INumeric value);
+	public abstract LongDecimal dividedBy(INumeric value);
 	/** Subtract and return a new object. */
-	public abstract longDecimal minus(BigDecimal value);
+	public abstract LongDecimal minus(BigDecimal value);
 	/** Subtract and return a new object. */
-	public abstract longDecimal minus(double value);
+	public abstract LongDecimal minus(double value);
 	/** Subtract and return a new object. */
-	public abstract longDecimal minus(INumeric value);
+	public abstract LongDecimal minus(INumeric value);
 	/**
 	 * Add and return a new object (similar to BigDecimal add).
 	 */
-	public abstract longDecimal plus(BigDecimal value);
+	public abstract LongDecimal plus(BigDecimal value);
 	/**
 	 * Add and return a new object (similar to BigDecimal add).
 	 */
-	public abstract longDecimal plus(double value);
+	public abstract LongDecimal plus(double value);
 	/**
 	 * Add and return a new object (similar to BigDecimal add).
 	 */
-	public abstract longDecimal plus(INumeric value);
+	public abstract LongDecimal plus(INumeric value);
 	/** Multiply this decimal value by another one and return a new object. */
-	public abstract longDecimal times(BigDecimal value);
+	public abstract LongDecimal times(BigDecimal value);
 	/** Multiply this decimal value by another one and return a new object. */
-	public abstract longDecimal times(double value);
+	public abstract LongDecimal times(double value);
 	/** Multiply this decimal value by another one and return a new object. */
-	public abstract longDecimal times(INumeric value);
+	public abstract LongDecimal times(INumeric value);
 
 }

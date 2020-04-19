@@ -12,7 +12,7 @@ import com.i2class.cmd.*;
 
 /**
  * CVTDAT (Convert date) processing.
- * @author ANDREWC
+ * 
  */
 public class Cvtdat extends AbstractCommand {
 
@@ -40,7 +40,7 @@ public class Cvtdat extends AbstractCommand {
 
 	
 	/** Convert the format of one date to another. */
-	public void exec(Object fromvar, fixed tovar) throws Exception {
+	public void exec(Object fromvar, FixedChar tovar) throws Exception {
 		setDate(fromvar);
 		exec();
 		tovar.assign(tovarString);
@@ -104,8 +104,8 @@ public class Cvtdat extends AbstractCommand {
 		m_date = buf.toString();
 		// Convert date format to 'no separators' (e.g. *YMD0)
 		fromfmt = fromfmt + '0';
-		date fromdate = new date(fromfmt, m_date);
-		date todate = new date(tofmt + tosep);
+		FixedDate fromdate = new FixedDate(fromfmt, m_date);
+		FixedDate todate = new FixedDate(tofmt + tosep);
 		todate.assign(fromdate);
 		tovarString = todate.toString();		
 	}

@@ -13,7 +13,7 @@ import com.i2class.*;
 /**
  * CALL processing.
  * Used only through QCMDEXC
- * @author ANDREWC
+ * 
  */
 public class Call extends CALL {
 

@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * A 'return from application' exception that can be gracefully handled.
- * @author Andrew Clark 
+ *  
  */
 public class ApplicationReturn extends Exception
 {

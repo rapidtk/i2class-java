@@ -9,7 +9,7 @@ import com.i2class.*;
 
 /**
  * The base message file for all OS/400 messages. 
- * @author ANDREWC
+ * 
  */
 public class QCPFMSG extends MessageFile
 {

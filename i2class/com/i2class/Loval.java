@@ -5,7 +5,7 @@ import java.math.BigDecimal;
  * The specific figurative constant *LOVAL.  *LOVAL is the most negative number that a number of a
  * specific type can hold.  For instance, then *LOVAL value of a 9,2 number is -9999999.99.  The
  * *LOVAL value of a fixed-length(5) character value is x'0000000000'.
- * @author Andrew Clark
+ * 
  */
 public class Loval extends FigConstNum
 {

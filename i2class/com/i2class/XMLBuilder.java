@@ -16,7 +16,7 @@ import com.ibm.as400ad.webfacing.runtime.view.*;
 
 /**
  * Build an XML string from a WebFacing request.
- * @author ANDREWC
+ * 
  */
 public class XMLBuilder {
 	// The parameters (fields) to get passed back to the WebFacing host
@@ -475,7 +475,7 @@ public class XMLBuilder {
 		// The PAGEID attribute has to be set or bad things happen when control returns to the WebFacing server
 		Integer pageIdObj = (Integer)session.getAttribute("pageId");
 		if(pageIdObj == null)
-			pageIdObj = numeric.ONE; //new Integer(1);
+			pageIdObj = ShortDecimal.ONE; //new Integer(1);
 		else
 			pageIdObj = new Integer(pageIdObj.intValue() + 1); // This will always be >1 so no need to do numeric.newInteger()
 		xmlb.pageIdObj = pageIdObj;

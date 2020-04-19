@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * OVRDBF (Override database file) processing.
- * @author ANDREWC
+ * 
  */
 public class Ovrdbf extends AbstractCommand {
 
@@ -39,14 +39,14 @@ public class Ovrdbf extends AbstractCommand {
 	public void setTofile(String tofile) {
 		m_tofile = qual(tofile);
 	}
-	public void setTofile(fixed tofile) {
+	public void setTofile(FixedChar tofile) {
 		setTofile(tofile.toString());
 	}
 	
 	public void setMbr(String mbr) {
 		m_mbr = Application.trimr(mbr);
 	}
-	public void setMbr(fixed mbr) {
+	public void setMbr(FixedChar mbr) {
 		setMbr(mbr.toString());
 	}
 	
@@ -55,7 +55,7 @@ public class Ovrdbf extends AbstractCommand {
 		setFile(file);
 		exec();
 	}
-	public void exec(fixed file) throws Exception {
+	public void exec(FixedChar file) throws Exception {
 		exec(file.toString());
 	}
 

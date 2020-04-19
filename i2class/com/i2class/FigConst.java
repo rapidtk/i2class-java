@@ -6,7 +6,7 @@ import java.util.Arrays;
 /**
  * A RPG figurative constant class.  Classes like Blanks (*BLANKS)
  * derive from this class.
- * @author Andrew Clark
+ * 
  */
 
 public class FigConst implements Comparable, Serializable
@@ -36,13 +36,13 @@ public class FigConst implements Comparable, Serializable
 
 	/** 
 	 * Compare to another object type.  Can only compare to <code>fixed</code> data types.
-	 * @see fixed
+	 * @see FixedChar
 	 */
 	public int compareTo(Object o) throws ClassCastException
 	{
-		if (o instanceof fixed)
+		if (o instanceof FixedChar)
 		{
-			int i = ((fixed) o).compareTo(this);
+			int i = ((FixedChar) o).compareTo(this);
 			return -i;
 		}
 		throw new ClassCastException("Cannot cast to FigConst");

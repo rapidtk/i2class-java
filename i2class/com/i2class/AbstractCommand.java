@@ -11,7 +11,7 @@ import java.sql.Connection;
 /**
  * The interface that all command (*CMD) objects must implement
  * 
- * @author ANDREWC
+ * 
  *
  */
 public abstract class AbstractCommand {

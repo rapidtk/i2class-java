@@ -3,7 +3,7 @@ package com.i2class;
 import java.io.*;
 /**
  * Simulate the local data area (*LDA) by using a temporary local file.
- * @author Andrew Clark
+ * 
  */
 class LocalDataAreaFile extends CharacterDataAreaFile
 {

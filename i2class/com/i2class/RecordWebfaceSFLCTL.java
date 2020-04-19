@@ -17,7 +17,7 @@ import com.ibm.as400ad.webfacing.runtime.view.def.*;
 
 /**
  * A WebFacing subfile control format class.
- * @author Andrew Clark
+ * 
  * @version 5.0
  */
 public class RecordWebfaceSFLCTL

@@ -8,7 +8,7 @@ import com.i2class.*;
 
 /**
  * A class to change attributes of an OS/400-style job.
- * @author Andrew Clark
+ * 
  */
 public class Chgjob
 {
@@ -27,7 +27,7 @@ public class Chgjob
 	{
 		m_app.appJob.jobDateString = date.toString();
 	}
-	public void setDate(fixed date)
+	public void setDate(FixedChar date)
 	{
 		setDate(date.toString());
 	}
@@ -39,7 +39,7 @@ public class Chgjob
 	{
 		m_app.appJob.jobDatfmt=datfmt;
 	}
-	public void setDatfmt(fixed datfmt)
+	public void setDatfmt(FixedChar datfmt)
 	{
 		setDatfmt(datfmt.toString());
 	}
@@ -53,7 +53,7 @@ public class Chgjob
 	{
 		setDatsep(datsep.charAt(0));
 	}
-	public void setDatsep(fixed datsep)
+	public void setDatsep(FixedChar datsep)
 	{
 		setDatsep(datsep.charAt(0));
 	}
@@ -67,7 +67,7 @@ public class Chgjob
 	{
 		setDecfmt(decfmt.charAt(0));
 	}
-	public void setDecfmt(fixed decfmt)
+	public void setDecfmt(FixedChar decfmt)
 	{
 		setDecfmt(decfmt.charAt(0));
 	}
@@ -77,7 +77,7 @@ public class Chgjob
 	{
 		m_app.appJob.jobSws=sws;
 	}
-	public void setSws(fixed sws)
+	public void setSws(FixedChar sws)
 	{
 		setSws(sws.toString());
 	}
@@ -92,7 +92,7 @@ public class Chgjob
 	{
 		setTimsep(timsep.charAt(0));
 	}
-	public void setTimsep(fixed timsep)
+	public void setTimsep(FixedChar timsep)
 	{
 		setTimsep(timsep.charAt(0));
 	}

@@ -9,7 +9,7 @@ import java.util.Vector;
 
 /**
  * A message description.
- * @author ANDREWC
+ * 
  *
  */
 public abstract class AbstractMessageDescription {

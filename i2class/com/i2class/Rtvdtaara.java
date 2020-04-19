@@ -11,7 +11,7 @@ import java.util.StringTokenizer;
 
 /**
  * RTVDTAARA (retrieve data area) processing.
- * @author ANDREWC
+ * 
  */
 public class Rtvdtaara extends AbstractCommand { 
 
@@ -82,8 +82,8 @@ public class Rtvdtaara extends AbstractCommand {
 			String sqlState = e.getSQLState();
 			if (sqlState.compareTo("42704")==0) // An undefined object name was detected
 			{
-				fixed msgdta = new fixed(20, q.fileName);
-				msgdta.setFixedAt(10, new fixed(10, q.libName));
+				FixedChar msgdta = new FixedChar(20, q.fileName);
+				msgdta.setFixedAt(10, new FixedChar(10, q.libName));
 				throw new Pgmmsg("CPF1015", "QCPFMSG", msgdta);
 			}
 			else

@@ -8,7 +8,7 @@ import com.ibm.as400.access.AS400JDBCDriver;
 
 /**
  * A database file class for keyed JDBC access.
- * @author Andrew Clark
+ * 
  */
 public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 {

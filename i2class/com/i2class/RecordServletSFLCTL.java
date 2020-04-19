@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * Thread subfile control format manipulations.
- * @author Andrew Clark
+ * 
  */
 public class RecordServletSFLCTL extends RecordWorkstnSFLCTL
 {

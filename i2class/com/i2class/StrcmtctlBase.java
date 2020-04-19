@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * A base class for STRCMTCTL (Start commitment control) processing.
- * @author ANDREWC
+ * 
  */
 public abstract class StrcmtctlBase extends AbstractCommand {
 

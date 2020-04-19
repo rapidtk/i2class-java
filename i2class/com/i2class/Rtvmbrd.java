@@ -11,13 +11,13 @@ import com.i2class.cmd.*;
 
 /**
  * RTVOBJD (retrieve object description) processing.
- * @author ANDREWC
+ * 
  */
 public class Rtvmbrd extends AbstractCommand {
 
 	private String m_file, m_mbr="*FIRST";
 
-	private fixed m_rtnlibVar, m_rtnmbrVar, m_fileatrVar, m_textVar;	
+	private FixedChar m_rtnlibVar, m_rtnmbrVar, m_fileatrVar, m_textVar;	
 	private String m_rtnlib, m_rtnmbr, m_fileatr, m_text;	
 	
 	/**

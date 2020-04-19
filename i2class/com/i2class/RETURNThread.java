@@ -4,7 +4,7 @@ import java.util.*;
 import java.util.Enumeration;
 
 /**
- * @author ANDREWC
+ * 
  *
  * A thread used to close the connection to the database server.
  */

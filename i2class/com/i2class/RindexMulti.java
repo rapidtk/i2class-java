@@ -8,7 +8,7 @@ import java.util.Vector;
 
 /**
  * Limited support for multi-format logical files in JDBC.
- * @author ANDREWC
+ * 
  *
  */
 public class RindexMulti extends RindexJDBC

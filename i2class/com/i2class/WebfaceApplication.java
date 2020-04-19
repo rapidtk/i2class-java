@@ -5,7 +5,7 @@ import java.util.*;
 import javax.servlet.http.*;
 /**
  * A thread-enabled I2 app built specifically to interact with WebFaced display files.
- * @author Andrew Clark
+ * 
  */
 public class WebfaceApplication extends ThreadApplication
 {

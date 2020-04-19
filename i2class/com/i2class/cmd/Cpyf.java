@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * CPYF (copy file) processing.
- * @author ANDREWC
+ * 
  */
 public class Cpyf extends AbstractCommand {
 
@@ -46,14 +46,14 @@ public class Cpyf extends AbstractCommand {
 	public void setFrommbr(String frommbr) {
 		m_frommbr = Application.trimr(frommbr);
 	}
-	public void setFrommbr(fixed frommbr) {
+	public void setFrommbr(FixedChar frommbr) {
 		setFrommbr(frommbr);
 	}
 
 	public void setTombr(String tombr) {
 		m_tombr = Application.trimr(tombr);
 	}
-	public void setTombr(fixed tombr) {
+	public void setTombr(FixedChar tombr) {
 		setTombr(tombr.toString());
 	}
 
@@ -61,7 +61,7 @@ public class Cpyf extends AbstractCommand {
 	{
 		m_crtfile=Application.trimr(crtfile);
 	}
-	public void setCrtfile(fixed crtfile)
+	public void setCrtfile(FixedChar crtfile)
 	{
 		setCrtfile(crtfile.toString());
 	}
@@ -69,7 +69,7 @@ public class Cpyf extends AbstractCommand {
 	{
 		setCrtfile(Application.trimr(mbropt));
 	}
-	public void setMbropt(fixed mbropt)
+	public void setMbropt(FixedChar mbropt)
 	{
 		setCrtfile(mbropt.toString());
 	}

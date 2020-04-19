@@ -26,7 +26,7 @@ package com.i2class;
  * The indicator will be set on (*ON, true) when EOF (no record) is found, otherwise it will be off (*OFF, false).
 
  * @see Rfile
- * @author Andrew Clark 
+ *  
  */
 public interface IDiskFile
 {
@@ -37,7 +37,7 @@ public interface IDiskFile
 	public void commit()
 		throws Exception;
 	/** Delete the current record from the file. */
-	public boolean Delete() throws Exception;
+	public boolean delete() throws Exception;
 	/**
 	 * Open the file.
 	 * @param openType How the file should be opened: READ_ONLY, READ_WRITE, WRITE_ONLY.

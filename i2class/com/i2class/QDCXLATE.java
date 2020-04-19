@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * Convert data API
- * @author ANDREWC
+ * 
  */
 public class QDCXLATE extends Application {
 	
@@ -25,7 +25,7 @@ public class QDCXLATE extends Application {
 	 * @param tableName the name of the table used for translation.  Only "QSYSTRNTBL" is allowed.
 	 * @throws Pgmmsg
 	 */
-	public void call(packed dataLength, fixed data, fixed tableName) throws Pgmmsg  {
+	public void call(PackedDecimal dataLength, FixedChar data, FixedChar tableName) throws Pgmmsg  {
 	 	String s = data.subst(1, dataLength.intValue());
 	 	// Translate data
 	 	if (tableName.compareTo("QSYSTRNTBL")==0)

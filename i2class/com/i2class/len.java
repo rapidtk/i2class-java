@@ -3,13 +3,13 @@ package com.i2class;
 /**
  * A length class used on the left side of an eval.  
  * Example eval %len(cname)=10 -> new len(cname).assign(10)
- * @author Andrew Clark
+ * 
  */
 public class len
 {
-	private varying vString;
+	private CharVarying vString;
 
-	public len(varying vStr)
+	public len(CharVarying vStr)
 	{
 		vString = vStr;
 	}

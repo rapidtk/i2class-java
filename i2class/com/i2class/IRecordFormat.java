@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * A basic record format interface.  A record format describes the fields that make up a SQL-like record of data.
- * @author Andrew Clark
+ * 
  */
 public interface IRecordFormat
 {

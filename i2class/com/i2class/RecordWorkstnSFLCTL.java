@@ -4,7 +4,7 @@ import java.util.Iterator;
 
 /**
  * Thread subfile control format manipulations.
- * @author Andrew Clark
+ * 
  */
 public class RecordWorkstnSFLCTL extends RecordWorkstn implements IRecordSFLCTL
 {

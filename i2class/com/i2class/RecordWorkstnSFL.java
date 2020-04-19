@@ -4,7 +4,7 @@ import java.util.Vector;
 
 /**
  * Thread subfile manipulations.
- * @author Andrew Clark
+ * 
  */
 // See getSfl() below for why ISFLCTL is implemented
 public class RecordWorkstnSFL extends RecordWorkstn implements IRecordSFL//, IRecordSFLX

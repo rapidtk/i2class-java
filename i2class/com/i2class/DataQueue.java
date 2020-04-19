@@ -8,7 +8,7 @@ import com.ibm.as400.access.DataQueueEntry;
 /**
  * OS/400-like data queue support
  * 
- * @author ANDREWC
+ * 
  *
  */
 public class DataQueue {
@@ -61,7 +61,7 @@ public class DataQueue {
 	public void sendData(FixedData data, FixedData key)
 	{
 		//	Since this is a 0-based index, the size() before entry is the correct value
-		Integer newIndex = numeric.newInteger(m_queueData.size());
+		Integer newIndex = ShortDecimal.newInteger(m_queueData.size());
 		// See if a value already exists for the specified key
 		Object index = m_keys.remove(key);
 		// If there is one, replace with a Vector entry of values...
@@ -300,7 +300,7 @@ public class DataQueue {
 	public static void main(String[] args)
 	{
 		DataQueue q = new DataQueue();
-		fixed f = new fixed(10);
+		FixedChar f = new FixedChar(10);
 		int len;
 		/*
 		f.assign("ABC");

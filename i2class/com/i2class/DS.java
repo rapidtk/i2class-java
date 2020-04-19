@@ -5,13 +5,13 @@ import java.math.*;
  * Simulate RPG multi-occur data structure.
  * A multi-occurrence data structure is like an array with an 
  * implied 1-based index (occurrence).
- * @author Andrew Clark 
+ *  
  */
-public class DS extends fixed
+public class DS extends FixedChar
 {
 	/** The current occurence. */
 	public int Occur;
-	protected fixed buffer[];
+	protected FixedChar buffer[];
 	//private int m_sz;
 
 	/**
@@ -24,9 +24,9 @@ public class DS extends fixed
 		//m_sz = sz;
 		// Create a fixed data type, but don't actually allocate space for it -- setOccurrence will set the pointer 
 		// to the correct buffer[]
-		super(sz, new pointer());
+		super(sz, new FixedPointer());
 		//buffer = new fixed[elem-1];
-		buffer = new fixed[elem];
+		buffer = new FixedChar[elem];
 		
 		// Change this so that we allocate the other buffers only as needed
 		//for (int i = 0; i < buffer.length; i++)
@@ -51,7 +51,7 @@ public class DS extends fixed
 	public Object clone()
 	{
 		DS cloned = (DS)super.clone();
-		cloned.buffer = new fixed[buffer.length];
+		cloned.buffer = new FixedChar[buffer.length];
 		System.arraycopy(buffer, 0, cloned.buffer, 0, buffer.length);
 		return cloned;
 	}
@@ -60,10 +60,10 @@ public class DS extends fixed
 	public void setOccurrence(int lOccur)
 	{
 		// Create multi-occur buffer if it doesn't already exist
-		fixed bufOccur = buffer[lOccur - 1];
+		FixedChar bufOccur = buffer[lOccur - 1];
 		if (bufOccur==null)
 		{
-			bufOccur=new fixed(size());
+			bufOccur=new FixedChar(size());
 			buffer[lOccur-1]=bufOccur;
 		}
 		setOverlay(bufOccur.getOverlay());

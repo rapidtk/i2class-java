@@ -4,7 +4,7 @@ import java.util.*;
 
 /**
  * A 'helper' class used to implement SFL functionality
- * @author Andrew Clark
+ * 
  * @see RfileWorkstn
  */
 class RecordSFL /*implements IRecordSFL*/

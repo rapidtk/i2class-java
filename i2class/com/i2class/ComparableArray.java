@@ -3,7 +3,7 @@ package com.i2class;
 
 /**
  * A comparable array class.  Loops through index of array and compares to identical element of another array
- * @author ANDREWC
+ * 
  */
 final class ComparableArray implements Comparable {
 	Object array[];

@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * DLTDTAQ (delete data queue) processing.
- * @author ANDREWC
+ * 
  */
 public class Dltdtaq extends AbstractCommand {
 
@@ -42,7 +42,7 @@ public class Dltdtaq extends AbstractCommand {
 		setDtaq(dtaq);
 		exec();
 	}
-	public void exec(fixed dtaq) throws Exception {
+	public void exec(FixedChar dtaq) throws Exception {
 		exec(dtaq.toString());
 	}
 

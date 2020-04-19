@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.io.*;
 /**
  * A character data area class that stores data in a remote database file.
- * @author Andrew Clark
+ * 
  */
 class CharacterDataAreaJDBC extends DataAreaJDBC implements ICharacterDtaara
 {

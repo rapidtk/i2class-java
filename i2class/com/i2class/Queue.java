@@ -7,7 +7,7 @@ import java.util.*;
 /**
  * First-in first-out (FIFO) queue with optional keys and wait time.
  * 
- * @author ANDREWC
+ * 
  *
  */
 class Queue {
@@ -70,7 +70,7 @@ class Queue {
 	public void sendObject(Object data, FixedData key)
 	{
 		//	Since this is a 0-based index, the size() before entry is the correct value
-		Integer newIndex = numeric.newInteger(m_queueData.size());
+		Integer newIndex = ShortDecimal.newInteger(m_queueData.size());
 		// See if a value already exists for the specified key
 		Object index = m_keys.remove(key);
 		// If there is one, replace with a Vector entry of values...
@@ -210,7 +210,7 @@ class Queue {
 				// headMap always returns LT and tailMap always returns GE so we have to calculate the successor for LE/GT
 				if (keyOrder.compareTo("LE")==0 || keyOrder.compareTo("GT")==0)
 				{
-					subKey = new fixed(key.size()+1);
+					subKey = new FixedChar(key.size()+1);
 					subKey.movel(key);
 					subKey.move('\0');
 				}

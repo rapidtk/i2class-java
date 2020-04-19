@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * A generic field description class used in place of the IBM record-level access class.
- * @author Andrew Clark
+ * 
  * @see com.ibm.as400.access.FieldDescription
  */
 class I2FieldDescription

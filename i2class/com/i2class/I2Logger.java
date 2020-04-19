@@ -10,7 +10,7 @@ import java.text.*;
 
 /**
  * A utility class to log I2 messages.
- * @author ANDREWC
+ * 
  *
  */
 public class I2Logger

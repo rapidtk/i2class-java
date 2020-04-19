@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * A subfile record interface used by WebFaced applications.
- * @author Andrew Clark
+ * 
  */
 interface IRecordSFL extends IRecord
 {

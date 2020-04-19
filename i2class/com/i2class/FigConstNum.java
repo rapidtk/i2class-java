@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 /**
  * A RPG numeric figurative constant class.  Classes like Zeros (*ZEROS) 
  * derive from this class.
- * @author Andrew Clark
+ * 
  * @version 1.0
  */
 abstract class FigConstNum extends FigConst
@@ -34,7 +34,7 @@ abstract class FigConstNum extends FigConst
 	 */
 	BigDecimal decimalValue(int length, int scale)
 	{
-		return numeric.newBigDecimal(doubleValue(length, scale));
+		return ShortDecimal.newBigDecimal(doubleValue(length, scale));
 	}
 	abstract double doubleValue(int length, int scale);
 

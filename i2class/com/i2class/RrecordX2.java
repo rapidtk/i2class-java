@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * A record class with AS400 field compatibility layer.
- * @author Andrew Clark
+ * 
  */
 import java.util.Vector;
 
@@ -12,9 +12,6 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 	Vector fldNames = new Vector();
 	Vector fldDescriptions = new Vector();
 	//Vector offsets = new Vector();
-	
-	static protected final int KEY_DESCEND=1;
-	static protected final int KEY_ABSVAL=2;
 
 	public RrecordX2(String recordName)
 	{
@@ -30,7 +27,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		@Override
 		public FixedData getFixedType()
 		{
-			return new int_f(2);
+			return new FixedBinary(2);
 		}
 	}
 	/** 4-byte binary value. */
@@ -43,7 +40,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		@Override
 		public FixedData getFixedType()
 		{
-			return new int_f(4);
+			return new FixedBinary(4);
 		}
 	}
 	/** 8-byte binary value. */
@@ -56,7 +53,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		@Override
 		public FixedData getFixedType()
 		{
-			return new int_f(8);
+			return new FixedBinary(8);
 		}
 	}
 	public class AS400PackedDecimal extends I2DataType
@@ -68,7 +65,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		@Override
 		public FixedData getFixedType()
 		{
-			return new packed(size, precision);
+			return new PackedDecimal(size, precision);
 		}
 	}
 	public class AS400ZonedDecimal extends I2DataType
@@ -80,7 +77,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		@Override
 		public FixedData getFixedType()
 		{
-			return new zoned(size, precision);
+			return new ZonedDecimal(size, precision);
 		}
 	}
 	public class AS400Float4 extends I2DataType
@@ -92,7 +89,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		@Override
 		public FixedData getFixedType()
 		{
-			return new float_f(4);
+			return new FixedFloat(4);
 		}
 	}
 	public class AS400Float8 extends I2DataType
@@ -104,7 +101,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		@Override
 		public FixedData getFixedType()
 		{
-			return new float_f(8);
+			return new FixedFloat(8);
 		}
 	}
 	public class AS400Text extends I2DataType
@@ -116,7 +113,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		@Override
 		public FixedData getFixedType()
 		{
-			return new fixed(size);
+			return new FixedChar(size);
 		}
 	}
 	public class BinaryFieldDescription extends I2FieldDescription

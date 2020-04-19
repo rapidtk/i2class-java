@@ -5,7 +5,7 @@
 package com.i2class;
 
 /**
- * @author ANDREWC
+ * 
  *
  */
 public interface IFixedData {

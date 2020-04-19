@@ -2,104 +2,27 @@ package com.i2class;
 
 /**
  * A varying-length string with a fixed-length (maximum) buffer size.
- *
- *  * @author ANDREWC
  */
-public class varying extends fixed {
-	
-	//private fixed voverlay;
-	/** The actual length of the varying-length data. */
-	//private int m_vlength;
-	
-	
-	protected varying()
-	{
-		super();
-	}
-	// Don't call super here because we want to initialize to "", not all blanks. 
-	public varying(int sz)
-	{
-		construct(sz+2);
-	}
-	public varying(int sz, byte array[], int index)
-	{
-		super(sz+2, array, index);
-	}
-	public varying(int sz, char c)
-	{
-		super(sz+2, c);
-	}
-	public varying(int sz, FigConst fc)
-	{
-		super(sz+2, fc);
-	}
-	public varying(int sz, String str)
-	{
-		super(sz+2, str);
+public class varying extends CharVarying {
+
+	public varying(int sz) {
+		super(sz);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#len()
-	 */
-	final public int len() {
-		return (int)getBinary(-2, 2);
+	public varying(int sz, byte[] array, int index) {
+		super(sz, array, index);
 	}
 
-
-	final int getOffset()
-	{
-		return m_ptr.m_offset+2;
+	public varying(int sz, char c) {
+		super(sz, c);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#getBytes()
-	public byte[] getBytes() {
-		if (voverlay==null)
-			voverlay = new fixed(m_size+2);
-		voverlay.setBinary(m_vlength, 0, 2);
-		voverlay.arrayCopy(2, this);
-		return voverlay.getOverlay();
-	}
-	 */
-
-
-	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#setVlength(int)
-	 */
-	protected void setVlength(int vlength)
-	{
-		//m_vlength = vlength;
-		setBinary(vlength, -2, 2);
+	public varying(int sz, FigConst fc) {
+		super(sz, fc);
 	}
 
-	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#msize()
-	 */
-	final int msize()
-	{
-		return m_size-2;
+	public varying(int sz, String str) {
+		super(sz, str);
 	}
-
-	/*
-	public static void main(String args[])
-	{
-		fixed fxd = new fixed(10, "ABC");
-		varying v = new varying(10);
-		v.assign(fxd);
-		byte[] b = v.getBytes();
-		v.assign("");
-		b = v.getBytes();
-		String s = v.toString();
-		v.assign(fxd.toString()+"DEF");
-		v.assign(fxd.trimr()+"DEF");
-		v.assign("ABC");
-		v.assign('c');
-		s = v.toFixedString();
-		s = v.toString();
-		fxd.assign(v);
-		v.move('x');
-		fxd.move('x');
-	}
-	*/
 
 }

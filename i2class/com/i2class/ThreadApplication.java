@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * An I2-translated app that can be run in a Java thread.
- * @author Andrew Clark
+ * 
  */
 public class ThreadApplication extends Application
 {

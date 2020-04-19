@@ -8,7 +8,7 @@ package com.i2class;
 
 /**
  * A multi-occur table.
- * @author ANDREWC
+ * 
  *
  */
 public class tableDS extends DS {
@@ -27,7 +27,7 @@ public class tableDS extends DS {
 	 */
 	public int lookup(char arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.EQ);
+		return lookupxx(arg, startIndex, Table.EQ);
 	}
 
 	/**
@@ -35,52 +35,52 @@ public class tableDS extends DS {
 	 */
 	public int lookup(Comparable arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.EQ);
+		return lookupxx(arg, startIndex, Table.EQ);
 	}
 
 	public int lookupge(char arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.GE);
+		return lookupxx(arg, startIndex, Table.GE);
 	}
 
 	public int lookupge(Comparable arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.GE);
+		return lookupxx(arg, startIndex, Table.GE);
 	}
 
 	public int lookupgt(char arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.GT);
+		return lookupxx(arg, startIndex, Table.GT);
 	}
 
 	public int lookupgt(Comparable arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.GT);
+		return lookupxx(arg, startIndex, Table.GT);
 	}
 
 	public int lookuple(char arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.LE);
+		return lookupxx(arg, startIndex, Table.LE);
 	}
 
 	public int lookuple(Comparable arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.LE);
+		return lookupxx(arg, startIndex, Table.LE);
 	}
 
 	public int lookuplt(char arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.LT);
+		return lookupxx(arg, startIndex, Table.LT);
 	}
 
 	public int lookuplt(Comparable arg, int startIndex)
 	{
-		return lookupxx(arg, startIndex, table.LT);
+		return lookupxx(arg, startIndex, Table.LT);
 	}
 
 	private int lookupxx(char arg, int startIndex, int compare)
 	{
-		fixed f = new fixed(1, arg);
+		FixedChar f = new FixedChar(1, arg);
 		int i = Application.lookupxx(f, buffer, startIndex, compare);
 		occur(i > 0 ? i : 1);
 		return i;

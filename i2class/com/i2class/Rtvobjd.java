@@ -11,7 +11,7 @@ import com.i2class.cmd.*;
 
 /**
  * RTVOBJD (retrieve object description) processing.
- * @author ANDREWC
+ * 
  */
 public class Rtvobjd extends AbstractCommand {
 
@@ -19,7 +19,7 @@ public class Rtvobjd extends AbstractCommand {
 
 	private String m_rtnlib, m_objatr, m_text;
 	
-	private fixed m_objatrVar, m_rtnlibVar, m_textVar;	
+	private FixedChar m_objatrVar, m_rtnlibVar, m_textVar;	
 	
 	/**
 	 * 
@@ -44,15 +44,15 @@ public class Rtvobjd extends AbstractCommand {
 	}
 	
 	// These are actually return values
-	public void setObjatr(fixed objatrVar)
+	public void setObjatr(FixedChar objatrVar)
 	{
 		m_objatrVar=objatrVar;
 	}
-	public void setRtnlib(fixed rtnlib)
+	public void setRtnlib(FixedChar rtnlib)
 	{
 		m_rtnlibVar=rtnlib;
 	}
-	public void setText(fixed textVar)
+	public void setText(FixedChar textVar)
 	{
 		m_textVar=textVar;
 	}

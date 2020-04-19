@@ -7,7 +7,6 @@ import com.lowagie.text.*;
 import com.lowagie.text.pdf.*;
 /**
  * Write out RPG-like 'green bar' output to a PDF file.
- * @author: Andrew Clark
  */
 public class RfilePDF extends RfilePrint
 {
@@ -23,7 +22,7 @@ public class RfilePDF extends RfilePrint
 	static final int MARGIN_SIZE = 36; // 36 points = 1/2"
 	private Rectangle r;
 	//private int fontSize=RecordPDF.DEFAULT_FONT_SIZE;
-	int_f fontSize = new int_f(2, RecordPDF.DEFAULT_FONT_SIZE);
+	FixedBinary fontSize = new FixedBinary(2, RecordPDF.DEFAULT_FONT_SIZE);
 
 	/**
 	 * Write RPG-like output to a PDF file
@@ -155,8 +154,8 @@ public class RfilePDF extends RfilePrint
 	public class Handle
 	{
 		public Rectangle 	rectangle;
-		public int_f	marginSize;
-		public int_f	fontSize; 
+		public FixedBinary	marginSize;
+		public FixedBinary	fontSize; 
 
 		public Document 	document;
 		public PdfWriter 	writer;

@@ -13,7 +13,7 @@ import com.ibm.as400ad.webfacing.runtime.view.*;
 import com.ibm.as400ad.webfacing.runtime.view.def.*;
 /**
  * Lock a thread until some action is taken by a user on a WebFaced display.
- * @author Andrew Clark 
+ *  
  * @version 4/22/2002 10:45:43 AM
  */
 public class ThreadLockWebface

@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * RCLRSC (Reclaim resources) processing.
- * @author ANDREWC
+ * 
  */
 public class Rclrsc extends AbstractCommand {
 
@@ -33,7 +33,7 @@ public class Rclrsc extends AbstractCommand {
 	public void setLvl(String lvl) {
 		m_lvl = Application.trimr(lvl);
 	}
-	public void setLvl(fixed lvl) {
+	public void setLvl(FixedChar lvl) {
 		setLvl(lvl.toString());
 	}
 	

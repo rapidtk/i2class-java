@@ -4,12 +4,16 @@ import java.io.Serializable;
 
 /**
  * A base record class for I2 (not AS400) records.
- * @author Andrew Clark
+ * 
  */
 class RrecordX implements IRecord, Serializable
 {
 	String recordName;
 	Rfile file;
+	
+	static protected final int KEY_DESCEND=1;
+	static protected final int KEY_ABSVAL=2;
+	
 	RrecordX(String recordName)
 	{
 		this.recordName=recordName;

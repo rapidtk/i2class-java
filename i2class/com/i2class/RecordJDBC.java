@@ -6,7 +6,7 @@ import java.util.Vector;
 
 /**
  * A JDBC record class.
- * @author Andrew Clark
+ * 
  * @see RfileJDBC
  */
 public class RecordJDBC extends RrecordX2
@@ -59,7 +59,7 @@ public class RecordJDBC extends RrecordX2
 		keyTypes.add(keyType);
 	}
 	
-	public void copyString(fixed fStr, int fieldIndex) throws SQLException
+	public void copyString(FixedChar fStr, int fieldIndex) throws SQLException
 	{
 		String s = getString(fieldIndex);
 		fStr.assign(s);
@@ -214,7 +214,7 @@ public class RecordJDBC extends RrecordX2
 				(I2FieldDescription) fldDescriptions.elementAt(
 					fldNames.indexOf(keyName));
 			if (fd instanceof FloatFieldDescription)
-				key[i] = numeric.newBigDecimal(((FigConstNum) value).floatValue());
+				key[i] = ShortDecimal.newBigDecimal(((FigConstNum) value).floatValue());
 			else
 			{
 				int scale = fd.dataType.precision;
@@ -222,7 +222,7 @@ public class RecordJDBC extends RrecordX2
 				// If this is a character string, then create a new key with the same length
 				if (scale == -1)
 				{
-					fixed fStr = new fixed(length);
+					FixedChar fStr = new FixedChar(length);
 					fStr.assign(value);
 					key[i] = fStr.toFixedString();
 				}
@@ -257,7 +257,7 @@ public class RecordJDBC extends RrecordX2
 	}
 
 	/** set I2 date/timestamp value */
-	public void setValue(int fieldIndex, date value) throws Exception
+	public void setValue(int fieldIndex, FixedDate value) throws Exception
 	{
 		/* If the result set is updatable, then we want to use the raw date form
 		if (file._updatable)
@@ -293,7 +293,7 @@ public class RecordJDBC extends RrecordX2
 		updateCount++;
 	}
 	// Update Fixed value
-	public void setValue(int fieldIndex, fixed value) throws SQLException
+	public void setValue(int fieldIndex, FixedChar value) throws SQLException
 	{
 		String s = value.toString();
 		setValue(fieldIndex, s);
@@ -340,7 +340,7 @@ public class RecordJDBC extends RrecordX2
 		updateCount++;
 	}
 	/** set I2 time value */
-	public void setValue(int fieldIndex, time value) throws Exception
+	public void setValue(int fieldIndex, FixedTime value) throws Exception
 	{
 		java.sql.Time sqlTime = new java.sql.Time(value.toDate().getTime());
 		//((RfileJDBC)file).rs.updateDouble(fieldIndex+1, value);
@@ -355,7 +355,7 @@ public class RecordJDBC extends RrecordX2
 		updateCount++;
 	}
 	/** set I2 timestamp value */
-	public void setValue(int fieldIndex, timestamp value) throws Exception
+	public void setValue(int fieldIndex, FixedTimestamp value) throws Exception
 	{
 		java.sql.Timestamp sqlTimestamp = value.toTimestamp();
 		//((RfileJDBC)file).rs.updateDouble(fieldIndex+1, value);

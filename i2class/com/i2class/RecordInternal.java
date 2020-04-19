@@ -3,7 +3,7 @@ import com.ibm.as400.access.*;
 
 /**
  * A class representation of a program-described (internally described) record.
- * @author Andrew Clark
+ * 
  */
 public class RecordInternal extends Record400
 {
@@ -24,25 +24,25 @@ public class RecordInternal extends Record400
 		String s = (String) ebcdic.toObject(buffer, offset);
 		return s.charAt(0);
 	}
-	protected fixed fixedAt(int offset, int len)
+	protected FixedChar fixedAt(int offset, int len)
 	{
 		AS400Text ebcdic = new AS400Text(len);
 		String s = (String) ebcdic.toObject(buffer, offset);
-		return new fixed(len, s);
+		return new FixedChar(len, s);
 	}
 	protected int intAt(int offset)
 	{
-		int i = (int) fixed.getBinary(buffer, offset, 4);
+		int i = (int) FixedChar.getBinary(buffer, offset, 4);
 		return i;
 	}
 	protected long longAt(int offset)
 	{
-		long l = fixed.getBinary(buffer, offset, 8);
+		long l = FixedChar.getBinary(buffer, offset, 8);
 		return l;
 	}
-	protected packed packedAt(int offset, int len, int precision)
+	protected PackedDecimal packedAt(int offset, int len, int precision)
 	{
-		return new packed(len, precision, buffer, offset);
+		return new PackedDecimal(len, precision, buffer, offset);
 	}
 	/**
 	 * Set the buffer array to the byte representation of this record
@@ -63,11 +63,11 @@ public class RecordInternal extends Record400
 			}
 		}
 	}
-	protected zoned zonedAt(int offset, int len, int precision)
+	protected ZonedDecimal zonedAt(int offset, int len, int precision)
 	{
 		AS400Text ebcdic = new AS400Text(len);
 		String s = (String) ebcdic.toObject(buffer, offset);
-		zoned z = new zoned(len, precision);
+		ZonedDecimal z = new ZonedDecimal(len, precision);
 		z.assign(s.getBytes(), 0);
 		return z;
 	}

@@ -25,7 +25,7 @@ import java.util.Map;
 import java.util.Vector;
 
 /**
- * @author ANDREWC
+ * 
  *
  * A ResultSet interface class to build a list of fields to select from.
  * This is used internally by I2 during input() and output() calls to 'intercept' what fields to read from.

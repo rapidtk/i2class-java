@@ -11,7 +11,7 @@ import com.i2class.cmd.*;
 
 /**
  * SNDPGMMSG (Send program message) API.
- * @author ANDREWC
+ * 
  */
 public class QMHSNDPM extends Application {
 	
@@ -31,8 +31,8 @@ public class QMHSNDPM extends Application {
 	 * @param errcod Error code
 	 * @throws Exception
 	 */
-	public void call(fixed msgid, fixed msgf, fixed msgdta, int_f msgLength, fixed msgType, fixed callStackEntry,
-	 int_f callStackCounter, fixed msgKey, FixedData errcod) throws Exception {
+	public void call(FixedChar msgid, FixedChar msgf, FixedChar msgdta, FixedBinary msgLength, FixedChar msgType, FixedChar callStackEntry,
+	 FixedBinary callStackCounter, FixedChar msgKey, FixedData errcod) throws Exception {
 	 	Sndpgmmsg sndpgmmsg = new Sndpgmmsg();
 	 	sndpgmmsg.setApp(prvApp());
 	 	sndpgmmsg.setMsgid(msgid);

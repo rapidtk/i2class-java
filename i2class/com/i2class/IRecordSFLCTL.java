@@ -5,7 +5,7 @@ import javax.servlet.http.*;
 
 /**
  * An interface to a SFLCTL format.
- * @author ANDREWC
+ * 
  */
 interface IRecordSFLCTL extends IRecordSFLX {
 	/** Get the webfaced name (SFLCTL for WebFacing), SFL for Thread) of the subfile. */

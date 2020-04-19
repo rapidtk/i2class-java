@@ -9,7 +9,6 @@ import java.util.Vector;
 /**
  * A record of data read/written from an externally-described OS/400 file.
  * @see RfileDB400
- * @author Andrew Clark 
  */
 public class Record400
 	extends com.ibm.as400.access.RecordFormat
@@ -22,6 +21,9 @@ public class Record400
 	private Vector offsets = new Vector();
 	//private Application app;
 	Rfile file;
+	
+	static protected final int KEY_DESCEND=1;
+	static protected final int KEY_ABSVAL=2;
 
 	/** Create a record format object with the specified name. */
 	public Record400(String recordName)
@@ -37,7 +39,7 @@ public class Record400
 	 */
 	public void addFieldDescription(com.ibm.as400.access.FieldDescription fldDesc) {
 		super.addFieldDescription(fldDesc);
-		offsets.add(numeric.newInteger(addOffset));
+		offsets.add(ShortDecimal.newInteger(addOffset));
 		addOffset += fldDesc.getDataType().getByteLength();
 	}
 	
@@ -47,28 +49,40 @@ public class Record400
 	 * @param fStr The fixed string variable to copy the value to.
 	 * @param fieldIndex The field index of the field to copy the value from.
 	 */
-	public void copyString(fixed fStr, int fieldIndex)
+	public void copyString(FixedChar fStr, int fieldIndex)
 		throws UnsupportedEncodingException
 	{
 		String s = record.getField(fieldIndex).toString();
 		fStr.assign(s);
 	}
-	public BigDecimal getBigDecimal(int fieldIndex) throws UnsupportedEncodingException
-	{
-		BigDecimal bd = (BigDecimal) record.getField(fieldIndex);
-		return bd;
-	}
+	
 	/** Get an external value from the field at the specified index. */
 	public char getChar(int fieldIndex) throws UnsupportedEncodingException
 	{
 		String s = (String) record.getField(fieldIndex);
 		return s.charAt(0);
 	}
+	
+	public BigDecimal getBigDecimal(int fieldIndex) throws UnsupportedEncodingException
+	{
+		BigDecimal bd = (BigDecimal) record.getField(fieldIndex);
+		return bd;
+	}
+	public BigDecimal getDecimal(int fieldIndex) throws UnsupportedEncodingException
+	{
+		return getBigDecimal(fieldIndex);
+	}
+	public BigDecimal getNumeric(int fieldIndex) throws UnsupportedEncodingException
+	{
+		return getBigDecimal(fieldIndex);
+	}
+	
 	public double getDouble(int fieldIndex) throws UnsupportedEncodingException
 	{
 		BigDecimal bd = getBigDecimal(fieldIndex);
 		return bd.doubleValue();
 	}
+	
 	/**
 	 * Return the field name at the specified index.
 	 */
@@ -95,19 +109,19 @@ public class Record400
 		com.ibm.as400.access.FieldDescription fd = getFieldDescription(index);
 		// Packed
 		if (fd instanceof PackedDecimalFieldDescription)
-			return new packed(
+			return new PackedDecimal(
 				fd.getLength(),
 				((PackedDecimalFieldDescription) fd).getDecimalPositions());
 		// Zoned
 		else if (fd instanceof ZonedDecimalFieldDescription)
-			return new zoned(
+			return new ZonedDecimal(
 				fd.getLength(),
 				((ZonedDecimalFieldDescription) fd).getDecimalPositions());
 		// Binary 
 		else if (fd instanceof BinaryFieldDescription)
-			return new int_f(fd.getDataType().getByteLength());
+			return new FixedBinary(fd.getDataType().getByteLength());
 		// Everything else (treat as character)
-		return new fixed(fd.getLength());
+		return new FixedChar(fd.getLength());
 	}
 	public int getInt(int fieldIndex) throws UnsupportedEncodingException
 	{
@@ -211,7 +225,7 @@ public class Record400
 		{
 			com.ibm.as400.access.FieldDescription fd = getKeyFieldDescription(i);
 			if (fd instanceof FloatFieldDescription)
-				key[i] = numeric.newBigDecimal(((FigConstNum) value).floatValue());
+				key[i] = ShortDecimal.newBigDecimal(((FigConstNum) value).floatValue());
 			else
 			{
 				int scale = -1;
@@ -238,7 +252,7 @@ public class Record400
 				// If this is a character string, then create a new key with the same length
 				if (scale == -1)
 				{
-					fixed fStr = new fixed(length);
+					FixedChar fStr = new FixedChar(length);
 					fStr.assign(value);
 					key[i] = fStr.toFixedString();
 				}
@@ -374,7 +388,7 @@ public class Record400
 		}
 		bd = new BigDecimal(s);
 		*/
-		BigDecimal bd = numeric.newBigDecimal(value);
+		BigDecimal bd = ShortDecimal.newBigDecimal(value);
 
 		setValue(fieldIndex, bd);
 	}
@@ -388,7 +402,7 @@ public class Record400
 		BigDecimal bd = BigDecimal.valueOf(value);
 		setValue(fieldIndex, bd);
 	}
-	public void setValue(int fieldIndex, fixed fStr)
+	public void setValue(int fieldIndex, FixedChar fStr)
 	{
 		String s = fStr.toString();
 		setValue(fieldIndex, s);
@@ -462,5 +476,12 @@ public class Record400
 	public Application app()
 	{
 		return file.app;
+	}
+	
+	/** Add and retrieve key field names with Descending/Absolute value specified. */
+	protected void addKeyFieldDescription(String fieldName, int keyType)
+	{
+		// Descending doesn't seem to matter for KeyedFile
+		addKeyFieldDescription(fieldName);
 	}
 }

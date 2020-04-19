@@ -12,21 +12,21 @@ import com.i2class.cmd.*;
 
 /**
  * Execute command (QCMDEXC) API
- * @author ANDREWC
+ * 
  */
 public class QCMDEXC extends Application {
 	
 	private static final Class[] APP_PARM_TYPES={Application.class};
 	private static final Class[] PARM_TYPES = {String.class};
 	
-	public fixed cmdString;
-	public packed cmdLength = new packed(15,5);
+	public FixedChar cmdString;
+	public PackedDecimal cmdLength = new PackedDecimal(15,5);
 
 	public QCMDEXC(Application app) throws Exception {
 	   super(app);
 	}
 	
-	public void call(fixed cmdString, packed cmdLength) throws Exception
+	public void call(FixedChar cmdString, PackedDecimal cmdLength) throws Exception
 	{	this.cmdString=cmdString;
 		this.cmdLength=cmdLength;
 		runMain();

@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * An interface to a keyed database file.
- * @author Andrew Clark 
+ *  
  */
 public interface IKeyedFile extends IDiskFile
 {
@@ -19,7 +19,7 @@ public interface IKeyedFile extends IDiskFile
 	public boolean chainn()
 		throws Exception; //AS400Exception, AS400SecurityException, ConnectionDroppedException, InterruptedException, IOException
 	/** Delete the current record from the file. */
-	public boolean Delete() throws Exception;
+	public boolean delete() throws Exception;
 /* Everything from this point on is considered 'keyed' access */
 	/** 
 	 * Read the next record if its key matches the values previously applied with setKey(). 

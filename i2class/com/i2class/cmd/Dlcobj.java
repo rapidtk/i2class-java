@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * DLCOBJ (Deallocate object) processing.
- * @author ANDREWC
+ * 
  */
 public class Dlcobj extends AbstractCommand {
 

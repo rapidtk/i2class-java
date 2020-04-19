@@ -9,7 +9,7 @@ import java.util.*;
 
 /**
  * RCVMSG (Receive program message) API.
- * @author ANDREWC
+ * 
  */
 public class QMHRCVPM extends Application {
 	
@@ -29,8 +29,8 @@ public class QMHRCVPM extends Application {
 	 * @param errcod Error code
 	 * @throws Exception
 	 */
-	public void call(FixedData msgInfo, int_f msgInfoLen, fixed fmtName, fixed callStackEntry,
-	 int_f callStackCounter, fixed msgType, fixed msgKey, int_f waitTime, fixed msgAction, FixedData errcod) {
+	public void call(FixedData msgInfo, FixedBinary msgInfoLen, FixedChar fmtName, FixedChar callStackEntry,
+	 FixedBinary callStackCounter, FixedChar msgType, FixedChar msgKey, FixedBinary waitTime, FixedChar msgAction, FixedData errcod) {
 	 	// Find call stack
 		Application csapp=Pgmmsg.findCallStack(prvApp(), callStackEntry.toString(), callStackCounter.intValue());
 		// Find program message
@@ -87,11 +87,11 @@ public class QMHRCVPM extends Application {
 				// Message file
 				if (bytPrv>=35)
 				{
-					msgInfo.setFixedAt(25, new fixed(10, pgmmsg.m_msgf));
+					msgInfo.setFixedAt(25, new FixedChar(10, pgmmsg.m_msgf));
 					// Message file library specified 
 					if (bytPrv>=45)
 					{
-						fixed libl = new fixed(10, "*LIBL");
+						FixedChar libl = new FixedChar(10, "*LIBL");
 						msgInfo.setFixedAt(35, libl);
 						// Message file library used
 						if (bytPrv>=55)
@@ -114,11 +114,11 @@ public class QMHRCVPM extends Application {
 				msgInfo.setBinary(pgmmsg.m_sev, 8, 4); // Message severity
 				if (bytPrv>=19)
 				{
-					msgInfo.setFixedAt(12, new fixed(7, pgmmsg.m_msgid)); // MSGID
+					msgInfo.setFixedAt(12, new FixedChar(7, pgmmsg.m_msgid)); // MSGID
 					// Build message type
 					if (bytPrv>=21)
 					{
-						fixed msgtyp = new fixed(2);
+						FixedChar msgtyp = new FixedChar(2);
 						if (pgmmsg.m_msgtype.compareTo("*ESCAPE")==0)
 							msgtyp.assign("15"); // Completion
 						else if (pgmmsg.m_msgtype.compareTo("*COMP")==0)

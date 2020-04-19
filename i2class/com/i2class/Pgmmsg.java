@@ -13,7 +13,7 @@ import java.util.ResourceBundle;
 
 /**
  * A program message class.
- * @author ANDREWC
+ * 
  *
  */
 public class Pgmmsg extends Exception {
@@ -131,7 +131,7 @@ public class Pgmmsg extends Exception {
 					break;
 				}
 				case TYPES_DEC:
-					packed p = m_msgdta.packedAt(offset, length, vbyteOrDec);
+					PackedDecimal p = m_msgdta.packedAt(offset, length, vbyteOrDec);
 					rplc = p.toString();
 					length = p.size();
 					break;
@@ -250,7 +250,7 @@ public class Pgmmsg extends Exception {
 		return csapp;
 	}
 
-	static Pgmmsg findPgmmsg(Application csapp, fixed msgKey, String msgType, String msgAction)
+	static Pgmmsg findPgmmsg(Application csapp, FixedChar msgKey, String msgType, String msgAction)
 	{
 		Pgmmsg pgmmsg = null;
 		// If we've found the matching Application, then add program message to program's message queue

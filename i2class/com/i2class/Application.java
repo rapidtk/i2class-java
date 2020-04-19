@@ -37,7 +37,7 @@ import com.ibm.as400.access.QSYSObjectPathName;
  * written to green-bar style reports.  
  * The indicators *INKA-*INKN and *INKP-*INKZ represent the 24 function keys that can be pressed on a 5250 terminal.
  * 
- * @author Andrew Clark
+ * 
  */
 public class Application implements Runnable, Serializable
 {
@@ -286,7 +286,7 @@ public class Application implements Runnable, Serializable
 	public Hashtable ovrFiles;
 	
 	/** PSDS reference */
-	fixed psds;
+	FixedChar psds;
 	
 	// Indicators
 
@@ -319,7 +319,7 @@ public class Application implements Runnable, Serializable
 	// Job switch indicators
 	public boolean INU1, INU2, INU3, INU4, INU5, INU6, INU7, INU8;
 
-	public final class IN_ARRAY extends fixed
+	public final class IN_ARRAY extends FixedChar
 	{
 		private int I;
 		IN_ARRAY()
@@ -611,6 +611,7 @@ public class Application implements Runnable, Serializable
 	{
 		this(app, datedit, "*ISO");
 	}
+	
 	/**
 	 * Construct this I2 application with the specified date format, date separator. 
 	 * @version 9/27/2002 5:53:56 PM
@@ -708,7 +709,7 @@ public class Application implements Runnable, Serializable
 
 		// Save default date format
 		_DATFMT = datfmt;
-		dateFormat = date.getDateFormat(datfmt);
+		dateFormat = FixedDate.getDateFormat(datfmt);
 		
 	}
 	
@@ -765,7 +766,7 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Return the address of a field */
-	static public pointer addr(FixedData field)
+	static public FixedPointer addr(FixedData field)
 	{
 		return field.m_ptr;
 	}
@@ -783,7 +784,7 @@ public class Application implements Runnable, Serializable
 	 * @param dat the date to format
 	 * @param dateFormat400 the 400 style date string (e.g. "*MDY/", "*ISO")
 	 */
-	public static fixed Char(date dat, String datfmt400)
+	public static FixedChar Char(FixedDate dat, String datfmt400)
 	{
 		return dat.Char(datfmt400);
 	}
@@ -809,18 +810,18 @@ public class Application implements Runnable, Serializable
 	 */
 	public static int check(char comparator, String base)
 	{
-		return new fixed(1, base).check(comparator);
+		return new FixedChar(1, base).check(comparator);
 	}
 	/**
 	 * Return the first position of the string <code>base</code> that contains a character that 
 	 * does not appear in string <code>comparator</code>.
 	 * @see check(fixed, String) 
 	 */
-	public static int check(char comparator, fixed base)
+	public static int check(char comparator, FixedChar base)
 	{
 		return base.check(comparator);
 	}
-	public static int check(fixed comparator, fixed base)
+	public static int check(FixedChar comparator, FixedChar base)
 	{
 		return base.check(comparator);
 	}
@@ -830,7 +831,7 @@ public class Application implements Runnable, Serializable
     * does not appear in string <code>comparator</code>. 
     * If all of the characters in <code>base</code> also appear in <code>comparator</code>, the function returns 0.
 	 */
-	public static int check(String comparator, fixed base)
+	public static int check(String comparator, FixedChar base)
 	{
 		return base.check(comparator);
 	}
@@ -841,7 +842,7 @@ public class Application implements Runnable, Serializable
 	 */
 	public static int check(String comparator, char base)
 	{
-		return new fixed(1, base).check(comparator);
+		return new FixedChar(1, base).check(comparator);
 	}
 	/**
 	 * Return the first position of the string <code>base</code> that contains a character that 
@@ -850,7 +851,7 @@ public class Application implements Runnable, Serializable
 	 */
 	public static int check(String comparator, String base)
 	{
-		return new fixed(base.length(), base).check(comparator);
+		return new FixedChar(base.length(), base).check(comparator);
 	}
 
 	/**
@@ -858,7 +859,7 @@ public class Application implements Runnable, Serializable
 	 * does not appear in string <code>comparator</code>.
 	 * @see checkr(fixed, String) 
 	 */
-	public static int checkr(char comparator, fixed base)
+	public static int checkr(char comparator, FixedChar base)
 	{
 		return base.checkr(comparator);
 	}
@@ -868,7 +869,7 @@ public class Application implements Runnable, Serializable
 	* does not appear in string <code>comparator</code>. 
 	* If all of the characters in <code>base</code> also appear in <code>comparator</code>, the function returns 0.
 	*/
-	public static int checkr(String comparator, fixed base)
+	public static int checkr(String comparator, FixedChar base)
 	{
 		return base.checkr(comparator);
 	}
@@ -879,7 +880,7 @@ public class Application implements Runnable, Serializable
 	 */
 	public static int checkr(char comparator, String base)
 	{
-		return new fixed(base.length(), base).checkr(comparator);
+		return new FixedChar(base.length(), base).checkr(comparator);
 	}
 	/**
 	 * Return the last position of the string <code>base</code> that contains a character that 
@@ -888,7 +889,7 @@ public class Application implements Runnable, Serializable
 	 */
 	public static int checkr(String comparator, String base)
 	{
-		return new fixed(base.length(), base).checkr(comparator);
+		return new FixedChar(base.length(), base).checkr(comparator);
 	}
 	/**
 	 * Return the last position of the string <code>base</code> 
@@ -898,13 +899,13 @@ public class Application implements Runnable, Serializable
 	 */
 	public static int checkr(String comparator, char base, int start)
 	{
-		return new fixed(1, base).checkr(comparator,start);
+		return new FixedChar(1, base).checkr(comparator,start);
 	}
 
 	/** Return the current system date. */
-	static public date date()
+	static public FixedDate date()
 	{
-		date d = new date();
+		FixedDate d = new FixedDate();
 		d.assign(new java.util.Date());
 		return d;
 	}
@@ -914,7 +915,7 @@ public class Application implements Runnable, Serializable
 	 * @param fStr the value to format
 	 * @param dateFormat400 the 400 style date string (e.g. "*MDY/", "*ISO")
 	 */
-	public static date date(fixed fStr, String datfmt400) throws Exception
+	public static FixedDate date(FixedChar fStr, String datfmt400) throws Exception
 	{
 		return date(fStr.toString(), datfmt400);
 	}
@@ -924,12 +925,12 @@ public class Application implements Runnable, Serializable
 	 * @param value the value to format
 	 * @param dateFormat400 the 400 style date string (e.g. "*MDY/", "*ISO")
 	 */
-	public static date date(int value, String datfmt400) throws Exception
+	public static FixedDate date(int value, String datfmt400) throws Exception
 	{
 		// Make sure that the date format ends with a '0' so that no separators get used
 		datfmt400 = numericDateFormat(datfmt400);
-		String datfmt = date.getDateFormat(datfmt400);
-		zoned z = new zoned((datfmt.length()), 0, value);
+		String datfmt = FixedDate.getDateFormat(datfmt400);
+		ZonedDecimal z = new ZonedDecimal((datfmt.length()), 0, value);
 		// Just use the raw zoned data instead so we avoid problems with leading 0s getting chopped
 		//date d = new date(datfmt400, z.toString());
 		String digits = z.toNumericString();
@@ -940,7 +941,7 @@ public class Application implements Runnable, Serializable
 	 * @param value the value to format
 	 * @param dateFormat400 the 400 style date string (e.g. "*MDY/", "*ISO")
 	 */
-	public static date date(INumeric value, String datfmt400) throws Exception
+	public static FixedDate date(INumeric value, String datfmt400) throws Exception
 	{
 		datfmt400 = numericDateFormat(datfmt400);
 		//return date(value.toString(), datfmt400);
@@ -951,7 +952,7 @@ public class Application implements Runnable, Serializable
 	 * Return the date representation of a string.
 	 * The string is assumed to be in the global (Application._DATFMT) date format.
 	 */
-	public static date date(String str) throws Exception
+	public static FixedDate date(String str) throws Exception
 	{
 		String datfmt400 = Application._DATFMT;
 		return date(str, datfmt400);
@@ -960,9 +961,9 @@ public class Application implements Runnable, Serializable
 	 * Return the date representation of a fixed string value.
 	 * @see date(String)
 	 */
-	public static date date(String str, String datfmt400) throws Exception
+	public static FixedDate date(String str, String datfmt400) throws Exception
 	{
-		date d = new date(datfmt400, str);
+		FixedDate d = new FixedDate(datfmt400, str);
 		// Make sure that the date is valid
 		d.toDate();
 		return d;
@@ -991,9 +992,9 @@ public class Application implements Runnable, Serializable
 	*/
 
 	/** Return the current system time. */
-	static public time time()
+	static public FixedTime time()
 	{
-		time t = new time();
+		FixedTime t = new FixedTime();
 		t.assign(new java.util.Date());
 		return t;
 	}
@@ -1002,9 +1003,9 @@ public class Application implements Runnable, Serializable
 	 * Return the time representation of a string.
 	 * The string is assumed to be in iso date format.
 	 */
-	public static time time(AbstractNumeric value) throws Exception
+	public static FixedTime time(AbstractNumeric value) throws Exception
 	{
-		time t = new time("*ISO0");
+		FixedTime t = new FixedTime("*ISO0");
 		t.move(value);
 		return t;
 	}
@@ -1013,9 +1014,9 @@ public class Application implements Runnable, Serializable
 	 * Return the time representation of a string.
 	 * The string is assumed to be in iso date format.
 	 */
-	public static time time(String str) throws Exception
+	public static FixedTime time(String str) throws Exception
 	{
-		time t = new time("*ISO");
+		FixedTime t = new FixedTime("*ISO");
 		t.assign(str);
 		return t;
 	}
@@ -1024,7 +1025,7 @@ public class Application implements Runnable, Serializable
 	 * Return the time representation of a string.
 	 * The string is assumed to be in iso date format.
 	 */
-	public static time time(fixed str) throws Exception
+	public static FixedTime time(FixedChar str) throws Exception
 	{
 		return time(str.toString());
 	}
@@ -1032,16 +1033,16 @@ public class Application implements Runnable, Serializable
 	/**
 	 * Return the time representation of a string in the specified date format.
 	 */
-	public static time time(fixed str, String datfmt400) throws Exception
+	public static FixedTime time(FixedChar str, String datfmt400) throws Exception
 	{
 		return time(str.toString(), datfmt400); 
 	}
 	/**
 	 * Return the time representation of a string in the specified date format.
 	 */
-	public static time time(String str, String datfmt400) throws Exception
+	public static FixedTime time(String str, String datfmt400) throws Exception
 	{
-		time t = new time(datfmt400, str); 
+		FixedTime t = new FixedTime(datfmt400, str); 
 		return t;
 	}
 
@@ -1050,7 +1051,7 @@ public class Application implements Runnable, Serializable
 	 * @param value the value to format
 	 * @param dateFormat400 the 400 style date string (e.g. "*HMS0", "*ISO")
 	 */
-	public static time time(INumeric value, String datfmt400) throws Exception
+	public static FixedTime time(INumeric value, String datfmt400) throws Exception
 	{
 		datfmt400 = numericDateFormat(datfmt400);
 		//return date(value.toString(), datfmt400);
@@ -1071,34 +1072,34 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Return the packed decimal equivalent of a long value. */
-	static public packed dec(long value)
+	static public PackedDecimal dec(long value)
 	{
 		int length = (int)Application.log10(value)+1;
-		return new packed(length, 0, value);
+		return new PackedDecimal(length, 0, value);
 	}
 	/** Return the packed decimal equivalent of a double value. */
-	static public packed dec(double value)
+	static public PackedDecimal dec(double value)
 	{
 		int length = (int)Application.log10(value)+1;
-		int scale = numeric.newBigDecimal(value).scale();
-		return new packed(length+scale, scale, value);
+		int scale = ShortDecimal.newBigDecimal(value).scale();
+		return new PackedDecimal(length+scale, scale, value);
 	}
 	/** Return the packed decimal equivalent of a value. */
-	static public packed dec(double value, int length, int scale)
+	static public PackedDecimal dec(double value, int length, int scale)
 	{
-		return new packed(length, scale, value);
+		return new PackedDecimal(length, scale, value);
 	}
 	/** Return the packed decimal equivalent of a numeric value. */
-	static public packed dec(INumeric value)
+	static public PackedDecimal dec(INumeric value)
 	{
-		packed p = new packed(value.len(), value.scale());
+		PackedDecimal p = new PackedDecimal(value.len(), value.scale());
 		p.assign(value);
 		return p;
 	}
 	/** Return the packed decimal equivalent of a value. */
-	static public packed dec(Object value, int length, int scale)
+	static public PackedDecimal dec(Object value, int length, int scale)
 	{
-		return new packed(length, scale, Double.parseDouble(value.toString()));
+		return new PackedDecimal(length, scale, Double.parseDouble(value.toString()));
 	}
 	
 	/** Return the number of decimal positions (scale) of a value. */
@@ -1113,7 +1114,7 @@ public class Application implements Runnable, Serializable
 	 * @param endDate
 	 * @param durationCode the duration code: (Application.)MSECONDS, SECONDS, MINUTES, HOURS, MONTHS, DAYS, YEARS
 	 */
-	static public int diff(date beginDate, date endDate, int durationCode) throws Exception 
+	static public int diff(FixedDate beginDate, FixedDate endDate, int durationCode) throws Exception 
 	{
 		// The number of milliseconds between the two dates
 		long ms = endDate.toDate().getTime() - beginDate.toDate().getTime();
@@ -1128,7 +1129,7 @@ public class Application implements Runnable, Serializable
 				ms = -ms;
 				multiplier = -1;
 			}
-			ms += date.LOVAL_DATE.getTime();
+			ms += FixedDate.LOVAL_DATE.getTime();
 			// Create a new date with the specified milliseconds
 			java.util.Date d = new java.util.Date(ms);
 			GregorianCalendar calendar = new GregorianCalendar();
@@ -1219,7 +1220,7 @@ public class Application implements Runnable, Serializable
 	/** Return a string edited according to the edit code. */
 	static public String editc(long value, char edtCde, char fillChar)
 	{
-		zoned z = new zoned(19,0,value);
+		ZonedDecimal z = new ZonedDecimal(19,0,value);
 		return editc(z, edtCde, fillChar);
 	}
 	
@@ -1242,7 +1243,7 @@ public class Application implements Runnable, Serializable
 	/** Return a string edited according to the edit word. */
 	static public String editw(long value, String edtwrd)
 	{
-		zoned z = new zoned(19,0,value);
+		ZonedDecimal z = new ZonedDecimal(19,0,value);
 		return editw(z, edtwrd);
 	}
 	
@@ -1687,7 +1688,7 @@ public class Application implements Runnable, Serializable
 	/**
 	 * Return the length of the specified character string.
 	 */
-	public static int len(fixed parm)
+	public static int len(FixedChar parm)
 	{
 		return parm.len();
 	}
@@ -1728,12 +1729,12 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Lookup up a value and return the index of the first exact match. */
-	public int lookup(char arg, fixed fStr)
+	public int lookup(char arg, FixedChar fStr)
 	{
 		return lookup(arg, fStr, 1);
 	}
 	/** Lookup up a value and return the index of the first exact match. */
-	public int lookup(char arg, fixed fStr, int startIndex)
+	public int lookup(char arg, FixedChar fStr, int startIndex)
 	{
 		return scanEqual(lookupxx(arg, fStr, startIndex, EQ));
 	}
@@ -1791,7 +1792,7 @@ public class Application implements Runnable, Serializable
 	 * Compare 2 fixed types.
 	 * Some DIM(1) arrays get turned into fixed, so we need to have this here.
 	 */
-	public int lookup(fixed fStr1, fixed fStr2, int startIndex)
+	public int lookup(FixedChar fStr1, FixedChar fStr2, int startIndex)
 	{
 		if (fStr1.equals(fStr2))
 			return 1;
@@ -1837,7 +1838,7 @@ public class Application implements Runnable, Serializable
 		return lookupge(arg.charAt(0), ary, startIndex);
 	}
 	/** Lookup up a value and return the index of the first match that is >=. */
-	public int lookupge(char arg, fixed fStr, int startIndex)
+	public int lookupge(char arg, FixedChar fStr, int startIndex)
 	{
 		return scanFound(lookupxx(arg, fStr, startIndex, GE));
 	}
@@ -1897,7 +1898,7 @@ public class Application implements Runnable, Serializable
 		return lookupgt(arg.charAt(0), ary, startIndex);
 	}
 	/** Lookup up a value and return the index of the first match that is >. */
-	public int lookupgt(char arg, fixed fStr, int startIndex)
+	public int lookupgt(char arg, FixedChar fStr, int startIndex)
 	{
 		return scanFound(lookupxx(arg, fStr, startIndex, GT));
 	}
@@ -1957,7 +1958,7 @@ public class Application implements Runnable, Serializable
 		return lookuple(arg.charAt(0), ary, startIndex);
 	}
 	/** Lookup up a value and return the index of the first match that is <=. */
-	public int lookuple(char arg, fixed fStr, int startIndex)
+	public int lookuple(char arg, FixedChar fStr, int startIndex)
 	{
 		return scanFound(lookupxx(arg, fStr, startIndex, LE));
 	}
@@ -2017,7 +2018,7 @@ public class Application implements Runnable, Serializable
 		return lookuplt(arg.charAt(0), ary, startIndex);
 	}
 	/** Lookup up a value and return the index of the first match that is <. */
-	public int lookuplt(char arg, fixed fStr, int startIndex)
+	public int lookuplt(char arg, FixedChar fStr, int startIndex)
 	{
 		return scanFound(lookupxx(arg, fStr, startIndex, LT));
 	}
@@ -2089,7 +2090,7 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** This is where the lookup actually happens for lookupxx */
-	static int lookupxx(char arg, fixed fStr, int startIndex, int compare)
+	static int lookupxx(char arg, FixedChar fStr, int startIndex, int compare)
 	{
 		int numElems = fStr.size();
 		for (; startIndex <= numElems; startIndex++)
@@ -2174,7 +2175,7 @@ public class Application implements Runnable, Serializable
 			boolean bcomp;
 			// We have to compare 'backwards' here so that we can use the arg (usually a fixed data type) 
 			// method instead of Integer.compareTo(), which only works when comparing agains Integer objects. 
-			int i = -arg.compareTo(numeric.newInteger(ary[startIndex - 1]));
+			int i = -arg.compareTo(ShortDecimal.newInteger(ary[startIndex - 1]));
 			if (compare == EQ)
 				bcomp = (i == 0);
 			else if (compare == GT)
@@ -2400,12 +2401,12 @@ public class Application implements Runnable, Serializable
 	 */
 	static public int move(char source, int dest)
 	{
-		return ((zoned) (new zoned(9, 0, dest).move(source))).intValue();
+		return ((ZonedDecimal) (new ZonedDecimal(9, 0, dest).move(source))).intValue();
 	}
 	/**
 	 * Move the right-most byte of a fixed-length value to a boolean (Indicator)
 	 */
-	static public boolean move(fixed source, boolean dest)
+	static public boolean move(FixedChar source, boolean dest)
 	{
 		if (move(source, ' ') == '1')
 			return true;
@@ -2414,17 +2415,17 @@ public class Application implements Runnable, Serializable
 	/** Move the right-most characters of a value to a character destination. */
 	static public char move(IFixed source, char dest)
 	{
-		return new fixed(1, dest).move(source).charAt(0);
+		return new FixedChar(1, dest).move(source).charAt(0);
 	}
 	/** Move the right-most characters of a value to a integer destination. */
 	static public int move(IFixed source, int dest)
 	{
-		return ((zoned) (new zoned(9, 0, dest).move(source))).intValue();
+		return ((ZonedDecimal) (new ZonedDecimal(9, 0, dest).move(source))).intValue();
 	}
 	/** Move the right-most characters of a value to a long destination. */
 	static public long move(IFixed source, long dest)
 	{
-		return ((zoned) (new zoned(18, 0, dest).move(source))).longValue();
+		return ((ZonedDecimal) (new ZonedDecimal(18, 0, dest).move(source))).longValue();
 	}
 	/** Move the right-most characters of a value to a Numeric destination. */
 	static public double move(IFixed source, AbstractNumeric dest)
@@ -2434,24 +2435,24 @@ public class Application implements Runnable, Serializable
 	/** Move the right-most characters of a value to a short destination. */
 	static public short move(IFixed source, short dest)
 	{
-		return ((zoned) (new zoned(4, 0, dest).move(source))).shortValue();
+		return ((ZonedDecimal) (new ZonedDecimal(4, 0, dest).move(source))).shortValue();
 	}
 	/** Move the right-most characters of a value to a character destination. */
 	static public char move(long source, char dest)
 	{
-		return new fixed(1, dest).move(new zoned(18, 0, source)).charAt(0);
+		return new FixedChar(1, dest).move(new ZonedDecimal(18, 0, source)).charAt(0);
 	}
 	/** Move the right-most characters of a value to a character destination. */
 	static public char move(String source, char dest)
 	{
-		return new fixed(1, dest).move(source).charAt(0);
+		return new FixedChar(1, dest).move(source).charAt(0);
 	}
 	/**
 	 * Move a String value to the right-most position of an integer.
 	 */
 	static public int move(String source, int dest)
 	{
-		return ((zoned) (new zoned(9, 0, dest).move(source))).intValue();
+		return ((ZonedDecimal) (new ZonedDecimal(9, 0, dest).move(source))).intValue();
 	}
 
 	/* * 
@@ -2501,12 +2502,12 @@ public class Application implements Runnable, Serializable
 	 * @param a2 The character array to copy to
 	 * @param i2 The offset (1-based) into the character array
 	*/
-	static public void MOVEA(fixed value, int i1, char[] a2, int i2)
+	static public void MOVEA(FixedChar value, int i1, char[] a2, int i2)
 	{
 		MOVEA(value.toCharArray(), i1, a2, i2);
 	}
 	/** Copy a character array to a fixed-string. */
-	static public void MOVEA(char []a1, int i1, fixed value, int i2)
+	static public void MOVEA(char []a1, int i1, FixedChar value, int i2)
 	{
 		MOVEA(a1, i1, value.toCharArray(), i2);
 	}
@@ -2518,7 +2519,7 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Copy arrays of the same type from 1-based index i1 to 1-based index i2 */
-	static public void MOVEA(fixed []a1, int i1, fixed []a2, int i2)
+	static public void MOVEA(FixedChar []a1, int i1, FixedChar []a2, int i2)
 	{
 		int elems = java.lang.Math.min(a1.length - --i1, a2.length - --i2);
 		for (int i = 0; i < elems; i++)
@@ -2631,7 +2632,7 @@ public class Application implements Runnable, Serializable
 			array[i - 1] = fc.charAt(0);
 	}
 	/** Copy a value to all elements of an array beginning at 1-based <code>index</code>. */ 
-	static public void MOVEALL(FigConst fc, fixed[] array, int index)
+	static public void MOVEALL(FigConst fc, FixedChar[] array, int index)
 	{
 		for (int i = index; i <= array.length; i++)
 			array[i - 1].assign(fc);
@@ -2692,7 +2693,7 @@ public class Application implements Runnable, Serializable
 			array[i - 1] = value;
 	}
 	/** Copy a value to all elements of an array beginning at 1-based <code>index</code>. */ 
-	static public void MOVEALL(String str, fixed[] array, int index)
+	static public void MOVEALL(String str, FixedChar[] array, int index)
 	{
 		for (int i = index; i <= array.length; i++)
 			array[i - 1].movel(str);
@@ -2701,19 +2702,19 @@ public class Application implements Runnable, Serializable
 	/**
 	 * Move the left-most byte of a fixed-length value to a boolean (Indicator)
 	 */
-	static public boolean movel(fixed source, boolean dest)
+	static public boolean movel(FixedChar source, boolean dest)
 	{
 		if (movel(source, ' ') == '1')
 			return true;
 		return false;
 	}
 	/** Move the left-most characters of a value to a character destination. */
-	static public char movel(fixed source, char dest)
+	static public char movel(FixedChar source, char dest)
 	{
-		return new fixed(1, dest).movel(source).charAt(0);
+		return new FixedChar(1, dest).movel(source).charAt(0);
 	}
 	/** Move the left-most characters of a value to a Numeric destination. */
-	static public double movel(fixed source, AbstractNumeric dest)
+	static public double movel(FixedChar source, AbstractNumeric dest)
 	{
 		return ((INumeric) dest.movel(source)).doubleValue();
 	}
@@ -2755,11 +2756,11 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Return the value raised to the specified power. */
-	static public longDecimal pow(INumeric value, double power)
+	static public LongDecimal pow(INumeric value, double power)
 	{
 		double result = pow(value.doubleValue(), power);
-		BigDecimal bd = numeric.newBigDecimal(result);
-		longDecimal raised = new longDecimal(31,bd.scale(),bd);
+		BigDecimal bd = ShortDecimal.newBigDecimal(result);
+		LongDecimal raised = new LongDecimal(31,bd.scale(),bd);
 		return raised;
 	}
 	
@@ -2881,7 +2882,7 @@ public class Application implements Runnable, Serializable
 	 * Returns the character string produced by inserting a replacement string 
 	 * into the source string
 	 */
-	static public fixed replace(char replacementString, Object sourceString, int startPosition, int sourceLengthToReplace)
+	static public FixedChar replace(char replacementString, Object sourceString, int startPosition, int sourceLengthToReplace)
 	{
 		return replace(new Character(replacementString).toString(), sourceString, startPosition, sourceLengthToReplace);
 	}
@@ -2889,7 +2890,7 @@ public class Application implements Runnable, Serializable
 	 * Returns the character string produced by inserting a replacement string 
 	 * into the source string
 	 */
-	static public fixed replace(Object replacementString, Object sourceString, int startPosition, int sourceLengthToReplace)
+	static public FixedChar replace(Object replacementString, Object sourceString, int startPosition, int sourceLengthToReplace)
 	{
 		String ss = sourceString.toString();
 		int ssLength = ss.length();
@@ -2908,7 +2909,7 @@ public class Application implements Runnable, Serializable
 		startPosition += sourceLengthToReplace;
 		if (startPosition<=ssLength)
 			sb.append(ss.substring(startPosition-1));
-		return new fixed(sb.length(), sb.toString());
+		return new FixedChar(sb.length(), sb.toString());
 	}
 
 	/** Scan for the first ocurrence of searchArgument, beginning at 1-based start. **/
@@ -2921,8 +2922,8 @@ public class Application implements Runnable, Serializable
 		throws Exception
 	{
 		int offset;
-		if (str instanceof fixed)
-			offset = ((fixed) str).scan(searchArgument);
+		if (str instanceof FixedChar)
+			offset = ((FixedChar) str).scan(searchArgument);
 		else if (str instanceof String)
 			offset = ((String) str).indexOf(searchArgument, start - 1) + 1;
 		else if (str instanceof char[])
@@ -2944,17 +2945,17 @@ public class Application implements Runnable, Serializable
 		return scanFound(offset);
 	}
 	/** Scan for the first ocurrence of searchArgument. **/
-	public int scan(fixed searchArgument, Object str) throws Exception
+	public int scan(FixedChar searchArgument, Object str) throws Exception
 	{
 		return scan(searchArgument, str, 1);
 	}
 	/** Scan for the first ocurrence of searchArgument, beginning at 1-based start. **/
-	public int scan(fixed searchArgument, Object str, int start)
+	public int scan(FixedChar searchArgument, Object str, int start)
 		throws Exception
 	{
 		int offset;
-		if (str instanceof fixed)
-			offset = ((fixed) str).scan(searchArgument);
+		if (str instanceof FixedChar)
+			offset = ((FixedChar) str).scan(searchArgument);
 		else
 		{
 			// If this is a char[] array, then treat like a String
@@ -2981,8 +2982,8 @@ public class Application implements Runnable, Serializable
 		throws Exception
 	{
 		int offset;
-		if (str instanceof fixed)
-			offset = ((fixed) str).scan(searchArgument);
+		if (str instanceof FixedChar)
+			offset = ((FixedChar) str).scan(searchArgument);
 		else
 		{
 			// If this is a char[] array, then treat like a String
@@ -3074,7 +3075,7 @@ public class Application implements Runnable, Serializable
 	 * @param durationCode the duration code: (Application.)SECONDS, MINUTES, HOURS, MONTHS, DAYS, YEARS
 	 * @return int
 	 */
-	static public int subdt(date value, int durationCode) throws Exception
+	static public int subdt(FixedDate value, int durationCode) throws Exception
 	{
 		java.util.Date d = value.toDate();
 		// Create a new Calendar and use the returned date to extract the specified portion
@@ -3097,7 +3098,7 @@ public class Application implements Runnable, Serializable
 	 * @param length The length of the substring to return
 	 * @return the specified substring
 	 */
-	static public fixed subst(Object str, int start)
+	static public FixedChar subst(Object str, int start)
 	{
 		String s = str.toString();
 		return subst(s, start, s.length()-start+1);
@@ -3109,12 +3110,12 @@ public class Application implements Runnable, Serializable
 	 * @param length The length of the substring to return
 	 * @return the specified substring
 	 */
-	static public fixed subst(Object str, int start, int length)
+	static public FixedChar subst(Object str, int start, int length)
 	{
 		String s = str.toString();
 		//return new varying(length, s.substring(start-1, start+length));
 		start--;
-		return new fixed(length, s.substring(start, start+length));
+		return new FixedChar(length, s.substring(start, start+length));
 	}
 	/**
 	 * Return a substring of the specified String.
@@ -3123,7 +3124,7 @@ public class Application implements Runnable, Serializable
 	 * @param length The length of the substring to return
 	 * @return the specified substring
 	 */
-	static public fixed subst(Object str, int start, INumeric length)
+	static public FixedChar subst(Object str, int start, INumeric length)
 	{
 		return subst(str, start, length.intValue());
 	}
@@ -3134,7 +3135,7 @@ public class Application implements Runnable, Serializable
 	 * @param length The length of the substring to return
 	 * @return the specified substring
 	 */
-	static public fixed subst(Object str, INumeric start)
+	static public FixedChar subst(Object str, INumeric start)
 	{
 		return subst(str, start.intValue());
 	}
@@ -3145,7 +3146,7 @@ public class Application implements Runnable, Serializable
 	 * @param length The length of the substring to return
 	 * @return the specified substring
 	 */
-	static public fixed subst(Object str, INumeric start, int length)
+	static public FixedChar subst(Object str, INumeric start, int length)
 	{
 		return subst(str, start.intValue(), length);
 	}
@@ -3156,7 +3157,7 @@ public class Application implements Runnable, Serializable
 	 * @param length The length of the substring to return
 	 * @return the specified substring
 	 */
-	static public fixed subst(Object str, INumeric start, INumeric length)
+	static public FixedChar subst(Object str, INumeric start, INumeric length)
 	{
 		return subst(str, start.intValue(), length.intValue());
 	}
@@ -3177,7 +3178,7 @@ public class Application implements Runnable, Serializable
 	 * Test to see if a value is valid numeric data.
 	 * @return 0 if blank, 1 if all numeric, >1 if all numeric with leading blanks, -1 otherwise 
 	 */
-	static public int testn(fixed fStr)
+	static public int testn(FixedChar fStr)
 	{
 		// A 1-character fixed result does a slightly different check
 		if (fStr.len()==1)
@@ -3217,15 +3218,15 @@ public class Application implements Runnable, Serializable
 	 * Test the zone portion of a value.
 	 * @see testz(char)
 	 */
-	static public int testz(fixed fStr)
+	static public int testz(FixedChar fStr)
 	{
 		return testz(fStr.charAt(0));
 	}
 	
 	/** Return the current system timestamp */
-	static public timestamp timestamp()
+	static public FixedTimestamp timestamp()
 	{
-		timestamp t = new timestamp();
+		FixedTimestamp t = new FixedTimestamp();
 		t.assign(new java.util.Date());
 		return t;
 	}
@@ -3237,7 +3238,7 @@ public class Application implements Runnable, Serializable
 	 * @param fStr The fixed-length string to trim
 	 * @return java.lang.String the trimmed string
 	 */
-	static public String trim(fixed fStr)
+	static public String trim(FixedChar fStr)
 	{
 		return fStr.trim();
 	}
@@ -3253,7 +3254,7 @@ public class Application implements Runnable, Serializable
 	 * @param fStr The fixed-length string to trim
 	 * @return java.lang.String the trimmed string
 	 */
-	static public String triml(fixed fStr)
+	static public String triml(FixedChar fStr)
 	{
 		return fStr.triml();
 	}
@@ -3275,7 +3276,7 @@ public class Application implements Runnable, Serializable
 	 * @param fStr The fixed-length string to trim
 	 * @return java.lang.String the trimmed string
 	 */
-	static public String trimr(fixed fStr)
+	static public String trimr(FixedChar fStr)
 	{
 		return fStr.trimr();
 	}
@@ -3302,17 +3303,17 @@ public class Application implements Runnable, Serializable
 	}
 
 	/** Return the fixed equivalent of a character value. */
-	public static fixed fixed(char value)
+	public static FixedChar fixed(char value)
 	{
-		return new fixed(1, value);
+		return new FixedChar(1, value);
 	}
 	/** Return the fixed equivalent of a string. */
-	public static fixed fixed(String value)
+	public static FixedChar fixed(String value)
 	{
-		return new fixed(value.length(), value);
+		return new FixedChar(value.length(), value);
 	}
 	/** Return the fixed equivalent of a character array. */
-	public static fixed fixed(char[] value)
+	public static FixedChar fixed(char[] value)
 	{
 		return fixed(new String(value));
 	}
@@ -3325,12 +3326,12 @@ public class Application implements Runnable, Serializable
 		for (int i = 0; i < array.length; i++)
 			total += array[i];
 		*/
-		BigDecimal bd = numeric.newBigDecimal(array[0]);
+		BigDecimal bd = ShortDecimal.newBigDecimal(array[0]);
 		for (int i = 1; i < array.length; i++)
 		{
 			double d = array[i];
 			if (d!=0)
-				bd = bd.add(numeric.newBigDecimal(d));
+				bd = bd.add(ShortDecimal.newBigDecimal(d));
 		}
 		return bd.doubleValue();
 	}
@@ -3897,7 +3898,7 @@ public class Application implements Runnable, Serializable
 		if (h!='0')
 		{
 			INLR=ON;
-			fixed msgDta = new fixed(50);
+			FixedChar msgDta = new FixedChar(50);
 			msgDta.setCharAt(49, h);
 			throw new Pgmmsg("RPG0233", "QRPGMSGE", msgDta);
 		}
@@ -4026,25 +4027,25 @@ public class Application implements Runnable, Serializable
 		return request;
 	}
 	
-	public pointer overlay(FixedData overlaidField, int offset)
+	public FixedPointer overlay(FixedData overlaidField, int offset)
 	{
-		return new pointer(overlaidField, offset-1);
+		return new FixedPointer(overlaidField, offset-1);
 	}
 	
-	public pointer overlay(FixedData overlaidField)
+	public FixedPointer overlay(FixedData overlaidField)
 	{
 		return overlay(overlaidField, 1);
 	}
 	
 	// Set the Program Status data structure
-	public void setPSDS(fixed psds)
+	public void setPSDS(FixedChar psds)
 	{
 		this.psds=psds;
 		int pLength = psds.len();
 		// Set program name
 		if (pLength>=10)
 		{
-			fixed f1 = new fixed(10);
+			FixedChar f1 = new FixedChar(10);
 			String className = this.getClass().getName();
 			int i=className.lastIndexOf('.');
 			if (i>0)
@@ -4083,7 +4084,7 @@ public class Application implements Runnable, Serializable
 							// Set job number
 							if (pLength>=269)
 							{
-								zoned z1 = new zoned(6,0);
+								ZonedDecimal z1 = new ZonedDecimal(6,0);
 								z1.assign(rtvjoba.nbr());
 								psds.setFixedAt(263, z1);
 

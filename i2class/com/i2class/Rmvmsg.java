@@ -10,12 +10,12 @@ import java.util.*;
 
 /**
  * RMVMSG (Remove message) processing.
- * @author ANDREWC
+ * 
  */
 public class Rmvmsg extends AbstractCommand {
 
 	private String m_pgmq="*SAME";
-	private fixed m_msgkey;
+	private FixedChar m_msgkey;
 	private String m_clear="*BYKEY";
 
 	/**
@@ -36,7 +36,7 @@ public class Rmvmsg extends AbstractCommand {
 	public void setPgmq(String pgmq) {
 		m_pgmq = Application.trimr(pgmq);
 	}
-	public void setMsgkey(fixed msgkey) {
+	public void setMsgkey(FixedChar msgkey) {
 		m_msgkey = msgkey;
 	}
 	public void setClear(String clear) {

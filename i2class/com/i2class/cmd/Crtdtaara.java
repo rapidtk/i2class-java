@@ -12,7 +12,7 @@ import com.i2class.*;
 
 /**
  * CRTDTAARA (create data area) processing.
- * @author ANDREWC
+ * 
  */
 public class Crtdtaara extends AbstractCommand {
 
@@ -96,8 +96,8 @@ public class Crtdtaara extends AbstractCommand {
 			dataType = "CHAR(" + m_len + ')';
 		}
 					
-		fixed msgdta = new fixed(20, q.fileName);
-		msgdta.setFixedAt(10, new fixed(10, q.libName));
+		FixedChar msgdta = new FixedChar(20, q.fileName);
+		msgdta.setFixedAt(10, new FixedChar(10, q.libName));
 		Sndpgmmsg sndpgmmsg = new Sndpgmmsg(rconn);
 		sndpgmmsg.setMsgdta(msgdta);
 		

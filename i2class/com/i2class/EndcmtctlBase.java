@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * A base class for ENDCMTCTL (End commitment control) processing.
- * @author ANDREWC
+ * 
  */
 public abstract class EndcmtctlBase extends AbstractCommand {
 

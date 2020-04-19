@@ -4,7 +4,7 @@ import java.io.*;
 import java.net.URL;
 /**
  * A character data area class that acutally stores data in a local byte-stream file.
- * @author Andrew Clark
+ * 
  * @see CharacterDataArea400
  */
 class CharacterDataAreaFile implements ICharacterDtaara

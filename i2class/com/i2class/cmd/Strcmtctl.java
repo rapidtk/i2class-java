@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * STRCMTCTL (Start commitment control) processing.
- * @author ANDREWC
+ * 
  */
 public class Strcmtctl extends StrcmtctlBase {
 
@@ -35,7 +35,7 @@ public class Strcmtctl extends StrcmtctlBase {
 		setLcklvl(lcklvl);
 		exec();
 	}
-	public void exec(fixed lcklvl) throws Exception
+	public void exec(FixedChar lcklvl) throws Exception
 	{
 		setLcklvl(lcklvl.toString());
 	}

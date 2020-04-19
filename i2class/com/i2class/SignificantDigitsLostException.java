@@ -4,7 +4,7 @@ package com.i2class;
 /**
  * Exception thrown by numeric classes if value being assigned would cause significant digits to be lost.
  * 
- * @author ANDREWC
+ * 
  */
 public class SignificantDigitsLostException extends ArithmeticException {
 	public SignificantDigitsLostException(int length, int scale, String value) {

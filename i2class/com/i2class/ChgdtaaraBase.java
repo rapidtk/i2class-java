@@ -12,7 +12,7 @@ import com.i2class.*;
 
 /**
  * CHGDTAARA (change data area) base class processing.
- * @author ANDREWC
+ * 
  */
 public abstract class ChgdtaaraBase extends AbstractCommand { 
 
@@ -91,8 +91,8 @@ public abstract class ChgdtaaraBase extends AbstractCommand {
 			String sqlState = e.getSQLState();
 			if (sqlState.compareTo("42704")==0) // An undefined object name was detected
 			{
-				fixed msgdta = new fixed(20, q.fileName);
-				msgdta.setFixedAt(10, new fixed(10, q.libName));
+				FixedChar msgdta = new FixedChar(20, q.fileName);
+				msgdta.setFixedAt(10, new FixedChar(10, q.libName));
 				throw new Pgmmsg("CPF1015", "QCPFMSG", msgdta);
 			}
 			else

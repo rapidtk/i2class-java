@@ -4,7 +4,7 @@ import java.sql.*;
 import java.util.StringTokenizer;
 /**
  * A data area class that stores data in a remote (JDBC) database file.
- * @author Andrew Clark
+ * 
  */
 class DataAreaJDBC implements IClosable
 {

@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * DLTF (delete file) processing.
- * @author ANDREWC
+ * 
  */
 public class Dltf extends AbstractCommand {
 
@@ -42,7 +42,7 @@ public class Dltf extends AbstractCommand {
 		setFile(file);
 		exec();
 	}
-	public void exec(fixed file) throws Exception {
+	public void exec(FixedChar file) throws Exception {
 		exec(file.toString());
 	}
 

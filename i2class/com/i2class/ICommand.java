@@ -6,7 +6,7 @@ package com.i2class;
 /**
  * The interface that all command (*CMD) objects must implement
  * 
- * @author ANDREWC
+ * 
  *
  */
 public interface ICommand {

@@ -6,7 +6,7 @@ package com.i2class;
 
 /**
  * An abstract class for numeric data that is 'coded' i.e. not zoned.
- * @author ANDREWC
+ * 
  *
  */
 abstract public class AbstractNumericCoded extends AbstractNumeric {
@@ -21,7 +21,7 @@ abstract public class AbstractNumericCoded extends AbstractNumeric {
 		int size,
 		int digits,
 		int scale,
-		pointer overlay)
+		FixedPointer overlay)
 	{
 		super(size, digits, scale, overlay);
 	}
@@ -41,7 +41,7 @@ abstract public class AbstractNumericCoded extends AbstractNumeric {
 	 */
 	public FixedData move(char c)
 	{
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.move(c);
 		assignZoned(z);
 		return this;
@@ -54,7 +54,7 @@ abstract public class AbstractNumericCoded extends AbstractNumeric {
 	 */
 	public FixedData move(IFixed fStr)
 	{
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.move(fStr);
 		assignZoned(z);
 		return this;
@@ -67,7 +67,7 @@ abstract public class AbstractNumericCoded extends AbstractNumeric {
 	 */
 	public FixedData move(String str)
 	{
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.move(str);
 		assignZoned(z);
 		return this;
@@ -80,7 +80,7 @@ abstract public class AbstractNumericCoded extends AbstractNumeric {
 	 */
 	public FixedData movel(char c)
 	{
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.movel(c);
 		assignZoned(z);
 		return this;
@@ -93,7 +93,7 @@ abstract public class AbstractNumericCoded extends AbstractNumeric {
 	 */
 	public FixedData movel(IFixed fStr)
 	{
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.movel(fStr);
 		assignZoned(z);
 		return this;
@@ -107,7 +107,7 @@ abstract public class AbstractNumericCoded extends AbstractNumeric {
 	 */
 	public FixedData movel(String str)
 	{
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.movel(str);
 		assignZoned(z);
 		return this;

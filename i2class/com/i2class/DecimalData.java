@@ -4,9 +4,9 @@ import java.math.BigDecimal;
 import java.math.BigInteger;
 
 /**
- * A mutable fixed-length, scale (<=18 digits) decimal data type for exact arithmetic.
+ * A mutable fixed-length/Scale decimal data type for exact arithmetic.
  * 
- * @author ANDREWC
+ * 
  *
  */
 abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable {
@@ -85,8 +85,8 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 	static DecimalData decimal(int length, int scale)
 	{
 		if (length<=18)
-			return new numeric(length, scale);
-		return new longDecimal(length, scale);
+			return new ShortDecimal(length, scale);
+		return new LongDecimal(length, scale);
 	}
 	
 	/** Divide this decimal value by another one. */
@@ -104,17 +104,17 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 	public abstract void div(INumeric value);
 
 	/** Divide this decimal value by another one and return a new object. */
-	public longDecimal dividedBy(BigDecimal value)
+	public LongDecimal dividedBy(BigDecimal value)
 	{
 		return AbstractNumeric.dividedBy(toBigDecimal(), value);
 	}
 	/** Divide this decimal value by another one and return a new object. */
-	public longDecimal dividedBy(double value)
+	public LongDecimal dividedBy(double value)
 	{
-		return dividedBy(numeric.newBigDecimal(value));
+		return dividedBy(ShortDecimal.newBigDecimal(value));
 	}
 	/** Divide this decimal value by another one and return a new object. */
-	public longDecimal dividedBy(INumeric value)
+	public LongDecimal dividedBy(INumeric value)
 	{
 		return dividedBy(value.toBigDecimal());
 	}
@@ -149,7 +149,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 
 	/** Move a boolean ('1', '0') value to the right-most digit of this value. */	
 	public DecimalData move(boolean value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.move(value);
 		assign(z);
 		return this;
@@ -157,7 +157,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 	
 	/** Move a character value to the right-most digit of this value. */	
 	public DecimalData move(char value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.move(value);
 		assign(z);
 		return this;
@@ -165,7 +165,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 
 	/** Move a character array to the right-most digits of this value. */	
 	public DecimalData move(char[] value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.move(value);
 		assign(z);
 		return this;
@@ -173,7 +173,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 
 	/** Move fixed-length data to the right-most digits of this value. */	
 	public DecimalData move(IFixed value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.move(value);
 		assign(z);
 		return this;
@@ -181,7 +181,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 
 	/** Move a String to the right-most digits of this value. */	
 	public DecimalData move(String value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.move(value);
 		assign(z);
 		return this;
@@ -199,7 +199,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 	 */
 	public void moveall(char c, int index)
 	{
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.moveall(c, index);
 		assign(z);
 	}
@@ -222,7 +222,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 	 */
 	public void moveall(String str, int index)
 	{
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.moveall(str, index);
 		assign(z);
 	}
@@ -239,7 +239,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 
 	/** Move a boolean ('1', '0') value to the right-most digit of this value. */	
 	public DecimalData movel(boolean value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.movel(value);
 		assign(z);
 		return this;
@@ -247,7 +247,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 	
 	/** Move a character value to the right-most digit of this value. */	
 	public DecimalData movel(char value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.movel(value);
 		assign(z);
 		return this;
@@ -255,7 +255,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 
 	/** Move a character array to the right-most digits of this value. */	
 	public DecimalData movel(char[] value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.movel(value);
 		assign(z);
 		return this;
@@ -263,7 +263,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 
 	/** Move fixed-length data to the right-most digits of this value. */	
 	public DecimalData movel(IFixed value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.movel(value);
 		assign(z);
 		return this;
@@ -271,24 +271,24 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 
 	/** Move a String to the right-most digits of this value. */	
 	public DecimalData movel(String value) {
-		zoned z = toZoned();
+		ZonedDecimal z = toZoned();
 		z.movel(value);
 		assign(z);
 		return this;
 	}
 
 	/** Subtract and return a new object. */
-	public longDecimal minus(BigDecimal value)
+	public LongDecimal minus(BigDecimal value)
 	{
 		return AbstractNumeric.minus(toBigDecimal(), value);
 	}
 	/** Subtract and return a new object. */
-	public longDecimal minus(double value)
+	public LongDecimal minus(double value)
 	{
-		return minus(numeric.newBigDecimal(value));
+		return minus(ShortDecimal.newBigDecimal(value));
 	}
 	/** Subtract and return a new object. */
-	public longDecimal minus(INumeric value)
+	public LongDecimal minus(INumeric value)
 	{
 		return minus(value.toBigDecimal());
 	}
@@ -321,21 +321,21 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 	/**
 	 * Add and return a new object (similar to BigDecimal add).
 	 */
-	public longDecimal plus(BigDecimal value)
+	public LongDecimal plus(BigDecimal value)
 	{
 		return AbstractNumeric.plus(toBigDecimal(), value);
 	}
 	/**
 	 * Add and return a new object (similar to BigDecimal add).
 	 */
-	public longDecimal plus(double value)
+	public LongDecimal plus(double value)
 	{
-		return plus(numeric.newBigDecimal(value));
+		return plus(ShortDecimal.newBigDecimal(value));
 	}
 	/**
 	 * Add and return a new object (similar to BigDecimal add).
 	 */
-	public longDecimal plus(INumeric value)
+	public LongDecimal plus(INumeric value)
 	{
 		return plus(value.toBigDecimal());
 	}
@@ -371,17 +371,17 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 	public abstract void sub(INumeric value) ;
 
 	/** Multiply this decimal value by another one and return a new object. */
-	public longDecimal times(BigDecimal value)
+	public LongDecimal times(BigDecimal value)
 	{
 		return AbstractNumeric.times(toBigDecimal(), value);
 	}
 	/** Multiply this decimal value by another one and return a new object. */
-	public longDecimal times(double value)
+	public LongDecimal times(double value)
 	{
-		return times(numeric.newBigDecimal(value));
+		return times(ShortDecimal.newBigDecimal(value));
 	}
 	/** Multiply this decimal value by another one and return a new object. */
-	public longDecimal times(INumeric value)
+	public LongDecimal times(INumeric value)
 	{
 		return times(value.toBigDecimal());
 	}
@@ -411,8 +411,8 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 
 
 	/* Create a zoned decimal equivalent of this object. */
-	public zoned toZoned() {
-		zoned zonedValue = new zoned(length, Scale);
+	public ZonedDecimal toZoned() {
+		ZonedDecimal zonedValue = new ZonedDecimal(length, Scale);
 		zonedValue.assign(this);
 		return zonedValue;
 	}

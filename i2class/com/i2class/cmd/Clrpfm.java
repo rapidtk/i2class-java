@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * CLRPFM (clear physical file member) processing.
- * @author ANDREWC
+ * 
  */
 public class Clrpfm extends AbstractCommand {
 
@@ -39,7 +39,7 @@ public class Clrpfm extends AbstractCommand {
 	}
 	
 	/** Clear the first member of the specified file. */
-	public void exec(fixed file) throws Exception {
+	public void exec(FixedChar file) throws Exception {
 		exec(file.trim());
 	}
 	public void exec(String file) throws Exception {
@@ -74,9 +74,9 @@ public class Clrpfm extends AbstractCommand {
 		}
 		
 		String mbrName;
-		fixed msgdta = new fixed(30, fileName);
-		msgdta.setFixedAt(10, new fixed(10, m_mbr));
-		msgdta.setFixedAt(20, new fixed(10, libName));
+		FixedChar msgdta = new FixedChar(30, fileName);
+		msgdta.setFixedAt(10, new FixedChar(10, m_mbr));
+		msgdta.setFixedAt(20, new FixedChar(10, libName));
 		// If this is the *LAST member, then get last member in list
 		if (m_mbr.equals("*LAST"))
 		{

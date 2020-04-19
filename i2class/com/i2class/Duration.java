@@ -3,7 +3,7 @@ package com.i2class;
 /**
  * A duration (YEARS, MONTHS, DAYS, HOURS, MINUTES, SECONDS) that can be added to a date/time value.
  *  
- * @author ANDREWC
+ * 
  * 
  * @see com.i2class.Application#YEARS
  * @see Application#MONTHS

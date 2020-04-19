@@ -12,7 +12,7 @@ import java.util.*;
 
 /**
  * Variable CALL processing.
- * @author ANDREWC
+ * 
  */
 public class CALL extends AbstractCommand {
 
@@ -35,7 +35,7 @@ public class CALL extends AbstractCommand {
 		return PARM_NAMES;
 	}
 
-	public void setPgm(fixed pgm) {
+	public void setPgm(FixedChar pgm) {
 		setPgm(pgm.toString());
 	}
 	public void setPgm(String pgm) {
@@ -45,7 +45,7 @@ public class CALL extends AbstractCommand {
 	public void setParm(String parm) {
 		m_parm = parm.toString();
 	}
-	public void setParm(fixed parm) {
+	public void setParm(FixedChar parm) {
 		setParm(parm.toString());
 	}
 	
@@ -62,7 +62,7 @@ public class CALL extends AbstractCommand {
 		setPgm(pgm);
 		exec();
 	}
-	public void exec(fixed pgm) throws Exception
+	public void exec(FixedChar pgm) throws Exception
 	{
 		exec(pgm.toString());
 	}
@@ -169,7 +169,7 @@ public class CALL extends AbstractCommand {
 		{
 			I2Logger.logger.severe(e);
 			// CPF0001 -- Error found on &1 command
-			fixed msgdta = new fixed(10, "CALL");
+			FixedChar msgdta = new FixedChar(10, "CALL");
 			throw new Pgmmsg("CPF0001", "QCPFMSG", msgdta);
 		}
 	}

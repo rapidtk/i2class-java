@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * A message description.
- * @author ANDREWC
+ * 
  *
  */
 public class MessageDescription extends AbstractMessageDescription {

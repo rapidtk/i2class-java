@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * SBMJOB (Submit job) processing.
- * @author ANDREWC
+ * 
  */
 public class Sbmjob extends AbstractCommand {
 
@@ -40,7 +40,7 @@ public class Sbmjob extends AbstractCommand {
 		setCmd(cmd);
 		exec();
 	}
-	public void exec(fixed cmd) throws Exception
+	public void exec(FixedChar cmd) throws Exception
 	{
 		exec(cmd.toString());
 	}
@@ -52,7 +52,7 @@ public class Sbmjob extends AbstractCommand {
 		// Set parameters for call
 		QCMDEXC qcmdexc = new QCMDEXC(getApp());
 		int cmdLength = m_cmd.length();
-		qcmdexc.cmdString = new fixed(cmdLength, m_cmd);
+		qcmdexc.cmdString = new FixedChar(cmdLength, m_cmd);
 		qcmdexc.cmdLength.assign(cmdLength);
 		// Start thread
 		qcmdexc.start();

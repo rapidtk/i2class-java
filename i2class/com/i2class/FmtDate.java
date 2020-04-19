@@ -4,9 +4,8 @@ import java.util.Date;
 import java.text.SimpleDateFormat;
 /**
  * A formatted date class used by UDATE, DATE, etc.
- * @author Andrew Clark
  */
-public class FmtDate extends zoned
+public class FmtDate extends ZonedDecimal
 {
 	static /*final*/ Date date /*= new Date()*/;
 	private String dateString;

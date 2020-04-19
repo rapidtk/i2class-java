@@ -12,7 +12,7 @@ import com.i2class.*;
 
 /**
  * CRTDTAARA (create data area) processing.
- * @author ANDREWC
+ * 
  */
 public class Chgdtaara extends com.i2class.ChgdtaaraBase { 
 

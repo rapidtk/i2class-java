@@ -8,7 +8,7 @@ import com.ibm.as400ad.webfacing.runtime.host.*;
 /**
  * Intercept host request for job info.
  * 
- * @author ANDREWC
+ * 
  */
 public class I2HostRequest implements IHostRequest {
 

@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * OVRDBF (Override database file) processing.
- * @author ANDREWC
+ * 
  */
 public class Dltovr extends AbstractCommand {
 
@@ -39,7 +39,7 @@ public class Dltovr extends AbstractCommand {
 		setFile(file);
 		exec();
 	}
-	public void exec(fixed file) throws Exception {
+	public void exec(FixedChar file) throws Exception {
 		exec(file.toString());
 	}
 
@@ -75,8 +75,8 @@ public class Dltovr extends AbstractCommand {
 		// If the override was not found, then throw exception
 		if (toFile==null)
 		{ 
-			fixed msgdta = new fixed(52);
-			msgdta.setFixedAt(2, new fixed(10, m_file));
+			FixedChar msgdta = new FixedChar(52);
+			msgdta.setFixedAt(2, new FixedChar(10, m_file));
 			// Override not found at specified level
 			throw new Pgmmsg("CPF9841", "QCPFMSG", msgdta);
 		}

@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * DLTF (delete file) processing.
- * @author ANDREWC
+ * 
  */
 public class Clrlib extends AbstractCommand {
 
@@ -39,7 +39,7 @@ public class Clrlib extends AbstractCommand {
 		setLib(lib);
 		exec();
 	}
-	public void exec(fixed lib) throws Exception {
+	public void exec(FixedChar lib) throws Exception {
 		exec(lib.toString());
 	}
 

@@ -6,7 +6,7 @@ import java.util.*;
 
 /**
  * A record class used to pass values from a stalled (e.g. READ/EXFMT) workstation thread.
- * @author Andrew Clark
+ * 
  * @see RfileWorkstn
  */
 public class RecordWorkstn extends RrecordX2
@@ -91,7 +91,7 @@ public class RecordWorkstn extends RrecordX2
 		super.addFieldDescription(field);
 		fldValues.addElement(null);
 	}
-	public void copyString(fixed fStr, int fieldIndex) throws SQLException
+	public void copyString(FixedChar fStr, int fieldIndex) throws SQLException
 	{
 		String s = getString(fieldIndex);
 		fStr.assign(s);
@@ -539,7 +539,7 @@ public class RecordWorkstn extends RrecordX2
 	}
 	
 	/** If a separate indicator structure (INDDS) is specfied, then write the indicator values */
-	void writeINDDS(fixed indds)
+	void writeINDDS(FixedChar indds)
 	{
 		if (indds!=null)
 		{

@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * An OS/400 packed decimal data area TYPE(*DEC) class.
- * @author Andrew Clark 
+ *  
  */
 class DecimalDataArea400
 	extends com.ibm.as400.access.DecimalDataArea

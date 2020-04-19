@@ -6,7 +6,7 @@ import javax.servlet.http.*;
 
 /**
  * A class to retrieve attributes from a OS/400-style job.
- * @author Andrew Clark
+ * 
  */
 public class Rtvjoba extends AbstractCommand
 {

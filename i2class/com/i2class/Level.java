@@ -6,7 +6,7 @@ package com.i2class;
 
 /**
  * Logging level.
- * @author ANDREWC
+ * 
  *
  */
 class Level

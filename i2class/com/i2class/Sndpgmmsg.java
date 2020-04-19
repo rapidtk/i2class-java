@@ -12,7 +12,7 @@ import com.i2class.cmd.*;
 
 /**
  * SNDPGMMSG (Send program message) processing.
- * @author ANDREWC
+ * 
  */
 public class Sndpgmmsg extends AbstractCommand {
 
@@ -23,7 +23,7 @@ public class Sndpgmmsg extends AbstractCommand {
 	private String m_msgtype="*INFO";
 	private String m_tomsgq="*TOPGMQ";
 	int m_callStack;
-	private fixed m_keyvar;
+	private FixedChar m_keyvar;
 	private String m_msg;
 	
 	
@@ -47,14 +47,14 @@ public class Sndpgmmsg extends AbstractCommand {
 		return PARM_NAMES;
 	}
 	
-	public void setTomsgq(fixed tomsgq) {
+	public void setTomsgq(FixedChar tomsgq) {
 		setTomsgq(tomsgq.trimr());
 	}
 	public void setTomsgq(String tomsgq) {
 		m_tomsgq = Application.trimr(tomsgq);
 	}
 	
-	public void setTopgmq(fixed topgmq) {
+	public void setTopgmq(FixedChar topgmq) {
 		setTopgmq(topgmq.trimr());
 	}
 	public void setTopgmq(String topgmq) {
@@ -64,18 +64,18 @@ public class Sndpgmmsg extends AbstractCommand {
 	public void setMsg(String msg) {
 		m_msg = msg;
 	}
-	public void setMsg(fixed msg) {
+	public void setMsg(FixedChar msg) {
 		setMsgid(msg.trimr());
 	}
 
-	public void setMsgid(fixed msgid) {
+	public void setMsgid(FixedChar msgid) {
 		setMsgid(msgid.trimr());
 	}
 	public void setMsgid(String msgid) {
 		m_msgid=Application.trimr(msgid);
 	}
 	
-	public void setMsgf(fixed msgf) {
+	public void setMsgf(FixedChar msgf) {
 		setMsgf(msgf.toString());
 	}
 	public void setMsgf(String msgf) {
@@ -83,27 +83,27 @@ public class Sndpgmmsg extends AbstractCommand {
 	}
 	
 	public void setMsgdta(String msgdta) {
-		setMsgdta(new fixed(msgdta.length(), msgdta));
+		setMsgdta(new FixedChar(msgdta.length(), msgdta));
 	}
 	public void setMsgdta(FixedData msgdta) {
 		//m_msgdta = (FixedData)msgdta.clone();
 		m_msgdta = msgdta;
 	}
 
-	public void setMsgtype(fixed msgtype) {
+	public void setMsgtype(FixedChar msgtype) {
 		setMsgtype(msgtype.trimr());
 	}
 	public void setMsgtype(String msgtype) {
 		m_msgtype = Application.trimr(msgtype);
 	}
 
-	public void setMsgq(fixed tomsgq) {
+	public void setMsgq(FixedChar tomsgq) {
 		setMsgq(tomsgq.trimr());
 	}
 	public void setMsgq(String tomsgq) {
 		m_tomsgq = Application.trimr(tomsgq);
 	}
-	public void setKeyvar(fixed keyvar) {
+	public void setKeyvar(FixedChar keyvar) {
 		m_keyvar = keyvar;
 	}
 
@@ -186,7 +186,7 @@ public class Sndpgmmsg extends AbstractCommand {
 				if (i>0)
 					msgqString = msgqString.substring(i+1);
 				// The message key is always the hashCode equivalent of the value
-				int_f msgKey = new int_f(4, pgmmsg.hashCode()); 
+				FixedBinary msgKey = new FixedBinary(4, pgmmsg.hashCode()); 
 				QueueTable.resolveQueue(app, msgqString+".msgq").sendObject(pgmmsg, msgKey);
 			}
 		}

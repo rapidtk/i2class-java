@@ -10,7 +10,7 @@ import com.i2class.*;
 
 /**
  * A Delay Job class.
- * @author ANDREWC
+ * 
  *
  */
 public class Dlyjob extends AbstractCommand {

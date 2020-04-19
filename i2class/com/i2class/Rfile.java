@@ -8,7 +8,7 @@ import java.io.Serializable;
  * Remember that %FOUND is set by CHAIN, DELETE, SETGT, SETLL - 
  *               %EOF is set by READ, READC, READE, READP, READPE
  *               %EOF(filename) is set off by CHAIN, OPEN, SETGT, SETLL 
- * @author Andrew Clark
+ * 
  */
 abstract class Rfile implements Serializable, IClosable
 {
@@ -23,6 +23,8 @@ abstract class Rfile implements Serializable, IClosable
 	// The Application associated with this file
 	public Application app;
 	protected int openType;
+	
+	
 	
 	/** Close this file. */
 	public abstract void close() throws Exception;
@@ -145,7 +147,7 @@ abstract class Rfile implements Serializable, IClosable
 	 * This is only supported in display files, but is here as a placeholder for translated code.
 	 * @deprecated
 	 */
-	public void setINFDS(fixed fStr)
+	public void setINFDS(FixedChar fStr)
 	{
 	}
 }

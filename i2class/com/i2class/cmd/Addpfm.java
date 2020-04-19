@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * ADDPFM (add physical file member) processing.
- * @author ANDREWC
+ * 
  */
 public class Addpfm extends AbstractCommand {
 
@@ -54,10 +54,10 @@ public class Addpfm extends AbstractCommand {
 		QfileName likeFile = rconn.qfileName(m_file);
 		QfileName q = new QfileName(likeFile.libName, likeFile.schemaName, '(' + likeFile.fileName + ')');
 
-		fixed msgdta = new fixed(30);
-		msgdta.setFixedAt(0, new fixed(10, m_mbr));
-		msgdta.setFixedAt(10, new fixed(10, q.fileName));
-		msgdta.setFixedAt(20, new fixed(10, q.libName));
+		FixedChar msgdta = new FixedChar(30);
+		msgdta.setFixedAt(0, new FixedChar(10, m_mbr));
+		msgdta.setFixedAt(10, new FixedChar(10, q.fileName));
+		msgdta.setFixedAt(20, new FixedChar(10, q.libName));
 		try {
 			rconn.createTableLike(q, likeFile);
 		} catch (SQLException e) {

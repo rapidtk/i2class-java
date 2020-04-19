@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * CRTDTAQ (Create data queue) processing.
- * @author ANDREWC
+ * 
  */
 public class Crtdtaq extends AbstractCommand {
 
@@ -46,7 +46,7 @@ public class Crtdtaq extends AbstractCommand {
 	public void setForce(String force) {
 		m_force=Application.trimr(force);
 	}
-	public void setForce(fixed force) {
+	public void setForce(FixedChar force) {
 		setForce(force.toString());
 	}
 	
@@ -54,7 +54,7 @@ public class Crtdtaq extends AbstractCommand {
 		m_keylen=Integer.valueOf(keylen.toString());
 	}
 	public void setKeylen(int keylen) {
-		m_keylen = numeric.newInteger(keylen);
+		m_keylen = ShortDecimal.newInteger(keylen);
 	}
 	
 	/** Create the specified data queue. */
@@ -62,7 +62,7 @@ public class Crtdtaq extends AbstractCommand {
 		setDtaq(dtaq);
 		exec();
 	}
-	public void exec(fixed dtaq) throws Exception {
+	public void exec(FixedChar dtaq) throws Exception {
 		exec(dtaq.toString());
 	}
 
@@ -86,9 +86,9 @@ public class Crtdtaq extends AbstractCommand {
 			queueName=m_dtaq;
 		}
 		
-		fixed msgdta = new fixed(30, queueName);
-		msgdta.setFixedAt(10, new fixed(10, libName));
-		msgdta.setFixedAt(20, new fixed(7, "DTAQ"));
+		FixedChar msgdta = new FixedChar(30, queueName);
+		msgdta.setFixedAt(10, new FixedChar(10, libName));
+		msgdta.setFixedAt(20, new FixedChar(7, "DTAQ"));
 		String qFileName = schemaName + '"' + queueName + ".dtaq\"";
 		String ddl = "CREATE TABLE " + qFileName + " (data BLOB, maxlen INT, force CHAR(4), seq CHAR(6), keylen INT)";
 		try {

@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.io.*;
 /**
  * A packed decimal data area class that acutally stores data in a local byte-stream file.
- * @author Andrew Clark
+ * 
  * @see DecimalDataArea400
  */
 class DecimalDataAreaFile implements IDecimalDtaara

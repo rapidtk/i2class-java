@@ -11,13 +11,13 @@ import com.i2class.*;
 
 /**
  * RMVM (remove member) processing.
- * @author ANDREWC
+ * 
  */
 public class Rmvm extends AbstractCommand {
 
 	private Statement m_stmt;
 	private String m_file, m_mbr;
-	private fixed msgdta;
+	private FixedChar msgdta;
 	
 	public Rmvm() {}
 	public Rmvm(I2Connection rconn) {
@@ -75,9 +75,9 @@ public class Rmvm extends AbstractCommand {
 		String filePattern = fileName + '(' + mbrPattern;
 
 		// Set up message data
-		msgdta = new fixed(30, fileName);
-		msgdta.setFixedAt(10, new fixed(10, m_mbr));
-		msgdta.setFixedAt(20, new fixed(10, libName));
+		msgdta = new FixedChar(30, fileName);
+		msgdta.setFixedAt(10, new FixedChar(10, m_mbr));
+		msgdta.setFixedAt(20, new FixedChar(10, libName));
 		// Build generic member list
 		m_stmt = getStatement();
 		if (generic)

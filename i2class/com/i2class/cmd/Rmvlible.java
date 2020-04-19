@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * RMVLIBLE (Remove library list entry) processing.
- * @author ANDREWC
+ * 
  */
 public class Rmvlible extends AbstractCommand {
 
@@ -39,7 +39,7 @@ public class Rmvlible extends AbstractCommand {
 		setLib(lib);
 		exec();
 	}
-	public void exec(fixed lib) throws Exception {
+	public void exec(FixedChar lib) throws Exception {
 		exec(lib.toString());
 	}
 
@@ -60,7 +60,7 @@ public class Rmvlible extends AbstractCommand {
 				break;
 			}
 		}
-		fixed msgdta = new fixed(10, m_lib);
+		FixedChar msgdta = new FixedChar(10, m_lib);
 		if (index>=0)
 		{
 			usrlibl.remove(index);

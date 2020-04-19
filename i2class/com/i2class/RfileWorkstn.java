@@ -8,7 +8,7 @@ import java.util.Vector;
  * This class is the base class used to represent a thread that will stall
  * at a READ/EXFMT statement of a display file until some sort of user
  * interaction occurs (e.g. function key pressed, ENTER).
- * @author Andrew Clark
+ * 
  * @see ThreadLock
  */
 public class RfileWorkstn extends Rfile /*extends com.ibm.Connection.access.KeyedFile*/
@@ -18,8 +18,8 @@ public class RfileWorkstn extends Rfile /*extends com.ibm.Connection.access.Keye
 	//String fileName;
 	private boolean writing = true;
 	//public ThreadLock fileLock;
-	fixed indds; // INDDS structure
-	fixed infds; // INFDS structure
+	FixedChar indds; // INDDS structure
+	FixedChar infds; // INFDS structure
 	Hashtable specialValues = new Hashtable();
 
 	/* Contstruct the specified object. 
@@ -337,7 +337,7 @@ public class RfileWorkstn extends Rfile /*extends com.ibm.Connection.access.Keye
 	 * Set the file INDARA (separate indicator) DS.
 	 * The only fields updated in the INFDS are the cursor position and AID (function key) hex code.
 	 */
-	public void setINDDS(fixed fStr)
+	public void setINDDS(FixedChar fStr)
 	{
 		indds = fStr;
 	}
@@ -345,7 +345,7 @@ public class RfileWorkstn extends Rfile /*extends com.ibm.Connection.access.Keye
 	 * Set the file INFormation DS.
 	 * The only fields updated in the INFDS are the cursor position and AID (function key) hex code.
 	 */
-	public void setINFDS(fixed fStr)
+	public void setINFDS(FixedChar fStr)
 	{
 		infds = fStr;
 	}

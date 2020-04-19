@@ -12,7 +12,7 @@ import com.i2class.cmd.*;
 
 /**
  * Send data queue API.
- * @author ANDREWC
+ * 
  */
 public class QRCVDTAQ extends Application {
 	
@@ -31,7 +31,7 @@ public class QRCVDTAQ extends Application {
 	 * @param rtnDta Buffer to return data into
 	 * @param waitTime the length of time (in seconds) to wait for the data
 	 */
-	public void call(fixed dtaq, fixed dtaqLib, packed rtnDtaLen, FixedData rtnDta, packed waitTime) throws OptionalDataException, SQLException, ClassNotFoundException, IOException
+	public void call(FixedChar dtaq, FixedChar dtaqLib, PackedDecimal rtnDtaLen, FixedData rtnDta, PackedDecimal waitTime) throws OptionalDataException, SQLException, ClassNotFoundException, IOException
 	{
 		Queue q = QSNDDTAQ.resolveDataQueue(this, dtaq);
 		int wt = waitTime.intValue();
@@ -58,8 +58,8 @@ public class QRCVDTAQ extends Application {
 	 * @param sndInfLen Length of sender information to be returned packed(3,0)
 	 * @param rtnSndInf sender info returned (output)
 	 */
-	public void call(fixed dtaq, fixed dtaqLib, packed rtnDtaLen, FixedData rtnDta, packed waitTime,
-	 fixed keyOrder, packed keyLen, FixedData key, packed sndInfLen, FixedData rtnSndInf) throws OptionalDataException, SQLException, ClassNotFoundException, IOException
+	public void call(FixedChar dtaq, FixedChar dtaqLib, PackedDecimal rtnDtaLen, FixedData rtnDta, PackedDecimal waitTime,
+	 FixedChar keyOrder, PackedDecimal keyLen, FixedData key, PackedDecimal sndInfLen, FixedData rtnSndInf) throws OptionalDataException, SQLException, ClassNotFoundException, IOException
 	{
 		Queue q = QSNDDTAQ.resolveDataQueue(this, dtaq);
 		int wt = waitTime.intValue();

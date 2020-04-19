@@ -10,7 +10,7 @@ import javax.servlet.http.*;
 
 /**
  * Stalled thread class to implement READ/EXFMT functionallity.
- * @author Andrew Clark
+ * 
  */
 public class ThreadLock implements Serializable
 {

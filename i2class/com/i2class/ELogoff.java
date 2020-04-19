@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * A 'logoff' exception that can be gracefully handled.
- * @author Andrew Clark 
+ *  
  */
 public class ELogoff extends ThreadDeath
 {

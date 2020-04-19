@@ -12,7 +12,7 @@ import com.i2class.cmd.*;
 
 /**
  * Send data queue API.
- * @author ANDREWC
+ * 
  */
 public class QSNDDTAQ extends Application {
 	
@@ -23,7 +23,7 @@ public class QSNDDTAQ extends Application {
 	   super(app);
 	}
 	
-	static QueueTable resolveDataQueue(Application app, fixed dtaq) throws OptionalDataException, SQLException, ClassNotFoundException, IOException
+	static QueueTable resolveDataQueue(Application app, FixedChar dtaq) throws OptionalDataException, SQLException, ClassNotFoundException, IOException
 	{
 		return QueueTable.resolveQueue(app, dtaq.trimr());
 	}
@@ -34,7 +34,7 @@ public class QSNDDTAQ extends Application {
 	 * @param dtaLen Length of data packed(5,0)
 	 * @param dta Data to be sent to queue
 	 */
-	public void call(fixed dtaq, fixed dtaqLib, packed dtaLen, FixedData dta) throws OptionalDataException, SQLException, ClassNotFoundException, IOException {
+	public void call(FixedChar dtaq, FixedChar dtaqLib, PackedDecimal dtaLen, FixedData dta) throws OptionalDataException, SQLException, ClassNotFoundException, IOException {
 		Queue q = resolveDataQueue(this, dtaq);
 		q.sendData(dta);
 	 }
@@ -48,7 +48,7 @@ public class QSNDDTAQ extends Application {
 	 * @param keyLen Length of key data packed(3,0)
 	 * @param key
 	 */
-	public void call(fixed dtaq, fixed dtaqLib, packed dtaLen, FixedData dta, packed keyLen, FixedData key) throws OptionalDataException, SQLException, ClassNotFoundException, IOException {
+	public void call(FixedChar dtaq, FixedChar dtaqLib, PackedDecimal dtaLen, FixedData dta, PackedDecimal keyLen, FixedData key) throws OptionalDataException, SQLException, ClassNotFoundException, IOException {
 		Queue q = resolveDataQueue(this, dtaq);
 		q.sendData(dta, key);
 	 }

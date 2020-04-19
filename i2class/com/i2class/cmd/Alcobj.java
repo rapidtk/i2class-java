@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * ALCOBJ (Allocate object) processing.
- * @author ANDREWC
+ * 
  */
 public class Alcobj extends AbstractCommand {
 
@@ -91,7 +91,7 @@ public class Alcobj extends AbstractCommand {
 						getStatement().execute(ddl);
 						//TODO save statement handle
 					} catch (SQLException e) {
-						fixed msgdta = new fixed(10, objName);
+						FixedChar msgdta = new FixedChar(10, objName);
 						// CPF1002 -- Cannot allocate object &1
 						throw new Pgmmsg("CPF1002", "QCPFMSG", msgdta);
 					} 

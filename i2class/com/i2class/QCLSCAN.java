@@ -8,7 +8,7 @@ import java.util.StringTokenizer;
 
 /**
  * Scan for String Pattern (QCLSCAN) API
- * @author ANDREWC
+ * 
  */
 public class QCLSCAN extends Application {
 	
@@ -16,8 +16,8 @@ public class QCLSCAN extends Application {
 	   super(app);
 	}
 	
-	public void call(fixed input, packed inputLength, packed startPosition, fixed pattern, packed patternLength,
-	 fixed translate, fixed trim, fixed wildCard, packed result) throws Exception {
+	public void call(FixedChar input, PackedDecimal inputLength, PackedDecimal startPosition, FixedChar pattern, PackedDecimal patternLength,
+	 FixedChar translate, FixedChar trim, FixedChar wildCard, PackedDecimal result) throws Exception {
 	 	int ilength = inputLength.intValue();
 		if (ilength!=input.size())
 			input = subst(input, 1, ilength);

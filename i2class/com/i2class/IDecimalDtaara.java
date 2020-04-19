@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 /**
  * A basic read/write interface to a packed decimal TYPE(*DEC) data area.
  * @see ICharacterDtaara
- * @author Andrew Clark 
+ *  
  */
 interface IDecimalDtaara
 {

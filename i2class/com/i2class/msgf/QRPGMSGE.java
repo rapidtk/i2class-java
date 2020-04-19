@@ -9,7 +9,7 @@ import com.i2class.*;
 
 /**
  * Run-time messages issued by RPG programs. 
- * @author ANDREWC
+ * 
  */
 public class QRPGMSGE extends MessageFile
 {

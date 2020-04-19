@@ -10,7 +10,7 @@ import java.util.Hashtable;
 
 /**
  * The Export file class allows data from one JDBC-enabled database to be exported to another.
- * @author ANDREWC
+ * 
  *
  */
 public class ExportFile {

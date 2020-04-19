@@ -11,7 +11,7 @@ import com.i2class.*;
 
 /**
  * ADDLIBLE (Add library list) processing.
- * @author ANDREWC
+ * 
  */
 public class Addlible extends AbstractCommand {
 
@@ -38,7 +38,7 @@ public class Addlible extends AbstractCommand {
 	public void setPosition(String position) {
 		m_position = Application.trimr(position);
 	}
-	public void setPosition(fixed position) {
+	public void setPosition(FixedChar position) {
 		setPosition(position.toString());
 	}
 	
@@ -47,7 +47,7 @@ public class Addlible extends AbstractCommand {
 		setLib(lib);
 		exec();
 	}
-	public void exec(fixed lib) throws Exception {
+	public void exec(FixedChar lib) throws Exception {
 		exec(lib.toString());
 	}
 
@@ -65,7 +65,7 @@ public class Addlible extends AbstractCommand {
 		if (st.hasMoreTokens())
 			reference = st.nextToken();
 		
-		fixed msgdta = new fixed(10, m_lib);
+		FixedChar msgdta = new FixedChar(10, m_lib);
 		// See if the library to add is already in the library list.
 		int usrliblSize = usrlibl.size();
 		int i=0;

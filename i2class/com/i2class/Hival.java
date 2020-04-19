@@ -3,7 +3,7 @@ package com.i2class;
 import java.math.BigDecimal;
 /**
   * A class the represents the special value <code>*HIVAL</code>.
-  * @author Andrew Clark
+  * 
   */
 public class Hival extends FigConstNum
 {
@@ -23,7 +23,7 @@ public class Hival extends FigConstNum
 	}
 	BigDecimal decimalValue(int length, int scale)
 	{
-		return numeric.newBigDecimal(doubleValue(length, scale));
+		return ShortDecimal.newBigDecimal(doubleValue(length, scale));
 	}
 	public double doubleValue()
 	{

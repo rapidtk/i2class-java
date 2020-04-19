@@ -7,7 +7,7 @@ import java.sql.*;
  * A prepared statement that preserves the String used to initially create it.  
  * Why doesn't java.sql.PreparedStatement have this?!?
  * 
- * @author ANDREWC
+ * 
  */
 class PreparedStringStatement {
 	PreparedStatement m_pstmt;

@@ -10,7 +10,7 @@ import com.ibm.as400ad.webfacing.runtime.view.def.FieldViewDefinition;
 
 /**
  * A special record class to deal with subfile message records (those with the SFLPGMQ keyword specified).
- * @author ANDREWC
+ * 
  *
  */
 public class RecordWebfaceSFLMSGRCD extends RecordWebfaceSFL {

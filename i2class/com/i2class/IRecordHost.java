@@ -2,7 +2,7 @@ package com.i2class;
 
 /**
  * A 
- * @author Andrew Clark
+ * 
  *
  */
 public interface IRecordHost {
