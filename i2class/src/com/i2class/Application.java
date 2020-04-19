@@ -3741,14 +3741,6 @@ public class Application implements Runnable, Serializable
 	{
 		Rreturn(host);
 	}
-	public void RETURN(Connection conn) throws Pgmmsg
-	{
-		RETURN((IRHost)conn);
-	}
-	public void RETURN(AS400 as400) throws Pgmmsg
-	{
-		RETURN((IRHost)as400);
-	}
 	
 	protected void Rreturn(IRHost rhost) throws Pgmmsg
 	{
@@ -4093,7 +4085,7 @@ public class Application implements Runnable, Serializable
 	
 	boolean initialCall=true;
 	/** Call INZSR on initial call, only. */
-	public boolean initialCall() throws Exception
+	public boolean initialCall()
 	{
 		boolean b = initialCall;
 		initialCall=false;
