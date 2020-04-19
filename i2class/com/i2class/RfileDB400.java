@@ -6,9 +6,9 @@ import java.io.IOException;
 // Java doc inhertis from IDBFile
 
 /**
- * An OS/400 based SQL table-like file class.
+ * An IBM i database file class.
+ * 
  * @see Rfile 
- * @author Andrew Clark 
  */
 public class RfileDB400
 	extends RfileCycle implements IDiskFile /*extends com.ibm.as400.access.KeyedFile*/
@@ -18,6 +18,7 @@ public class RfileDB400
 	KeyedFile file;
 	protected com.ibm.as400.access.Record record;
 	private I2AS400 rsystem;
+	
 	/** 
 	 * Create a new file object that references a file on a remote OS/400 system.
 	 * @param system The OS/400 system that the file resides on
@@ -28,12 +29,12 @@ public class RfileDB400
 		String fileName) //throws java.beans.PropertyVetoException
 	{
 		String path = Application.getPath(fileName);
-		if (system instanceof I2AS400)
-		{
-			rsystem = (I2AS400)system;
-			system = ((I2AS400)system).as400;
-		}
 		file = new KeyedFile(system, path);
+	}
+	public RfileDB400(I2AS400 system, String fileName) //throws java.beans.PropertyVetoException
+	{
+		this(system.getAS400(), fileName);
+		rsystem = system;
 	}
 	
 	/** Destroy the connection objects that this object references. */
@@ -140,28 +141,28 @@ public class RfileDB400
 		AS400File.commit(as400);
 	}
 	/** Delete the current record from the file. */
-	public boolean Delete() throws Exception
+	public boolean delete() throws Exception
 	{
 		file.deleteCurrentRecord();
 		return true;
 	}
 	/** Delete the current record of the specified format from the file. */
-	public boolean Delete(Record400 r) throws Exception
+	public boolean delete(Record400 r) throws Exception
 	{
 		setRecordFormat(r);
-		return Delete();
+		return delete();
 	}
 	/** Delete the record at the specified relative record number. */
-	public boolean Delete(Record400 r, long rrn) throws Exception
+	public boolean delete(Record400 r, long rrn) throws Exception
 	{
 		setRecordFormat(r);
 		//file.deleteRecord(rrn);
-		return Delete();
+		return delete();
 	}
 	/** Delete the record at the specified relative record number. */
-	public boolean Delete(Record400 r, INumeric rrn) throws Exception
+	public boolean delete(Record400 r, INumeric rrn) throws Exception
 	{
-		return Delete(r, rrn.longValue());
+		return delete(r, rrn.longValue());
 	}
 	/**
 	 * Open the file.

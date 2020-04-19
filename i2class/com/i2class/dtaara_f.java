@@ -12,6 +12,9 @@ public class dtaara_f extends CharDtaara {
 	public dtaara_f(int sz, AS400 system, String dtaaraName) {
 		super(sz, system, dtaaraName);
 	}
+	public dtaara_f(int sz, I2AS400 system, String dtaaraName) {
+		super(sz, system, dtaaraName);
+	}
 
 	public dtaara_f(int sz, Connection host, String dtaaraName) {
 		super(sz, host, dtaaraName);

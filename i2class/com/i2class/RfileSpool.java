@@ -32,6 +32,12 @@ public class RfileSpool extends RfilePrint
 		String path = Application.getPath(fileName);
 		prtf = new PrinterFile(system, path);
 	}
+	public RfileSpool(I2AS400 system, String fileName, int len)
+	{
+		this(system.getAS400(), fileName, len);
+		this.app = system.app;
+	}
+	
 	private boolean checkOverflow()
 	{
 		if (((RecordSpool) prtRecord).splf == null)

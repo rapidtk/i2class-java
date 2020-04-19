@@ -202,11 +202,11 @@ public class I2ConnectionBase implements IRHost, Cloneable
 	}
 	/* (non-Javadoc)
 	 * @see com.asc.rio.IHost#setHost(java.lang.Object)
-	 */
 	public void setHost(Object o)
 	{
 		conn = (Connection)o;
 	}
+	*/
 	
 	
 	/**
@@ -272,7 +272,7 @@ public class I2ConnectionBase implements IRHost, Cloneable
 					I2Logger.logger.debug("Using current connection " + conn);
 				c=conn;
 			}
-			// If the current conneciton hasn't been created, then go to connection pool
+			// If the current connection hasn't been created, then go to connection pool
 			else
 			{
 				if (app==null)
