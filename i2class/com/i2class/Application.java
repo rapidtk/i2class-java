@@ -193,7 +193,7 @@ public class Application implements Runnable, Serializable
 	//static public date TIMESTAMP /*= new FmtDate(14, "HHmmssMMddyyyy")*/;
 	
 	/** The 6-digit HHMMSS military representation of the current time. */
-	/*static final*/ public FmtTime TIME /*= new FmtTime(6, "HHmmss")*/;
+	static final public FmtTime TIME = new FmtTime(6, "HHmmss");
 	//static public date UTIMESTAMP /*= new FmtDate(12, "HHmmssMMddyy")*/;
 	
 	/** 
@@ -209,6 +209,11 @@ public class Application implements Runnable, Serializable
 	 */
 	public FmtTime UTIMESTAMP /*= new FmtDate(12, "HHmmssMMddyy")*/;
 
+	static public final String DEFAULT_UDATE_FORMAT = "MMddyy";
+	static public final String DEFAULT_TIME_FORMAT = "HHmmss";
+
+	static public final FmtDate JOB_DATE = new FmtDate(6, DEFAULT_UDATE_FORMAT);
+	
 	/*static*/ public FmtDate DATE /* = new FmtDate(8, "MMddyyyy")*/;
 	/** 
 	 * The 6-digit representation of the current date (for example 031231 is the last day of the year 2003). 
@@ -216,14 +221,13 @@ public class Application implements Runnable, Serializable
 	 */
 	/*static*/ public FmtDate UDATE /*= new FmtDate(6, "MMddyy")*/;
 	/** The 2-digit representation of the current dat. */
-	/*static final*/ public FmtDate UDAY /*= new FmtDate(2, "dd")*/;
+	static final public FmtDate UDAY = new FmtDate(2, "dd");
 	/** The 2-digit representation of the current month. */
-	/*static final*/ public FmtDate UMONTH /*= new FmtDate(2, "MM")*/;
-	//static final public date TIME = new date("HHmmss", -1);
+	static final public FmtDate UMONTH = new FmtDate(2, "MM");
 	/** The 2-digit representation of the current year. */
-	/*static final*/ public FmtDate UYEAR /*= new FmtDate(2, "yy")*/;
+	static final public FmtDate UYEAR = new FmtDate(2, "yy");
 	/** The 4-digit representation of the current year. */
-	/*static final*/ public FmtDate YEAR /*= new FmtDate(4, "yyyy")*/;
+	static final public FmtDate YEAR = new FmtDate(4, "yyyy");
 	
 	// Rounding constants 
 	/** Round down */
@@ -641,7 +645,7 @@ public class Application implements Runnable, Serializable
 		INU8 = (appJob.jobSws.charAt(7)=='1');
 		
 		// Set udate format
-		udateFormat = "MMddyy";
+		udateFormat = DEFAULT_UDATE_FORMAT;
 		longUdateFormat = "MMddyyyy";
 
 		if (datedit.compareTo("*YMD") == 0)
@@ -654,39 +658,12 @@ public class Application implements Runnable, Serializable
 			udateFormat = "ddMMyy";
 			longUdateFormat = "ddMMyyyy";
 		}
-		/*
-		else if (_DATFMT.compareTo("*JUL"==0))
+		else if (datedit.compareTo("*JUL")==0)
 		{
-			dateFormat="yyddd";
-			longDateFormat="yyyyddd";
-		}
-		*/
-		else
-		{
-			udateFormat = "MMddyy";
-			longUdateFormat = "MMddyyyy";
+			dateFormat="yyDDD";
+			longUdateFormat="yyyyDDD";
 		}
 
-		// If this is the first program in the call stack (app==null) then set values for UDAY, etc.
-		if (app==null)
-		{
-			// Create new seed value for FmtDate
-			FmtDate.date = new java.util.Date();
-			TIME = new FmtTime(6, "HHmmss");
-			UDAY = new FmtDate(2, "dd");
-			UMONTH = new FmtDate(2, "MM");
-			UYEAR = new FmtDate(2, "yy");
-			YEAR = new FmtDate(4, "yyyy");
-					
-		}
-		else
-		{
-			TIME = app.TIME;
-			UDAY = app.UDAY;
-			UMONTH = app.UMONTH;
-			YEAR = app.YEAR;
-		}
-		
 		// If the date formats are the same, then we can just do assignment
 		if (app==null || udateFormat.compareTo(app.udateFormat)!=0)
 		{

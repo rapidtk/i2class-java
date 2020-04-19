@@ -23,12 +23,12 @@ abstract public class RfilePrint extends Rfile
 	void setRecord(IRecord rcd)
 	{
 		super.setRecord(rcd);
-		// Update the date/time values of the record
+		// Update the UDATE value of the record (the format is Application-specific)
 		RrecordPrint record = (RrecordPrint)rcd;
 		if (app != null)
-		{
-			record.TIME = app.TIME;
 			record.UDATE = app.UDATE;
-		}
+		// Use default values if not already set
+		else
+			record.UDATE = Application.JOB_DATE;
 	}
 }

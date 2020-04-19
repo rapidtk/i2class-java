@@ -27,8 +27,10 @@ abstract public class RrecordPrint extends RrecordX2
 	 public static final double LN10=2.3025850929940456840179914546844;
 	 
 	 // Date/time constants for print records
-	public FmtTime TIME;
+	static public FmtTime TIME=Application.TIME;
 	public FmtDate UDATE;
+	static public final FmtDate JOB_DATE = Application.JOB_DATE;
+	
 	 
 	 /** 
 	 * Edit the specified value using the specified edit word and place the results into a outputBuffer 
