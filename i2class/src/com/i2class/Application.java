@@ -4085,11 +4085,18 @@ public class Application implements Runnable, Serializable
 	
 	boolean initialCall=true;
 	/** Call INZSR on initial call, only. */
-	public boolean isInitialCall()
+	protected boolean isInitialCall()
 	{
 		boolean b = initialCall;
 		initialCall=false;
 		return b;
+	}
+	
+	protected void INZSR() throws Exception { }
+	
+	protected void runMain() throws Exception {
+		if (isInitialCall())
+			INZSR();
 	}
 	
 	// Return number of parameters passed to routine
