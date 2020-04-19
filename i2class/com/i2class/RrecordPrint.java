@@ -31,6 +31,8 @@ abstract public class RrecordPrint extends RrecordX2
 	public FmtDate UDATE;
 	static public final FmtDate JOB_DATE = Application.JOB_DATE;
 	
+	protected boolean[] IN = new boolean[99];
+
 	 
 	 /** 
 	 * Edit the specified value using the specified edit word and place the results into a outputBuffer 
@@ -309,7 +311,7 @@ abstract public class RrecordPrint extends RrecordX2
 	// Record buffer with room for first character form control character
 	protected int outputSize;
 	//int printLength;
-	public int page = 1;
+	public int page = 1; // This is the DDS constant PAGNBR
 
 	int pageWidth;
 	public RrecordPrint(String recordName)
@@ -393,6 +395,12 @@ abstract public class RrecordPrint extends RrecordX2
 		*/
 		print((long) value, col);
 	}
+
+	/** Print out a (right-adjusted) numeric value at the specified column with no editing. */
+	public void print(ZonedDecimal n, int col)
+	{
+		print(n, col, 'X');
+	}
 	/** Print out a (right-adjusted) numeric value at the specified column after applying the specified edit character. */
 	public void print(INumeric n, int col, char edtCde)
 	{
@@ -406,7 +414,7 @@ abstract public class RrecordPrint extends RrecordX2
 	{
 		// Edtcde(X) means no editing
 		if (edtCde == 'X')
-			print((IFixed) n, col);
+			print(n.toNumericString(), col);
 		else
 			print(n, col, getEdtWrd(n, edtCde, fillChar));
 	}
@@ -521,6 +529,11 @@ abstract public class RrecordPrint extends RrecordX2
 			col = column;
 		print(fStr, col + fStr.size() - 1);
 	}
+	/** Print out a left-adjusted numeric value at the specified column with no editing. */
+	public void printl(ZonedDecimal n, int col)
+	{
+		printl(n, col, 'X');
+	}
 	/** Print out a left-adjusted numeric value at the specified column after applying the specified edit character. */
 	public void printl(INumeric n, int col, char edtCde)
 	{
@@ -534,13 +547,14 @@ abstract public class RrecordPrint extends RrecordX2
 	{
 		// Edtcde(X) means no editing
 		if (edtCde == 'X')
-			printl((fixed) n, col);
+			printl(n.toNumericString(), col);
 		else
 			printl(n, col, getEdtWrd(n, edtCde, fillChar));
 	}
 	/** Print out a left-adjusted numeric value at the specified column after applying the specified edit word. */
 	public void printl(INumeric n, int col, String edtWrd)
 	{
+		// Adjust from left-adjusted to right-adjusted offsets so that printing logic is in print() instead of here
 		print(n, col + edtWrd.length() - 1, edtWrd);
 	}
 	/** Print a left-adjusted value at the current column. */
@@ -580,9 +594,69 @@ abstract public class RrecordPrint extends RrecordX2
 	 *  @param rows the number of rows to space down.
 	*/
 	abstract public void space(int rows) throws /*java.io.IO*/ Exception;
+	/**
+	 * 
+	 * Move the cursor to the specified row, but don't move to a new page if row 
+	 * is less than the current row, unless this is the first setRow.
+	 * @version 9/27/2002 2:31:51 PM
+	 * @param rows int The row to move to
+	 * @see #skip
+	 */
+	public void setRow(int rows) throws Exception
+	{
+		skip(rows);
+	}
 	
 	/** Update the page number. */
 	protected void updatePage() throws java.io.IOException
 	{
 	}
+	
+	/**
+	 * Set the specified field of this format to a value
+	 * @version 10/1/2002 9:52:05 AM
+	 * @param fStr The <code>fixed</code> value to change
+	 * @param value The value to set to
+	 */
+	public void setText(FixedChar fStr, char value)
+	{
+		fStr.assign(value);
+	}
+	/**
+	 * Set the specified field of this format to a value
+	 * @version 10/1/2002 9:52:05 AM
+	 * @param fStr The <code>fixed</code> value to change
+	 * @param value The value to set to
+	 */
+	public void setText(FixedChar fStr, FixedChar value)
+	{
+		fStr.assign(value);
+	}
+	/**
+	 * Set the specified field of this format to a value
+	 * @version 10/1/2002
+	 * @param num The <code>zoned</code>value to change
+	 * @param value The value to set to
+	 */
+	public void setText(ZonedDecimal num, double value)
+	{
+		num.assign(value);
+	}
+	/**
+	 * Set the specified field of this format to a value
+	 * @version 10/1/2002
+	 * @param num The <code>zoned</code>value to change
+	 * @param value The value to set to
+	 */
+	public void setText(ZonedDecimal num, INumeric value)
+	{
+		num.assign(value.doubleValue());
+	}
+	
+	/** Set the specified indicator. */
+	public void setIndicator(int ind, boolean value)
+	{
+		IN[ind-1]=value;
+	}
+
 }

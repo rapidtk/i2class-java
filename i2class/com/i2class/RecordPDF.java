@@ -5,7 +5,7 @@ import com.lowagie.text.pdf.*;
 
 /**
  * The record format class for PDF output
- * @author Andrew Clark
+ * 
  * @see RfilePDF
  */
 public class RecordPDF extends RrecordPrint
@@ -22,7 +22,6 @@ public class RecordPDF extends RrecordPrint
 	private int _style, lastStyle = -1;
 	static final int DEFAULT_FONT_SIZE = 10;
 	int fontSize;
-	protected boolean[] IN = new boolean[99];
 	/**
 	 * Create a PDF record format object
 	 * @version 10/1/2002 1:57:32 PM
@@ -179,68 +178,12 @@ public class RecordPDF extends RrecordPrint
 	{
 	}
 	/**
-	 * Move the cursor to the specified row, but don't move to a new page if row 
-	 * is less than the current row, unless this is the first setRow.
-	 * @version 9/27/2002 2:31:51 PM
-	 * @param rows int The row to move to
-	 * @see #skip
-	 */
-	public void setRow(int rows) throws Exception
-	{
-		skip(rows);
-	}
-	/**
 	 * Set the next printx() to be the specified style
 	 * @param lstyle the specified style
 	 */
 	public void setStyle(int style)
 	{
 		_style = style;
-	}
-	/** Set the specified indicator. */
-	public void setIndicator(int ind, boolean value)
-	{
-		IN[ind-1]=value;
-	}
-	/**
-	 * Set the specified field of this format to a value
-	 * @version 10/1/2002 9:52:05 AM
-	 * @param fStr The <code>fixed</code> value to change
-	 * @param value The value to set to
-	 */
-	public void setText(fixed fStr, char value)
-	{
-		fStr.assign(value);
-	}
-	/**
-	 * Set the specified field of this format to a value
-	 * @version 10/1/2002 9:52:05 AM
-	 * @param fStr The <code>fixed</code> value to change
-	 * @param value The value to set to
-	 */
-	public void setText(fixed fStr, fixed value)
-	{
-		fStr.assign(value);
-	}
-	/**
-	 * Set the specified field of this format to a value
-	 * @version 10/1/2002
-	 * @param num The <code>zoned</code>value to change
-	 * @param value The value to set to
-	 */
-	public void setText(zoned num, double value)
-	{
-		num.assign(value);
-	}
-	/**
-	 * Set the specified field of this format to a value
-	 * @version 10/1/2002
-	 * @param num The <code>zoned</code>value to change
-	 * @param value The value to set to
-	 */
-	public void setText(zoned num, INumeric value)
-	{
-		num.assign(value.doubleValue());
 	}
 	/** Skip to the specified row of the output page.  If the current row number is greater than
 	 * <code>rows</code>, then skip to the specified line on the next page.

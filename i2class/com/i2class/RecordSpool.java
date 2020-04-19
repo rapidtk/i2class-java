@@ -5,7 +5,7 @@ import java.io.*;
 
 /**
  * A record class to write spool file output.
- * @author Andrew Clark
+ * 
  * @see com.i2class.RfileSpool
  */
 public class RecordSpool extends RrecordPrint implements IRecord
@@ -100,4 +100,18 @@ public class RecordSpool extends RrecordPrint implements IRecord
 		}
 
 	}
+	/**
+	 * The abstract print method where text is actually written.  
+	 * The <code>output</code> method sets the values before this method is called.
+	 * @version 10/1/2002 8:39:32 AM
+	 */
+	protected void printOutput() throws Exception
+	{
+	}
+	
+	// Returns the DDS PAGNBR special value
+	public ZonedDecimal getPAGNBR() {
+		return new ZonedDecimal(4, 0, page);
+	}
+	
 }
