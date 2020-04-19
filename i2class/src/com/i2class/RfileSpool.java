@@ -120,6 +120,7 @@ public class RfileSpool extends RfilePrint
 	{
 		prtRecord.cur_page_line_num = cur_page_line_num;
 		prtRecord.output();
+		prtRecord.printOutput();
 		return checkOverflow();
 	}
 	public boolean write(RecordSpool rcd) throws Exception
