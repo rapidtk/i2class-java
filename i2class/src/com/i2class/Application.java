@@ -4085,7 +4085,7 @@ public class Application implements Runnable, Serializable
 	
 	boolean initialCall=true;
 	/** Call INZSR on initial call, only. */
-	public boolean initialCall()
+	public boolean isInitialCall()
 	{
 		boolean b = initialCall;
 		initialCall=false;
