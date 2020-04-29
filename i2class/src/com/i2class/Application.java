@@ -190,6 +190,40 @@ public class Application implements Runnable, Serializable
 	static final public int MONTHS = Calendar.MONTH;
 	static final public int YEARS = Calendar.YEAR;
 
+	// Date constants		
+	static final String CDMY="*CDMY";
+	static final String CMDY="*CMDY";
+	static final String CYMD="*CYMD";
+	static final String DMY="*DMY";
+	static final String EUR="*EUR";
+	static final String HMS="*HMS";
+	static final String ISO="*ISO";
+	static final String JIS="*JIS";
+	static final String JOB="*JOB";
+	static final String JOBRUN="*JOBRUN";
+	static final String JUL="*JUL";
+	static final String LONGJUL="*LONGJUL";
+	static final String MDY="*MDY";
+	static final String SYS="*SYS";
+	static final String USA="*USA";
+	static final String YMD="*YMD";
+	
+	static final String CDMY0="*CDMY0";
+	static final String CMDY0="*CMDY0";
+	static final String CYMD0="*CYMD0";
+	static final String DMY0="*DMY0";
+	static final String EUR0="*EUR0";
+	static final String HMS0="*HMS0";
+	static final String ISO0="*ISO0";
+	static final String JIS0="*JIS0";
+	static final String JOB0="*JOB0";
+	static final String JOBRUN0="*JOBRUN0";
+	static final String JUL0="*JUL0";
+	static final String LONGJUL0="*LONGJUL0";
+	static final String MDY0="*MDY0";
+	static final String SYS0="*SYS0";
+	static final String USA0="*USA0";
+	static final String YMD0="*YMD0";
 
 	// These have to be public because inner classes (e.g. output()) don't have access to protected data
 	//static public date TIMESTAMP /*= new FmtDate(14, "HHmmssMMddyyyy")*/;
