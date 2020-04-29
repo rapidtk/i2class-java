@@ -189,6 +189,8 @@ public class Application implements Runnable, Serializable
 	static final public int DAYS = Calendar.DAY_OF_MONTH;
 	static final public int MONTHS = Calendar.MONTH;
 	static final public int YEARS = Calendar.YEAR;
+
+
 	// These have to be public because inner classes (e.g. output()) don't have access to protected data
 	//static public date TIMESTAMP /*= new FmtDate(14, "HHmmssMMddyyyy")*/;
 	
@@ -237,6 +239,7 @@ public class Application implements Runnable, Serializable
 	// %BIF constants
 	/** *ASTFILL (asterik fill) special value for editc() bif */
 	public static final char ASTFILL='*';
+
 
 	/** Indicates whether the last file record access resulted in an eof or bof condition. */
 	boolean eof; // changed from eof to EOF to avoid name conflict, %bif error() is used instead
@@ -761,9 +764,9 @@ public class Application implements Runnable, Serializable
 	 * @param dat the date to format
 	 * @param dateFormat400 the 400 style date string (e.g. "*MDY/", "*ISO")
 	 */
-	public static FixedChar Char(FixedDate dat, String datfmt400)
+	public static String Char(FixedDate dat, String datfmt400)
 	{
-		return dat.Char(datfmt400);
+		return dat.Char(datfmt400).toString();
 	}
 	/**
 	 * Return a string representation of the number.
@@ -3486,14 +3489,14 @@ public class Application implements Runnable, Serializable
 	}
 	/** Translate all the characters in string <code>source</code> beginning at the 1-based index <code>start</code> 
 	 * from <code>from</code> to <code>to</code>. */
-	static public char xlate(String from, String to, char source, int start)
+	static public String xlate(String from, String to, char source, int start)
 		throws Exception
 	{
-		return xlate(from, to, new Character(source).toString(), start).charAt(0);
+		return xlate(from, to, new Character(source).toString(), start);
 	}
 	/** Translate all the characters in string <code>source</code> beginning at the 1-based index <code>start</code> 
 	 * from <code>from</code> to <code>to</code>. */
-	static public char xlate(String from, String to, char source)
+	static public String xlate(String from, String to, char source)
 		throws Exception
 	{
 		return xlate(from, to, source, 1);
