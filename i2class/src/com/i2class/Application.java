@@ -933,6 +933,10 @@ public class Application implements Runnable, Serializable
 	{
 		return date(fStr.toString(), datfmt400);
 	}
+	public static FixedDate date(FixedChar fStr) throws Exception
+	{
+		return date(fStr, ISO);
+	}
 
 	/**
 	 * Return the date representation of an integer value.
@@ -950,6 +954,11 @@ public class Application implements Runnable, Serializable
 		String digits = z.toNumericString();
 		return date(digits, datfmt400);
 	}
+	public static FixedDate date(int value) throws Exception
+	{
+		return date(value, ISO);
+	}
+	
 	/**
 	 * Return the date representation of a Numeric (e.g. zoned, packed) value
 	 * @param value the value to format
@@ -962,13 +971,19 @@ public class Application implements Runnable, Serializable
 		String digits = value.toNumericString();
 		return date(digits, datfmt400);
 	}
+	public static FixedDate date(INumeric value) throws Exception
+	{
+		return date(value, ISO);
+	}
+
 	/**
 	 * Return the date representation of a string.
 	 * The string is assumed to be in the global (Application._DATFMT) date format.
 	 */
 	public static FixedDate date(String str) throws Exception
 	{
-		String datfmt400 = Application._DATFMT;
+		//String datfmt400 = Application._DATFMT;
+		String datfmt400 = ISO;
 		return date(str, datfmt400);
 	}
 	/**
