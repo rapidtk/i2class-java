@@ -173,11 +173,13 @@ public class FixedDate extends FixedChar
 		adddur(duration.intValue(), durationCode);
 	}
 	/**
-	 * Add a duration to this date.
+	 * Add a duration to this date and return a new FixedDate value.
 	 */
-	public void add(Duration duration) throws Exception
+	public FixedDate add(Duration duration) throws Exception
 	{
-		adddur(duration.duration, duration.durationCode);
+		FixedDate newDate = new FixedDate(this.datfmt, this);
+		newDate.adddur(duration.duration, duration.durationCode);
+		return newDate;
 	}
 
 	/**
