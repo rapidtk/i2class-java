@@ -215,12 +215,36 @@ public class FixedChar extends FixedData
 		return equals(true);
 	}
 
-/** Concatenate a character value this this fixed-length string. */
+	/** Add a character value to this fixed-length string, and return a new value. */
+	public FixedChar add(char c1)
+	{
+		FixedChar result = new FixedChar(len() + 1);
+		result.assign(toString() + c1);
+		return result;
+	}
+
+	/** Add a String value to this fixed-length string, and return a new value. */
+	public FixedChar add(String str1)
+	{
+		FixedChar result = new FixedChar(len() + str1.length());
+		result.assign(toString() + str1);
+		return result;
+	}
+
+	/** Add a FixedChar value to this fixed-length string, and return a new value. */
+	public FixedChar add(FixedChar fStr)
+	{
+		FixedChar result = new FixedChar(len() + fStr.len());
+		result.assign(toString() + fStr.toString());
+		return result;
+	}
+
+/** Concatenate a character value to this fixed-length string. */
 	public void cat(char c1)
 	{
 		cat(c1, 0);
 	}
-/** Concatenate a character value this this fixed-length string. 
+/** Concatenate a character value to this fixed-length string. 
  * @param c1 The character value to concatenate
  * @param blanks The number of blank spaces to leave between the last non-blank value of this string
  * and the concatenated value.
@@ -231,7 +255,7 @@ public class FixedChar extends FixedData
 		c[0] = (byte) c1;
 		catStr(c, 0, 1, blanks);
 	}
-/** Concatenate a character value this this fixed-length string. 
+/** Concatenate a character value to this fixed-length string. 
  * @see #cat(char c1, int blanks)
  */
 	public void cat(char c1, INumeric blanks)
