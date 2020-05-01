@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="INFFMT"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qddspext" type="REC">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <indicators>
+            <option indicator="20"/>
+            <response indicator="1" isaidkey="true"/>
+            <response indicator="2" isaidkey="true"/>
+        </indicators>
+        <buffers inputlength="4" outputlength="2"/>
+    </data>
+    <view firstfieldline="19" lastfieldline="23" outputonly="true" primarysize="0">
+        <keywords>
+            <keyword id="KWD_OVERLAY"/>
+            <keyword id="KWD_KEEP"/>
+            <keyword id="KWD_PAGEUP" indicator=" 20"/>
+            <keyword id="KWD_HLPCLR"/>
+            <keyword id="KWD_HLPTITLE">
+                <parameter string="Display Program Messages                              "/>
+            </keyword>
+        </keywords>
+        <aidkeys>
+            <aidkey beanname="INFFMT" key="CA03" label="Exit"
+                priority="2" tran="true"/>
+            <aidkey beanname="INFFMT" key="CA12" label="Cancel"
+                priority="2" tran="true"/>
+            <aidkey beanname="INFFMT" key="HELP" label="Help"
+                priority="-1" tran="true"/>
+            <aidkey beanname="INFFMT" indicator=" 20" key="PAGEUP"
+                label="PAGEUP" priority="-1" tran="true"/>
+        </aidkeys>
+        <onlinehelp>
+            <helparea bottom="0" left="0" right="0" top="0">
+                <definition helpspecname="PGMMSG/HELP" object="QHMH"
+                    recordname="INFFMT" type="HelpPanelGroup"/>
+            </helparea>
+            <helparea bottom="23" left="1" right="80" top="23">
+                <definition helpspecname="PGMMSG/FKEYS" object="QHMH"
+                    recordname="INFFMT" type="HelpPanelGroup"/>
+            </helparea>
+        </onlinehelp>
+    </view>
+    <feedback>
+        <indicators>
+            <aidkeyresponse indicator="1" name="CA03"/>
+            <aidkeyresponse indicator="1" name="CA12"/>
+            <aidkeyresponse indicator="2" name="PAGEUP"/>
+        </indicators>
+    </feedback>
+</record>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="MENUSN36"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qdspmnu" type="REC">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <fields>
+            <field length="73" name="CMDLINE" shift="A" type="FT_ALPHA" usage="B"/>
+            <field length="78" name="MSGLINE" shift="A" type="FT_ALPHA" usage="O"/>
+        </fields>
+        <indicators separateindicatorarea="true">
+            <option indicator="1"/>
+        </indicators>
+        <buffers inputlength="146" outputlength="302"/>
+    </data>
+    <view firstcolumn="2" firstfieldline="23" lastcolumn="79"
+        lastfieldline="24" outputonly="false" primarysize="0" secondarysize="1">
+        <keywords>
+            <keyword id="KWD_OVERLAY"/>
+            <keyword id="KWD_PROTECT"/>
+            <keyword id="KWD_CLRL">
+                <parameter string="*NO"/>
+            </keyword>
+            <keyword id="KWD_KEEP"/>
+            <keyword id="KWD_ASSUME"/>
+            <keyword id="KWD_PAGEDOWN"/>
+            <keyword id="KWD_PAGEUP"/>
+        </keywords>
+        <fields>
+            <field column="7" name="CMDLINE" row="23" width="73"/>
+            <field column="2" name="MSGLINE" row="24" width="78"/>
+        </fields>
+        <aidkeys>
+            <aidkey beanname="MENUSN36" key="CF03" label="Exit"
+                priority="-1" tran="true"/>
+            <aidkey beanname="MENUSN36" key="CF12" label="Cancel"
+                priority="-1" tran="true"/>
+            <aidkey beanname="MENUSN36" key="HELP" label="Help"
+                priority="-1" tran="true"/>
+        </aidkeys>
+        <displayattributes>
+            <pcfieldinfo fieldname="CMDLINE" indicator=""/>
+        </displayattributes>
+    </view>
+    <feedback/>
+</record>

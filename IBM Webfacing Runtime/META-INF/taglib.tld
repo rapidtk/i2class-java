@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.1//EN" "http://java.sun.com/products/jsp/dtd/web-jsptaglib_1_1.dtd">
+ 
+<taglib>
+  <tlibversion>1.0</tlibversion>
+  <jspversion>1.1</jspversion>
+  <shortname>wf</shortname>
+  <uri>http://www.ibm.com/software/ad/wdt400/</uri>
+  <info>WebFacing Imbedded Tag library</info>
+
+  <tag>  
+    <name>logmsg</name>
+    <tagclass>com.ibm.etools.iseries.webfacing.tags.impl.WFLogger</tagclass>
+    <bodycontent>NONE</bodycontent>
+    <info>Logs a message to the WebFacing runtime log if tracing is enabled and the severity level is being logged</info>
+    <attribute> 
+      <name>type</name>
+      <required>true</required>
+    </attribute> 
+    <attribute> 
+      <name>sev</name>
+      <required>true</required>
+    </attribute> 
+    <attribute> 
+      <name>msg</name>
+      <required>true</required>
+    </attribute> 
+  </tag>
+  <tag>  
+    <name>usrdef</name>
+    <tagclass>com.ibm.etools.iseries.webfacing.tags.impl.WFUserDef</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Container for user defined field html</info>
+    <attribute> 
+      <name>field</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute> 
+      <name>record</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute> 
+      <name>sflrow</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+  </tag>
+  <tag>  
+    <name>pgmdef</name>
+    <tagclass>com.ibm.etools.iseries.webfacing.tags.impl.WFProgDef</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Container for program defined field html</info>
+    <attribute> 
+      <name>field</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute> 
+      <name>record</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute> 
+      <name>sflrow</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+  </tag>
+  <tag>  
+    <name>mtfld</name>
+    <tagclass>com.ibm.etools.iseries.webfacing.tags.impl.WFMTFld</tagclass>
+    <bodycontent>JSP</bodycontent>
+    <info>Transparent container for the default field html</info>
+    <attribute> 
+      <name>field</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute> 
+      <name>record</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+    <attribute> 
+      <name>sflrow</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute> 
+  </tag>
+</taglib>

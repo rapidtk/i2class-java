@@ -1,8 +1,6 @@
 
 package com.i2class;
 
-import javax.servlet.http.*;
-
 /**
  * An interface to a SFLCTL format.
  * 

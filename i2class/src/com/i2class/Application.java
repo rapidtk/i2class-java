@@ -15,8 +15,6 @@ import java.util.Hashtable;
 import java.util.ResourceBundle;
 import java.util.Vector;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.ibm.as400.access.AS400;
 import com.ibm.as400.access.QSYSObjectPathName;
 /**
@@ -4037,15 +4035,6 @@ public class Application implements Runnable, Serializable
 		if (prvAppRef!=null)
 			p = (Application)prvAppRef.get();
 		return p;
-	}
-	
-	/** Return the request object (HttpServletRequest, if any) associated with this application. */
-	public Object getRequest()
-	{
-		HttpServletRequest request = null;
-		if (threadLock instanceof ThreadLockServlet)
-			request = ((ThreadLockServlet)threadLock).getRequest();
-		return request;
 	}
 	
 	public FixedPointer overlay(FixedData overlaidField, int offset)

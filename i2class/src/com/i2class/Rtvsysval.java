@@ -5,8 +5,6 @@ package com.i2class;
 import java.text.*;
 import java.util.Date;
 
-import javax.servlet.http.*;
-
 /**
  * RTVSYSVAL (Retrieve system value) processing.
  * 

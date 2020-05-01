@@ -2,8 +2,6 @@ package com.i2class;
 
 import java.util.Vector;
 
-import javax.servlet.http.HttpServletRequest;
-
 import com.i2class.*;
 
 /**

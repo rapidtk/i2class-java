@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="SCRN2CTL"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qddspext" type="SFLCTL">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <fields>
+            <field length="4" name="MSGNUM" shift="S" type="FT_NUMERIC" usage="B">
+                <decimalprecision precision="0"/>
+            </field>
+        </fields>
+        <indicators>
+            <option indicator="50"/>
+            <response indicator="1" isaidkey="true"/>
+        </indicators>
+        <buffers inputlength="10" outputlength="10"/>
+        <subfile pagesize="15" subfilename="SCREEN2" subfilesize="62"/>
+    </data>
+    <view firstfieldline="3" lastfieldline="17" outputonly="true" primarysize="0">
+        <keywords>
+            <keyword id="KWD_OVERLAY"/>
+            <keyword id="KWD_KEEP">
+                <parameter string="YES"/>
+            </keyword>
+            <keyword id="KWD_SFLDSP"/>
+            <keyword id="KWD_SFLEND" indicator=" 50"/>
+            <keyword id="KWD_SFLCLR" indicator="N50"/>
+        </keywords>
+        <aidkeys>
+            <aidkey beanname="SCRN2CTL" key="CA03" label="Exit"
+                priority="-1" tran="true"/>
+            <aidkey beanname="SCRN2CTL" key="CA12" label="Cancel"
+                priority="-1" tran="true"/>
+            <aidkey beanname="SCRN2CTL" key="HELP" label="Help"
+                priority="-1" tran="true"/>
+        </aidkeys>
+        <subfile areafirstrow="3" areaheight="15" firstcolumn="2"
+            recordsperrow="1" recordwidth="76">
+            <fields>
+                <field column="2" name="MSGDATA" row="3" width="76"/>
+            </fields>
+        </subfile>
+    </view>
+    <feedback>
+        <indicators>
+            <aidkeyresponse indicator="1" name="CA03"/>
+            <aidkeyresponse indicator="1" name="CA12"/>
+        </indicators>
+        <subfile rowpersubfile="1">
+            <keywords>
+                <keyword id="KWD_SFLRCDNBR"/>
+            </keywords>
+            <subfilerecordnumber fieldname="MSGNUM"/>
+        </subfile>
+    </feedback>
+</record>

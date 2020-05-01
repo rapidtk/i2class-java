@@ -1,0 +1,134 @@
+package com.ibm.as400ad.webfacing.runtime.view.def;
+
+import com.ibm.as400ad.webfacing.convert.rules.Unit;
+import com.ibm.as400ad.webfacing.runtime.controller.WFSession;
+import com.ibm.as400ad.webfacing.runtime.host.HostJobInfo;
+import com.ibm.as400ad.webfacing.runtime.view.CommandKeyLabelList;
+import com.ibm.as400ad.webfacing.runtime.view.RecordViewBean;
+import java.util.ArrayList;
+import java.util.Iterator;
+
+/**
+ * This class contains a list of visibility conditioned
+ * labels sharing the same key code
+ */
+public class VisibilityConditionedCommandKeyLabel extends ConditionedCommandKeyLabel
+{
+	static final String copyRight = new String("(C) Copyright IBM Corporation 1999-2003, all rights reserved");
+
+	/**
+	 * constructor
+	 * @param name java.lang.String
+	 * @param label java.lang.String
+	 * @param beanName java.lang.String
+	 * @param priority int
+	 * @param indicatorStr java.lang.String
+	 */
+	public VisibilityConditionedCommandKeyLabel(String name, String label, String beanName, int priority)
+	{
+		super(name, label, beanName, priority);
+	}
+
+	/**
+	 *  resolve the visible conditioned-on label
+	 * and return a CommandKeyLabel object
+	 */
+	public Iterator getLabel(RecordViewBean rvb, boolean visibleLabelsOnly)
+	{
+		String label = getKeyLabel();
+		String name = getKeyName();
+		String fieldName = null;
+
+		//Resulting Visible command key label list
+		CommandKeyLabelList vccll = new CommandKeyLabelList();
+		//Resulting Invisible command key label list
+		//This list is returned if the visible list is empty (Defect: 48744)
+		CommandKeyLabelList ivccll = new CommandKeyLabelList();
+
+		boolean isLabelVisible = false;
+		boolean haveInvisibleLabel = false;
+
+		ArrayList labels = getConditionedLabels();
+		for (int i = 0; i < labels.size(); i++)
+		{
+			VisibilityConditionedLabel vcl = (VisibilityConditionedLabel) labels.get(i);
+			fieldName = vcl.getFieldID();
+			if ((null != fieldName && rvb.isFieldVisible(fieldName)) && vcl.getLabel() != null)
+			{
+				isLabelVisible = true;
+			}
+			else
+			{
+				isLabelVisible = false;
+			}
+
+			if (vcl.isDynamic()) // $DKL
+			{
+				//Submit MSGID requests in case a label is based on a MSGID
+				HostJobInfo hostJobInfo = WFSession.getJobInfoRequestor();
+				hostJobInfo.submitRequests();
+				label = rvb.getFeedbackBean().getFieldValue(fieldName);
+
+				if (null == name || name.equals("*AUTO"))
+				{
+					//Parse if necessary and auto adjust keyname and keylabel
+					ArrayList labelList = new ArrayList();
+					label = CommandKeyLabel.parseDynamicKeyLabel(label, labelList);
+
+					Unit unit;
+					for (int j = 0; j < labelList.size(); j++)
+					{
+						unit = (Unit) labelList.get(j);
+						label = unit.text;
+
+						name = String.valueOf(unit.sequenceNumber);
+						if (name.length() == 1)
+						{
+							//add "0" at the beginning
+							name = "0" + name;
+						}
+						// Add multiple labels one at a time if found
+						if (null != label)
+						{
+							if (isLabelVisible)
+								vccll.add(new CommandKeyLabel(name, label, getRecordName(), getPriority(), fieldName));
+							else if (!haveInvisibleLabel && !visibleLabelsOnly)
+							{
+								ivccll.add(new CommandKeyLabel(name, label, getRecordName(),  getPriority(), fieldName));
+							}
+						}
+					}
+				}
+			}
+			//set the first conditioned-on label if not dynamic
+			else
+			{
+				label = vcl.getLabel();
+				if (null != label)
+				{
+					if (isLabelVisible)
+						vccll.add(new CommandKeyLabel(name, label, getRecordName(), getPriority(), fieldName));
+					else if (!haveInvisibleLabel && !visibleLabelsOnly)
+					{
+						ivccll.add(new CommandKeyLabel(name, label, getRecordName(),  getPriority(), fieldName));
+						haveInvisibleLabel = true;
+					}
+				}
+			}
+			//If we have a visible label we're done
+			if (vccll.getLabels().hasNext())
+			{
+				break;
+			}
+			else if (ivccll.getLabels().hasNext())
+			{
+				haveInvisibleLabel = true;
+			}
+		}
+		if (vccll.getLabels().hasNext() || visibleLabelsOnly)
+			return vccll.getLabels();
+		else
+			return ivccll.getLabels();
+	}
+
+}

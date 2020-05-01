@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="HEADER"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qddspext" type="REC">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <indicators>
+            <response indicator="1" isaidkey="true"/>
+        </indicators>
+        <buffers inputlength="2"/>
+    </data>
+    <view firstfieldline="1" lastfieldline="1" outputonly="true" primarysize="0">
+        <keywords>
+            <keyword id="KWD_KEEP"/>
+        </keywords>
+        <aidkeys>
+            <aidkey beanname="HEADER" key="CA03" label="Exit"
+                priority="-1" tran="true"/>
+            <aidkey beanname="HEADER" key="CA12" label="Cancel"
+                priority="-1" tran="true"/>
+            <aidkey beanname="HEADER" key="HELP" label="Help"
+                priority="-1" tran="true"/>
+        </aidkeys>
+    </view>
+    <feedback>
+        <indicators>
+            <aidkeyresponse indicator="1" name="CA03"/>
+            <aidkeyresponse indicator="1" name="CA12"/>
+        </indicators>
+    </feedback>
+</record>

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="INQFMT"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qddspext" type="REC">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <fields>
+            <field length="142" name="REPLYIN" shift="A" type="FT_ALPHA" usage="I">
+                <checkattributes attributes="LC;"/>
+            </field>
+        </fields>
+        <indicators>
+            <option indicator="30"/>
+            <response indicator="1" isaidkey="true"/>
+            <response indicator="2" isaidkey="true"/>
+        </indicators>
+        <buffers inputlength="288" outputlength="2"/>
+    </data>
+    <view firstfieldline="19" lastfieldline="23" outputonly="false" primarysize="0">
+        <keywords>
+            <keyword id="KWD_OVERLAY"/>
+            <keyword id="KWD_KEEP"/>
+            <keyword id="KWD_PAGEUP" indicator=" 30"/>
+            <keyword id="KWD_HLPCLR"/>
+            <keyword id="KWD_HLPTITLE">
+                <parameter string="Display Program Messages                              "/>
+            </keyword>
+        </keywords>
+        <fields>
+            <field column="18" name="REPLYIN" row="20" width="142"/>
+        </fields>
+        <aidkeys>
+            <aidkey beanname="INQFMT" key="CA03" label="Exit"
+                priority="2" tran="true"/>
+            <aidkey beanname="INQFMT" key="CA12" label="Cancel"
+                priority="2" tran="true"/>
+            <aidkey beanname="INQFMT" key="HELP" label="Help"
+                priority="-1" tran="true"/>
+            <aidkey beanname="INQFMT" indicator=" 30" key="PAGEUP"
+                label="PAGEUP" priority="-1" tran="true"/>
+        </aidkeys>
+        <onlinehelp>
+            <helparea bottom="0" left="0" right="0" top="0">
+                <definition helpspecname="PGMMSG/HELP" object="QHMH"
+                    recordname="INQFMT" type="HelpPanelGroup"/>
+            </helparea>
+            <helparea bottom="21" left="1" right="80" top="19">
+                <definition helpspecname="PGMMSG/REPLY" object="QHMH"
+                    recordname="INQFMT" type="HelpPanelGroup"/>
+            </helparea>
+            <helparea bottom="23" left="1" right="80" top="23">
+                <definition helpspecname="PGMMSG/FKEYS" object="QHMH"
+                    recordname="INQFMT" type="HelpPanelGroup"/>
+            </helparea>
+        </onlinehelp>
+    </view>
+    <feedback>
+        <indicators>
+            <aidkeyresponse indicator="1" name="CA03"/>
+            <aidkeyresponse indicator="1" name="CA12"/>
+            <aidkeyresponse indicator="2" name="PAGEUP"/>
+        </indicators>
+    </feedback>
+</record>

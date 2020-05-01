@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="MENUSY"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qdspmnu" type="REC">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <fields>
+            <field length="73" name="CMDLINE" shift="A" type="FT_ALPHA" usage="B">
+                <checkattributes attributes="LC;"/>
+            </field>
+            <field length="78" name="MSGLINE" shift="A" type="FT_ALPHA" usage="O"/>
+        </fields>
+        <indicators separateindicatorarea="true">
+            <option indicator="1"/>
+            <option indicator="3"/>
+        </indicators>
+        <buffers inputlength="146" outputlength="302"/>
+    </data>
+    <view firstcolumn="2" firstfieldline="21" lastcolumn="80"
+        lastfieldline="24" outputonly="false" primarysize="0" secondarysize="1">
+        <fieldvisdef>
+            <visdef string="Unnamed1:03"/>
+            <visdef string="Unnamed0:N03:0"/>
+        </fieldvisdef>
+        <keywords>
+            <keyword id="KWD_OVERLAY"/>
+            <keyword id="KWD_PROTECT"/>
+            <keyword id="KWD_CLRL">
+                <parameter string="*NO"/>
+            </keyword>
+            <keyword id="KWD_KEEP"/>
+            <keyword id="KWD_ASSUME"/>
+            <keyword id="KWD_PAGEDOWN"/>
+            <keyword id="KWD_PAGEUP"/>
+        </keywords>
+        <fields>
+            <field column="7" name="CMDLINE" row="21" width="73"/>
+            <field column="2" name="MSGLINE" row="24" width="78"/>
+        </fields>
+        <aidkeys>
+            <aidkey beanname="MENUSY" key="CF03" label="Exit"
+                priority="2" tran="true"/>
+            <aidkey beanname="MENUSY" key="CF12" label="Cancel"
+                priority="2" tran="true"/>
+            <aidkey beanname="MENUSY" key="HELP" label="Help"
+                priority="-1" tran="true"/>
+        </aidkeys>
+        <commandkeylabels>
+            <visibilityconditioned beanname="MENUSY" key="16" priority="2">
+                <conditionedlabel fieldid="Unnamed1" label="AS/400 main menu"/>
+            </visibilityconditioned>
+            <visibilityconditioned beanname="MENUSY" key="13" priority="2">
+                <conditionedlabel fieldid="Unnamed1" label="Information Assistant"/>
+            </visibilityconditioned>
+        </commandkeylabels>
+        <displayattributes>
+            <pcfieldinfo fieldname="CMDLINE" indicator=""/>
+        </displayattributes>
+    </view>
+    <feedback/>
+</record>

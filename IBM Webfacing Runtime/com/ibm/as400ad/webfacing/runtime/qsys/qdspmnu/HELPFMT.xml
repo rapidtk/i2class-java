@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="HELPFMT"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qdspmnu" type="REC">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <fields>
+            <field length="78" name="OVERLAY" shift="A" type="FT_ALPHA" usage="O"/>
+            <field length="78" name="MSGLINE" shift="A" type="FT_ALPHA" usage="O"/>
+        </fields>
+        <indicators separateindicatorarea="true">
+            <option indicator="1"/>
+            <option indicator="2"/>
+        </indicators>
+        <buffers outputlength="312"/>
+    </data>
+    <view firstcolumn="2" firstfieldline="22" lastcolumn="79"
+        lastfieldline="24" outputonly="true" primarysize="0" secondarysize="1">
+        <keywords>
+            <keyword id="KWD_OVERLAY"/>
+            <keyword id="KWD_PROTECT"/>
+            <keyword id="KWD_CLRL">
+                <parameter string="*NO"/>
+            </keyword>
+            <keyword id="KWD_KEEP"/>
+            <keyword id="KWD_ASSUME"/>
+            <keyword id="KWD_PAGEDOWN"/>
+            <keyword id="KWD_PAGEUP"/>
+        </keywords>
+        <fields>
+            <field column="2" name="OVERLAY" row="23" width="78"/>
+            <field column="2" name="MSGLINE" row="24" width="78">
+                <msgid indicator=" 01" msgfile="QCPFMSG" msgid="CPD6A66" prefix="ERR"/>
+                <msgid indicator=" 02" msgfile="QCPFMSG" msgid="CPD6A69" prefix="ERR"/>
+            </field>
+        </fields>
+        <aidkeys>
+            <aidkey beanname="HELPFMT" key="CF03" label="Exit"
+                priority="2" tran="true"/>
+            <aidkey beanname="HELPFMT" key="CF12" label="Cancel"
+                priority="2" tran="true"/>
+            <aidkey beanname="HELPFMT" key="HELP" label="Help"
+                priority="-1" tran="true"/>
+        </aidkeys>
+    </view>
+    <feedback/>
+</record>

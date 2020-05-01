@@ -5,9 +5,6 @@ import java.io.PrintWriter;
 import java.io.Serializable;
 import java.util.*;
 
-import javax.servlet.*;
-import javax.servlet.http.*;
-
 /**
  * Stalled thread class to implement READ/EXFMT functionallity.
  * 

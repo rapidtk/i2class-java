@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="SCREEN1"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qddspext" type="MSGRCD">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <fields>
+            <field length="4" name="MSGKEY" type="FT_ALPHA" usage="O"/>
+            <field length="10" name="MSGQ" type="FT_ALPHA" usage="O"/>
+            <field length="1" name="MSGATTR" type="FT_ALPHA" usage="O"/>
+            <field length="128" name="MSGDATA" type="FT_ALPHA" usage="O"/>
+        </fields>
+        <indicators>
+            <response indicator="1" isaidkey="true"/>
+        </indicators>
+        <buffers inputlength="2" outputlength="286"/>
+    </data>
+</record>

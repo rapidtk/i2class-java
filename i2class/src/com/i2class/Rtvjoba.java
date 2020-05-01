@@ -2,8 +2,6 @@ package com.i2class;
 
 import java.util.Vector;
 
-import javax.servlet.http.*;
-
 /**
  * A class to retrieve attributes from a OS/400-style job.
  * 
@@ -109,7 +107,7 @@ public class Rtvjoba extends AbstractCommand
 	public String curuser() throws Pgmmsg
 	{
 		String user=null;
-		// If this request is associated with a Http request, then use that user if available
+		/* If this request is associated with a Http request, then use that user if available
 		HttpServletRequest request = getRequest(getApp());
 		if (request != null)
 			user = request.getRemoteUser();
@@ -127,12 +125,12 @@ public class Rtvjoba extends AbstractCommand
 	
 	/*
 	 * @return the request associated with this thread.
-	 */
 	static private HttpServletRequest getRequest(Application app) {
 		if (app.threadLock instanceof ThreadLockServlet)
 			return ((ThreadLockServlet)app.threadLock).getRequest();
 		return null;
 	}
+	 */
 	
 	/** Return the subtype associated with this job (always '*') */
 	static public char subtype()

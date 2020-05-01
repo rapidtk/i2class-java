@@ -1,0 +1,128 @@
+package com.ibm.as400ad.webfacing.runtime.view.def;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+
+import com.ibm.as400ad.webfacing.convert.rules.Unit;
+import com.ibm.as400ad.webfacing.runtime.controller.WFSession;
+import com.ibm.as400ad.webfacing.runtime.host.HostJobInfo;
+import com.ibm.as400ad.webfacing.runtime.view.CommandKeyLabelList;
+import com.ibm.as400ad.webfacing.runtime.view.RecordViewBean; // only needed to evaluate Indicators, better to have RVB implement IEvaluateIndicators
+
+/**
+ * This class contains a list of indicator conditioned
+ * labels sharing the same key code
+ */
+public class IndicatorConditionedCommandKeyLabel extends ConditionedCommandKeyLabel
+{
+	static final String copyRight = new String(" (C) Copyright IBM Corporation 2003");
+
+	/**
+	 * constructor
+	 * @param name java.lang.String
+	 * @param label java.lang.String
+	 * @param beanName java.lang.String
+	 * @param priority int
+	 * @param indicatorStr java.lang.String
+	 */
+	public IndicatorConditionedCommandKeyLabel(String name, String label, String beanName, int priority)
+	{
+		super(name, label, beanName, priority);
+	}
+
+	/**
+	 *  Resolve the visible conditioned-on label
+	 * and return a CommandKeyLabel object.
+	 * Return null if the label text is null.
+	 */
+	public Iterator getLabel(RecordViewBean rvb, boolean visibleLabelsOnly)
+	{
+		String label = getKeyLabel();
+		String iLabel = null;
+		String name = getKeyName();
+		String fieldName = null;
+
+		//Resulting Visible command key label list
+		CommandKeyLabelList iccll = new CommandKeyLabelList();
+		//Resulting Invisible command key label list
+		//This list is returned if the visible list is empty (Defect: 48744)
+		CommandKeyLabelList iiccll = new CommandKeyLabelList();
+
+		boolean isLabelVisible = false;
+
+		ArrayList labels = getConditionedLabels();
+		for (int i = 0; i < labels.size(); i++)
+		{
+			IndicatorConditionedLabel icl = (IndicatorConditionedLabel) labels.get(i);
+			if (rvb.evaluateIndicatorExpression(icl.getIndicatorExpression()) && icl.getLabel() != null)
+			{
+				isLabelVisible = true;
+			}
+			else
+			{
+				isLabelVisible = false;
+			}
+			if (icl.isDynamic() && null != fieldName) // $DKL
+			{
+				//Submit MSGID requests in case a label is based on a MSGID
+				HostJobInfo hostJobInfo = WFSession.getJobInfoRequestor();
+				hostJobInfo.submitRequests();
+				label = rvb.getFeedbackBean().getFieldValue(fieldName);
+
+				if (null == name || name.equals("*AUTO"))
+				{
+					//Parse if necessary and auto adjust keyname and keylabel
+					ArrayList labelList = new ArrayList();
+					label = CommandKeyLabel.parseDynamicKeyLabel(label, labelList);
+
+					Unit unit;
+					for (int j = 0; j < labelList.size(); j++)
+					{
+						unit = (Unit) labelList.get(j);
+						label = unit.text;
+
+						name = String.valueOf(unit.sequenceNumber);
+						if (name.length() == 1)
+						{
+							//add "0" at the beginning
+							name = "0" + name;
+						}
+						if (null != label)
+						{
+							if (isLabelVisible)
+								iccll.add(new CommandKeyLabel(name, label, getRecordName(), getPriority(), fieldName));
+							else if (!visibleLabelsOnly)
+							{
+								iiccll.add(new CommandKeyLabel(name, label, getRecordName(), CommandKeyLabel.DDS_DEFINITION, fieldName));
+							}
+						}
+					}
+					//Avoid adding the label twice
+					label = null;
+				}
+			}
+			else
+			{
+				if (isLabelVisible)
+					label = icl.getLabel();
+				else if (!visibleLabelsOnly)
+					iLabel = icl.getLabel();
+			}
+		}
+	
+		if (null != label)
+		{
+			iccll.add(new CommandKeyLabel(name, label, getRecordName(), getPriority(), fieldName));
+		}
+		if (null != iLabel && !visibleLabelsOnly)
+		{
+			iccll.add(new CommandKeyLabel(name, iLabel, getRecordName(), CommandKeyLabel.DDS_DEFINITION, fieldName));
+		}
+		
+		//If a visible label doesn't exist provide the invisible
+		if (iccll.getLabels().hasNext() || visibleLabelsOnly)
+			return iccll.getLabels();
+		else
+			return iiccll.getLabels();
+	}
+}

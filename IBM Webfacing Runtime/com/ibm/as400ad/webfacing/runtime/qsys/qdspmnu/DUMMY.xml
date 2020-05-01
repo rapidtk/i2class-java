@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="DUMMY"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qdspmnu" type="REC">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <fields>
+            <field length="1" name="DUMMY1" shift="A" type="FT_ALPHA" usage="O"/>
+        </fields>
+        <indicators separateindicatorarea="true"/>
+        <buffers outputlength="2"/>
+    </data>
+    <view firstfieldline="1" lastfieldline="1" outputonly="true"
+        primarysize="0" secondarysize="1">
+        <keywords>
+            <keyword id="KWD_KEEP">
+                <parameter string="YES"/>
+            </keyword>
+            <keyword id="KWD_ASSUME">
+                <parameter string="YES"/>
+            </keyword>
+            <keyword id="KWD_PAGEDOWN"/>
+            <keyword id="KWD_PAGEUP"/>
+        </keywords>
+        <fields>
+            <field column="2" name="DUMMY1" row="1" width="1"/>
+        </fields>
+        <aidkeys>
+            <aidkey beanname="DUMMY" key="CF03" label="Exit"
+                priority="-1" tran="true"/>
+            <aidkey beanname="DUMMY" key="CF12" label="Cancel"
+                priority="-1" tran="true"/>
+            <aidkey beanname="DUMMY" key="HELP" label="Help"
+                priority="-1" tran="true"/>
+        </aidkeys>
+    </view>
+    <feedback/>
+</record>

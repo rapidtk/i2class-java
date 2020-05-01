@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<LookandFeel name="">
+<CommandKey>
+<Pattern prefix="PF" separator="=">
+</Pattern>
+<Pattern prefix="FP" separator="=">
+</Pattern>
+<Pattern prefix="CF" separator="=">
+</Pattern>
+<Pattern prefix="CA" separator="=">
+</Pattern>
+<Pattern prefix="F" separator="=">
+</Pattern>
+<TextConstant option="blanks"></TextConstant>
+</CommandKey>
+<Menu>
+<Pattern separator="="></Pattern>
+<Pattern separator="."></Pattern>
+</Menu>
+<MNUDDS>
+<Option format="hypertextlink"></Option> 
+<Pattern separator="."></Pattern>
+</MNUDDS>
+<XMLJar state="TRUE">
+</XMLJar>
+<EDTCDE>
+<Mapping userDefined="5" systemCode="5"></Mapping>
+</EDTCDE> 
+</LookandFeel>

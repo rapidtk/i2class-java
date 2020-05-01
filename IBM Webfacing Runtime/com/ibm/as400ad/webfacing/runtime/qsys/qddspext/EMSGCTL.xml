@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<record name="EMSGCTL"
+    package="package com.ibm.as400ad.webfacing.runtime.qsys.qddspext" type="SFLCTL">
+    <data filemembertype="MNUDDS" versiondigits="501020000">
+        <indicators>
+            <option indicator="40"/>
+            <response indicator="1" isaidkey="true"/>
+        </indicators>
+        <buffers inputlength="2" outputlength="2"/>
+        <subfile pagesize="1" subfilename="EMSGSFL" subfilesize="10"/>
+    </data>
+    <view firstfieldline="24" lastfieldline="24" outputonly="true" primarysize="0">
+        <keywords>
+            <keyword id="KWD_OVERLAY"/>
+            <keyword id="KWD_ERASE" indicator="N40">
+                <parameter string="EMSGSFL"/>
+            </keyword>
+            <keyword id="KWD_KEEP"/>
+            <keyword id="KWD_SFLDSP" indicator=" 40"/>
+            <keyword id="KWD_SFLDSPCTL"/>
+            <keyword id="KWD_SFLEND" indicator=" 40"/>
+            <keyword id="KWD_SFLDLT" indicator="N40"/>
+        </keywords>
+        <aidkeys>
+            <aidkey beanname="EMSGCTL" key="CA03" label="Exit"
+                priority="-1" tran="true"/>
+            <aidkey beanname="EMSGCTL" key="CA12" label="Cancel"
+                priority="-1" tran="true"/>
+            <aidkey beanname="EMSGCTL" key="HELP" label="Help"
+                priority="-1" tran="true"/>
+        </aidkeys>
+        <subfile areafirstrow="24" areaheight="1" firstcolumn="2"
+            recordsperrow="1" recordwidth="76">
+            <fields>
+                <field column="2" name="MSGDATA" row="24" width="76"/>
+            </fields>
+        </subfile>
+    </view>
+    <feedback>
+        <indicators>
+            <aidkeyresponse indicator="1" name="CA03"/>
+            <aidkeyresponse indicator="1" name="CA12"/>
+        </indicators>
+        <subfile rowpersubfile="1"/>
+    </feedback>
+</record>
