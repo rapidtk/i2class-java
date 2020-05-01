@@ -36,7 +36,8 @@ public class Assert
 
     public static void assertTrue(boolean flag)
     {
-        assert true;
+        if(!flag)
+            fail();
     }
 
     public static void fail(String s)
