@@ -357,7 +357,7 @@ public class ZonedDecimal extends AbstractNumeric {
 		return tempDecimal_;
 	}
 
-	/** Return the numeric string representation of this value. */
+	/** Return the numeric string representation of this value i.e. with no editing - leading and trailing (decimal) 0's are not suppressed. */
 	public String toNumericString() {
 		rSubfields();
 		boolean negative = (signum() < 0);
@@ -428,16 +428,16 @@ public class ZonedDecimal extends AbstractNumeric {
 		return;
 	}
 	
+	/* For testing
 	public static void main(String[] args)
 	{
 		ZonedDecimal z5 = new ZonedDecimal(5,0);
 		z5.assign(-2);
-		/*
 		fixed f = new fixed(3, "345");
 		zoned z = new zoned(3,0, new pointer(f, 0));
 		byte[] bytes = {'0','1','2'};
 		z.assign(bytes, 0);
 		String s = z.toFixedString();
-	*/
 	}
+	*/
 }
