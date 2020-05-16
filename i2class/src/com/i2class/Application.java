@@ -1340,6 +1340,7 @@ public class Application implements Runnable, Serializable
 		return found;
 	}
 	
+	private IRHost rhost;
 	/**
 	 * Return a default AS400 object.
 	 */
@@ -1406,7 +1407,61 @@ public class Application implements Runnable, Serializable
 		{
 			I2Logger.logger.printStackTrace(e);
 		}
+		rhost = ras400;
 		return ras400;
+	}
+	
+	/**
+	 * Return a default connection object.
+	 */
+	public I2Connection getConnection()
+	{
+		return getConnection("*PROPERTY", "*PROPERTY", "*PROPERTY");
+	}
+	/**
+	 * Get a connection to the specified URL
+	 * Creation date: (3/13/2002 8:56:34 AM)
+	 */
+	public I2Connection getConnection(String URL)
+	{
+		return getConnection(URL, "*PROPERTY", "*PROPERTY");
+	}
+	/**
+	 * Get a connection object using the specified URL, user id, and password.
+	 */
+	public I2Connection getConnection(
+		String url,
+		String usrid,
+		String password)
+	{
+		if (I2Logger.logger.isTraceable())
+			I2Logger.logger.trace("Getting connection " + url);
+		I2Connection rconn=null;
+		try
+		{
+			// If no host/userid/password is specified, then try to load from properties file
+			if (url.equals("*PROPERTY")
+				|| usrid.equals("*PROPERTY")
+				|| password.equals("*PROPERTY"))
+			{
+				// First, try to load from I2.properties
+				ResourceBundle prop = getResourceBundle();
+				if (password.equals("*PROPERTY"))
+					password = prop.getString("HostPWD");
+				if (usrid.equals("*PROPERTY"))
+					usrid = prop.getString("HostUID");
+				if (url.equals("*PROPERTY"))
+					url = prop.getString("HostURL");
+			}
+			// Get the connection from the cache
+			rconn = (I2Connection)retrieveI2Host(url, usrid, password);
+		}
+		catch (Exception e)
+		{
+			I2Logger.logger.printStackTrace(e);
+		}
+		rhost = rconn;
+		return rconn;
 	}
 
 	/* 
@@ -3645,57 +3700,6 @@ public class Application implements Runnable, Serializable
 		IRecord cycleRecord = (IRecord)cycleFormats.elementAt(cycleFileIndex);
 		cycleFile.setFormat(cycleRecord);
 	}
-	/**
-	 * Return a default connection object.
-	 */
-	public I2Connection getConnection()
-	{
-		return getConnection("*PROPERTY", "*PROPERTY", "*PROPERTY");
-	}
-	/**
-	 * Get a connection to the specified URL
-	 * Creation date: (3/13/2002 8:56:34 AM)
-	 */
-	public I2Connection getConnection(String URL)
-	{
-		return getConnection(URL, "*PROPERTY", "*PROPERTY");
-	}
-	/**
-	 * Get a connection object using the specified URL, user id, and password.
-	 */
-	public I2Connection getConnection(
-		String url,
-		String usrid,
-		String password)
-	{
-		if (I2Logger.logger.isTraceable())
-			I2Logger.logger.trace("Getting connection " + url);
-		I2Connection rconn=null;
-		try
-		{
-			// If no host/userid/password is specified, then try to load from properties file
-			if (url.equals("*PROPERTY")
-				|| usrid.equals("*PROPERTY")
-				|| password.equals("*PROPERTY"))
-			{
-				// First, try to load from I2.properties
-				ResourceBundle prop = getResourceBundle();
-				if (password.equals("*PROPERTY"))
-					password = prop.getString("HostPWD");
-				if (usrid.equals("*PROPERTY"))
-					usrid = prop.getString("HostUID");
-				if (url.equals("*PROPERTY"))
-					url = prop.getString("HostURL");
-			}
-			// Get the connection from the cache
-			rconn = (I2Connection)retrieveI2Host(url, usrid, password);
-		}
-		catch (Exception e)
-		{
-			I2Logger.logger.printStackTrace(e);
-		}
-		return rconn;
-	}
 	
 	/**
 	 * Write out all cycle formats for the specified vector.
@@ -4135,9 +4139,56 @@ public class Application implements Runnable, Serializable
 	
 	protected void INZSR() throws Exception { }
 	
-	protected void runMain() throws Exception {
+	protected void PSSR() throws Exception { }
+	
+	protected void Main() throws Exception { }
+	
+	private void linearMain() throws Exception {
+		try {
+			Main();
+		} catch (ApplicationReturn e) {
+			throw e;
+		} catch (Exception e) {
+			PSSR();
+			throw e;
+		}
+	}
+	
+	// Run linear Main executable (no implicit close of files)
+	protected void runLinearMain() throws Exception {
 		if (isInitialCall())
 			INZSR();
+		linearMain();
+	}
+	
+	// Run "normal" Main executable (no cycle files) with implicit close of files
+	protected void runMain() throws Exception {
+		try {
+			runLinearMain();
+		} catch (ApplicationReturn e) {
+			; // Do nothing, this is normal
+		}
+		RETURN(rhost);
+	}
+	
+	protected void resetRecordIndicators() throws Exception { }
+	// Perform cycle processing
+	protected void runCycle() throws Exception {
+		try {
+			if (isInitialCall())
+				INZSR();
+			
+			totalCycle();
+			while (!INLR && !INRT) {
+				detailCycle();
+				linearMain(); // This can throw ApplicationReturn
+				totalCycle();
+				resetRecordIndicators();
+			}
+		} catch (ApplicationReturn e) {
+			; // Do nothing, this is normal
+		}
+		RETURN(rhost);
 	}
 	
 	// Return number of parameters passed to routine
