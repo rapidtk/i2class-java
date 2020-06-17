@@ -274,15 +274,15 @@ public class Application implements Runnable, Serializable
 
 
 	/** Indicates whether the last file record access resulted in an eof or bof condition. */
-	boolean eof; // changed from eof to EOF to avoid name conflict, %bif error() is used instead
+	boolean EOF; // changed from eof to EOF to avoid name conflict, %bif eof() is used instead
 	/** 
 	 * Indicates whether the last file record access, character scan or array lookup was successful.
 	 */
-	boolean found;
+	boolean FOUND;
 	/** 
 	 * Indicates whether the last file record access or array lookup found an exact match.
 	 */
-	boolean equal;
+	boolean EQUAL;
 	/** 
 	 * Indicates whether the last opcode caused an error (when a (E) opcode extender is specified).
 	 */
@@ -1285,7 +1285,7 @@ public class Application implements Runnable, Serializable
 	 */
 	public boolean eof()
 	{
-		return eof;
+		return EOF;
 	}
 
 	/**
@@ -1307,7 +1307,7 @@ public class Application implements Runnable, Serializable
 	 */
 	public boolean equal()
 	{
-		return equal;
+		return EQUAL;
 	}
 
 	/**
@@ -1337,7 +1337,7 @@ public class Application implements Runnable, Serializable
 	/** Return the last found condition */
 	public boolean found()
 	{
-		return found;
+		return FOUND;
 	}
 	
 	private IRHost rhost;
@@ -3084,7 +3084,7 @@ public class Application implements Runnable, Serializable
 	 */
 	int scanEqual(int offset)
 	{
-		equal = (scanFound(offset)>0);
+		EQUAL = (scanFound(offset)>0);
 		return offset;
 	}
 
@@ -3095,7 +3095,7 @@ public class Application implements Runnable, Serializable
 	{
 		// Offset is 0-based instead of 1-based, so adjust here
 		// offset++;
-		found = (offset > 0);
+		FOUND = (offset > 0);
 		return offset;
 	}
 	

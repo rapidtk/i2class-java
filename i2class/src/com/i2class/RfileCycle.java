@@ -23,7 +23,7 @@ abstract class RfileCycle extends Rfile
 	{
 		this.found = found;
 		if (app != null)
-			app.found = found;
+			app.FOUND = found;
 	}
 	
 	// Set global equal indicator
@@ -31,6 +31,6 @@ abstract class RfileCycle extends Rfile
 	{
 		m_equal = equal;
 		if (app != null)
-			app.equal = equal;
+			app.EQUAL = equal;
 	}
 }

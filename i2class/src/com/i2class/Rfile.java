@@ -139,7 +139,7 @@ abstract class Rfile implements Serializable, IClosable
 	protected void setI2Eof(boolean eof)
 	{
 		if (app != null)
-			app.eof = eof;
+			app.EOF = eof;
 	}
 
 	/**
