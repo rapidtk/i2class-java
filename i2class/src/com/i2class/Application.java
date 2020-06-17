@@ -3615,6 +3615,16 @@ public class Application implements Runnable, Serializable
 		return years(years.intValue());
 	}
 	
+	/** Return packed(10,0) equivalent of int */
+	static public PackedDecimal packed(int i) {
+		return new PackedDecimal(10,0, i);
+	}
+	
+	/** Return zoned(10,0) equivalent of int */
+	static public ZonedDecimal zoned(int i) {
+		return new ZonedDecimal(10,0, i);
+	}
+	
 	/**
 	 * For RPG Cycle processing, add a detail file/format pair. 
 	 */
