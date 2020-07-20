@@ -80,6 +80,8 @@ public class Application implements Runnable, Serializable
 	* When applied to a numeric field, *ONES means 1.
 	*/
 	static final FigConst ONES = new FigConst('1');
+	
+	static final Object NULL = null;
 
 
 	// File constants
