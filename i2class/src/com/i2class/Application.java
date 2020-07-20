@@ -4209,6 +4209,7 @@ public class Application implements Runnable, Serializable
 		RETURN(rhost);
 	}
 	
+	/*TODO: Setting/reading number of parameters isn't really supported...
 	// Return number of parameters passed to routine
 	int parms;
 	public int setParms(int parms)
@@ -4220,6 +4221,7 @@ public class Application implements Runnable, Serializable
 	{
 		return parms;
 	}
+	*/
 	
 	/* This is an aborted attempt to make the file access generic so that JDBC vs 400 access could be 
 	 * decided at run-time, instead of at conversion time; class structure really doesn't support it...
