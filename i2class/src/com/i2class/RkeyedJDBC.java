@@ -152,14 +152,17 @@ public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 				// Try to get a rowid-like equivalent.  
 				//connMetaData = conn.getMetaData();
 				connMetaData = rconn.getConn(commit).getMetaData();
-				dbName = connMetaData.getDatabaseProductName();
+				dbName = connMetaData.getDatabaseProductName();		
+				//FIXME: This isn't actually rowid and could return an incorrect value...
 				// DB2/400 
 				if (dbName.indexOf("400") >= 0)
 				{
 					rowid = "rrn(xxx)";
 					correlation = " xxx";
 				}
-				else if (dbName.compareTo("PostgreSQL") == 0)
+				if (dbName.compareTo("PostgreSQL") == 0)		
+					//TODO: oid is not supported in V12+ and must be explicitly added...??
+					// https://www.postgresql.org/docs/12/release-12.html#id-1.11.6.5.4
 					rowid = "oid";
 				// Any other database has to implement rowid
 				else
