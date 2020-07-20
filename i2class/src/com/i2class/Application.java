@@ -3099,6 +3099,12 @@ public class Application implements Runnable, Serializable
 		return offset;
 	}
 	
+	public static String scanrpl(CharSequence string, CharSequence replacement, CharSequence source) {
+		String strSource = source.toString();
+		strSource.replace(string,  replacement);
+		return strSource;
+	}
+
 	/** Return a SECOND duration */
 	static public Duration seconds(int seconds)
 	{
