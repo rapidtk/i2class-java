@@ -40,7 +40,7 @@ package com.i2class;
  * </pre>  
  * 
  */
-public class FixedChar extends FixedData
+public class FixedChar extends FixedData implements CharSequence
 {
 
 	/** An fixed value with no allocated buffer. */
@@ -877,5 +877,15 @@ public class FixedChar extends FixedData
 	public void chgvar(long l)
 	{
 		assign(Long.toString(l));
+	}
+
+	//@Override
+	public int length() {
+		return len();
+	}
+
+	//@Override
+	public CharSequence subSequence(int start, int end) {
+		return subst(start-1, end-start);
 	}	
 }
