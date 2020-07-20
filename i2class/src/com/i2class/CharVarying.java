@@ -23,6 +23,11 @@ public class CharVarying extends FixedChar {
 	{
 		super(sz+2, array, index);
 	}
+	public CharVarying(int sz, FixedPointer overlay)
+	{
+		super(sz, overlay);
+	}
+
 	public CharVarying(int sz, char c)
 	{
 		super(sz+2, c);

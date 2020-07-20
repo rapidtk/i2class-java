@@ -24,5 +24,9 @@ public class varying extends CharVarying {
 	public varying(int sz, String str) {
 		super(sz, str);
 	}
+	public varying(int sz, FixedPointer overlay)
+	{
+		super(sz, overlay);
+	}
 
 }
