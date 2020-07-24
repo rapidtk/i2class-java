@@ -319,6 +319,10 @@ public class FixedChar extends FixedData implements CharSequence
 		String str1 = this.toString() + seq1.toString();
 		return new FixedChar(str1.length(), str1);
 	}
+	public FixedChar plus(char c1) {
+		String str1 = this.toString() + Character.valueOf(c1).toString();
+		return new FixedChar(str1.length(), str1);
+	}
 
 /** 
  * Return the left-most position of this fixed-length string that is not set to the 
