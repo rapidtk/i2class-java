@@ -35,4 +35,10 @@ public class QDCXLATE extends Application {
 	 	data.movel(s);
 	}
 
+	public static QDCXLATE activate(Application app, QDCXLATE instance) throws Exception {
+		if (instance == null)
+			instance = new QDCXLATE(app);
+		return instance;
+	}
+
 }

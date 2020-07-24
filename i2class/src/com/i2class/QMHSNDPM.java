@@ -42,6 +42,12 @@ public class QMHSNDPM extends Application {
 		sndpgmmsg.m_callStack=callStackCounter.intValue();
 		sndpgmmsg.exec();
 	 }
+
+	public static QMHSNDPM activate(Application app, QMHSNDPM instance) throws Exception {
+		if (instance == null)
+			instance = new QMHSNDPM(app);
+		return instance;
+	}
 	 
 	/*
 	 public static void main(String[] args)

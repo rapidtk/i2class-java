@@ -72,4 +72,11 @@ public class QRCVDTAQ extends Application {
 		}
 		rtnDtaLen.assign(receiveLength);
 	 }
+	
+	public static QRCVDTAQ activate(Application app, QRCVDTAQ instance) throws Exception {
+		if (instance == null)
+			instance = new QRCVDTAQ(app);
+		return instance;
+	}
+
 }

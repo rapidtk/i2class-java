@@ -65,5 +65,11 @@ public class QCLSCAN extends Application {
 		
 		result.assign(index);
 	}
+	
+	public static QCLSCAN activate(Application app, QCLSCAN instance) throws Exception {
+		if (instance == null)
+			instance = new QCLSCAN(app);
+		return instance;
+	}
 
 }

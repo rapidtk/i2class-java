@@ -158,4 +158,11 @@ public class QCMDEXC extends Application {
 			throw new Pgmmsg("CPF0006", "QCPFMSG");
 		}
 	}
+
+	public static QCMDEXC activate(Application app, QCMDEXC instance) throws Exception {
+		if (instance == null)
+			instance = new QCMDEXC(app);
+		return instance;
+	}
+	
 }

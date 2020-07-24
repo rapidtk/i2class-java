@@ -52,6 +52,12 @@ public class QSNDDTAQ extends Application {
 		Queue q = resolveDataQueue(this, dtaq);
 		q.sendData(dta, key);
 	 }
+	
+	public static QSNDDTAQ activate(Application app, QSNDDTAQ instance) throws Exception {
+		if (instance == null)
+			instance = new QSNDDTAQ(app);
+		return instance;
+	}
 	 
 	/*
 	 public static void main(String[] args) throws Exception

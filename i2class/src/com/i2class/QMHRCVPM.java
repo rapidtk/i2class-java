@@ -166,4 +166,11 @@ public class QMHRCVPM extends Application {
 			}
 		}
 	}
+
+	public static QMHRCVPM activate(Application app, QMHRCVPM instance) throws Exception {
+		if (instance == null)
+			instance = new QMHRCVPM(app);
+		return instance;
+	}
+
 }
