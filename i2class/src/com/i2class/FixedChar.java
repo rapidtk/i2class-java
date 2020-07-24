@@ -313,6 +313,12 @@ public class FixedChar extends FixedData implements CharSequence
 		if (offset < msize())
 			arrayCopy(offset, s2, s2Offset, s2Len);
 	}
+	
+	//TODO: maybe optimize this a little...
+	public FixedChar plus(CharSequence seq1) {
+		String str1 = this.toString() + seq1.toString();
+		return new FixedChar(str1.length(), str1);
+	}
 
 /** 
  * Return the left-most position of this fixed-length string that is not set to the 
@@ -826,7 +832,6 @@ public class FixedChar extends FixedData implements CharSequence
 	/** Return this string with all blanks trimmed from both sides. */
 	public String trim()
 	{
-		rSubfields();
 		return toString().trim();
 	}
 
