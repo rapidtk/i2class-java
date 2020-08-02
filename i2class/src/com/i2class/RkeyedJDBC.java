@@ -160,13 +160,12 @@ public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 					rowid = "rrn(xxx)";
 					correlation = " xxx";
 				}
-				else if (dbName.compareTo("PostgreSQL") == 0) {		
-					// oid is not supported in V12+, so replace with ctid (which "should" be functionally equivalent) instead
+				else if (dbName.compareTo("PostgreSQL") == 0)		
+					//TODO: oid is not supported in V12+ and must be explicitly added...??
 					// https://www.postgresql.org/docs/12/release-12.html#id-1.11.6.5.4
-					//rowid = "oid";
-					rowid = "ctid";
+					rowid = "oid";
 				// Any other database has to implement rowid
-				} else
+				else
 				{
 					rowid = "rowid";
 					rowidQuote = "'";
