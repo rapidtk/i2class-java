@@ -74,7 +74,7 @@ public class FixedTime extends FixedDate {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.date#newDate0(java.lang.String, com.asc.rio.date)
+	 * @see com.i2class.date#newDate0(java.lang.String, com.i2class.date)
 	 */
 	protected FixedDate newDate0(String datfmt400, FixedDate value)
 	{

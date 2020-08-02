@@ -48,7 +48,7 @@ public class QCMDEXC extends Application {
 			// The first token is the command name
 			String cmdName = s.substring(0, i);
 			// Convert command name to first letter uppercase, everything else lowercase
-			String className = "com.asc.rio.cmd." + cmdName.substring(0, 1).toUpperCase() + cmdName.substring(1).toLowerCase();
+			String className = "com.i2class.cmd." + cmdName.substring(0, 1).toUpperCase() + cmdName.substring(1).toLowerCase();
 			Class cmdClass = Class.forName(className);
 			AbstractCommand cmd = (AbstractCommand)cmdClass.newInstance();
 			// Pull off parameter names

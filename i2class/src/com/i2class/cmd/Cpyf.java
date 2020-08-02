@@ -29,7 +29,7 @@ public class Cpyf extends AbstractCommand {
 
 	static final String[] PARM_NAMES={"FROMFILE", "TOFILE", "FROMMBR", "TOMBR", "CRTFILE"};
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#getParmNames()
+	 * @see com.i2class.AbstractCommand#getParmNames()
 	 */
 	protected String[] getParmNames() {
 		return PARM_NAMES;
@@ -82,7 +82,7 @@ public class Cpyf extends AbstractCommand {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICommand#exec()
+	 * @see com.i2class.ICommand#exec()
 	 */
 	public void exec() throws Exception {
 		// Extract schema, file name

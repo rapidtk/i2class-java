@@ -18,14 +18,14 @@ class CharacterDataAreaJDBC extends DataAreaJDBC implements ICharacterDtaara
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICharacterDtaara#read()
+	 * @see com.i2class.ICharacterDtaara#read()
 	 */
 	public String read() throws Exception
 	{
 		return (String)getObject();
 	}
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICharacterDtaara#read(int, int)
+	 * @see com.i2class.ICharacterDtaara#read(int, int)
 	 */
 	public String read(int offset, int length) throws Exception
 	{
@@ -35,7 +35,7 @@ class CharacterDataAreaJDBC extends DataAreaJDBC implements ICharacterDtaara
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICharacterDtaara#write(java.lang.String)
+	 * @see com.i2class.ICharacterDtaara#write(java.lang.String)
 	 */
 	public void write(String value) throws Exception
 	{
@@ -44,7 +44,7 @@ class CharacterDataAreaJDBC extends DataAreaJDBC implements ICharacterDtaara
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICharacterDtaara#write(java.lang.String, int)
+	 * @see com.i2class.ICharacterDtaara#write(java.lang.String, int)
 	 */
 	public void write(String value, int offset) throws Exception
 	{

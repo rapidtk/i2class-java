@@ -13,7 +13,7 @@ public class ThreadApplication extends Application
 	/**
 	 * Insert the method's description here.
 	 * Creation date: (6/5/2002 1:58:20 PM)
-	 * @param app com.asc.rio.RPGapp
+	 * @param app com.i2class.RPGapp
 	 */
 	public ThreadApplication(Application app)
 	{

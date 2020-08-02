@@ -23,7 +23,7 @@ public class PackedDecimal extends AbstractNumericCoded
 	/**
 	 * Insert the method's description here.
 	 * Creation date: (11/20/2001 10:21:26 AM)
-	 * @return com.asc.rio.zoned
+	 * @return com.i2class.zoned
 	 */
 	/*
 		public zoned(double val) {
@@ -315,7 +315,7 @@ public class PackedDecimal extends AbstractNumericCoded
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractNumeric#toNumericString()
+	 * @see com.i2class.AbstractNumeric#toNumericString()
 	 */
 	public String toNumericString() {
 		return toZoned().toNumericString();

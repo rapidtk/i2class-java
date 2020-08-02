@@ -2,6 +2,7 @@ package com.i2class;
 
 import java.io.Serializable;
 import java.util.Arrays;
+import java.util.Vector;
 
 /**
  * The base class for all fixed-length, mutable I2 data.
@@ -16,6 +17,9 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	int m_size;
 	
 	/*private*/protected boolean updating = false;
+	private Vector overlayFields;
+	
+	
 	/* *
 	 * Create a fixed-length string whose buffer is based upon another fixed.
 	 * @version 11/4/2002 10:05:10 AM
@@ -125,7 +129,22 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	}
 
 	/** Clear this data (0 for numeric, blanks for character, etc.) to it's default value. */
-	public abstract void clear();
+	public void clear() {
+		// Loop through and clear any overlay fields
+		if (overlayFields!= null) {
+			for (int i=0; i<overlayFields.size(); i++) {
+				FixedData overlayField = (FixedData)overlayFields.get(i);
+				overlayField.clear();
+			}
+				
+		}
+	}
+	
+	void addOverlayField(FixedData overlayField) {
+		if (overlayFields==null)
+			overlayFields = new Vector();
+		overlayFields.add(overlayField);
+	}
 	
 	public Object clone()
 	{
@@ -738,7 +757,7 @@ public abstract class FixedData implements Comparable, Cloneable, IFixed, Serial
 	 * Sets the overlay of this object to another fixed string.
 	 * This is necessary since a <code> fixed </code> is a mutable type. 
 	 * This is equivalent to setting the reference (e.g. String x=y) of an 'unmutable' type.
-	 * @param fStr com.asc.rio.fixed the <code> fixed </code> object to set a reference to
+	 * @param fStr com.i2class.fixed the <code> fixed </code> object to set a reference to
 	 */
 	public void setOverlay(FixedData fStr)
 	{

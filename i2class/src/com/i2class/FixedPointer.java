@@ -4,6 +4,7 @@
 package com.i2class;
 
 import java.io.Serializable;
+import java.util.Vector;
 
 /**
  * A pointer to fixed-length data.
@@ -12,8 +13,10 @@ import java.io.Serializable;
  */
 public class FixedPointer implements Serializable
 {
+	//TODO: do we really need m_overlay anymore since we have overlaidField now??
 	byte[] 	m_overlay;
 	int		m_offset;
+	FixedData overlaidField;
 
 	FixedPointer()
 	{
@@ -25,6 +28,7 @@ public class FixedPointer implements Serializable
 	FixedPointer(FixedData overlaidField, int offset)
 	{
 		this(overlaidField.getOverlay(), overlaidField.getOffset()+offset);
+		this.overlaidField = overlaidField;
 	}
 	FixedPointer(byte[] array, int offset)
 	{
@@ -66,6 +70,11 @@ public class FixedPointer implements Serializable
 	public void sub(int offset)
 	{
 		add(-offset);
+	}
+	
+	void addOverlayField(FixedData overlayField) {
+		if (overlaidField!=null)
+			overlaidField.addOverlayField(overlayField);
 	}
 	
 }

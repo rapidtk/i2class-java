@@ -463,7 +463,7 @@ public class Record400
 	*/
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRecord#setFile(com.asc.rio.Rfile)
+	 * @see com.i2class.IRecord#setFile(com.i2class.Rfile)
 	 */
 	public void setFile(Rfile file)
 	{
@@ -471,7 +471,7 @@ public class Record400
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRecord#app()
+	 * @see com.i2class.IRecord#app()
 	 */
 	public Application app()
 	{

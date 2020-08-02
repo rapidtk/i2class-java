@@ -297,7 +297,7 @@ public class RindexJDBC extends RkeyedJDBC
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.RfileJDBC#close()
+	 * @see com.i2class.RfileJDBC#close()
 	 */
 	public void close() throws SQLException {
 		super.close();

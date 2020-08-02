@@ -209,7 +209,7 @@ public /*final*/ class LongDecimal extends DecimalData {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.DecimalData#negate()
+	 * @see com.i2class.DecimalData#negate()
 	public longDecimal negate() {
 		longDecimal dec = (longDecimal)super.clone();
 		dec.decimalValue = decimalValue.negate();
@@ -233,7 +233,7 @@ public /*final*/ class LongDecimal extends DecimalData {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.INumeric#toNumericString()
+	 * @see com.i2class.INumeric#toNumericString()
 	 */
 	public String toNumericString() {
 		return toZoned().toNumericString();

@@ -195,14 +195,14 @@ public class RecordWorkstnSFLCTL extends RecordWorkstn implements IRecordSFLCTL
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRecordSFLCTL#getPageSize()
+	 * @see com.i2class.IRecordSFLCTL#getPageSize()
 	 */
 	public int getPageSize() {
 		return pageSize;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRecordSFLCTL#getSflSize()
+	 * @see com.i2class.IRecordSFLCTL#getSflSize()
 	public int getSubfileSize() {
 		return subfileSize;
 		// TODO Auto-generated method stub

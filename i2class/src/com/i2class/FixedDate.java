@@ -603,7 +603,7 @@ public class FixedDate extends FixedChar
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#moveFixedData(com.asc.rio.FixedData)
+	 * @see com.i2class.FixedData#moveFixedData(com.i2class.FixedData)
 	 */
 	protected FixedData moveFixedData(FixedData fStr)
 	{
@@ -630,7 +630,7 @@ public class FixedDate extends FixedChar
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#movelFixedData(com.asc.rio.FixedData)
+	 * @see com.i2class.FixedData#movelFixedData(com.i2class.FixedData)
 	 */
 	protected FixedData movelFixedData(FixedData fStr)
 	{

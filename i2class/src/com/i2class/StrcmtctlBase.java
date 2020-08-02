@@ -27,7 +27,7 @@ public abstract class StrcmtctlBase extends AbstractCommand {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICommand#exec()
+	 * @see com.i2class.ICommand#exec()
 	 */
 	public void exec() throws Exception {
 		

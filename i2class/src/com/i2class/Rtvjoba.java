@@ -158,7 +158,7 @@ public class Rtvjoba extends AbstractCommand
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#exec()
+	 * @see com.i2class.AbstractCommand#exec()
 	 */
 	public void exec() throws Exception
 	{
@@ -167,7 +167,7 @@ public class Rtvjoba extends AbstractCommand
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#getParmNames()
+	 * @see com.i2class.AbstractCommand#getParmNames()
 	 */
 	protected String[] getParmNames()
 	{

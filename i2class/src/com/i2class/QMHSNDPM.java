@@ -54,7 +54,7 @@ public class QMHSNDPM extends Application {
 	 {
 	 	fixed msgid=new fixed(10,"CPF9810");
 	 	fixed msgf=new fixed(20, "QCPFMSG");
-	 	fixed msgdta=new fixed(10, "APLSAMPLE");
+	 	fixed msgdta=new fixed(10, "SCHEMA");
 	 	fixedBin msgLength = new fixedBin(4, 10);
 	 	fixed msgType = new fixed(10, "*ESCAPE");
 	 	fixed callStackEntry=new fixed(10, "*");

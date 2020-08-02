@@ -522,7 +522,7 @@ public class FixedChar extends FixedData implements CharSequence
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#clear()
+	 * @see com.i2class.FixedData#clear()
 	 */
 	public void clear() {
 		assign(" ");

@@ -48,7 +48,7 @@ public class Rcvmsg extends AbstractCommand {
 
 	static final String[] PARM_NAMES={"PGMQ", "MSGQ", "MSGTYPE"};
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#getParmNames()
+	 * @see com.i2class.AbstractCommand#getParmNames()
 	 */
 	protected String[] getParmNames() {
 		return PARM_NAMES;
@@ -110,7 +110,7 @@ public class Rcvmsg extends AbstractCommand {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICommand#exec()
+	 * @see com.i2class.ICommand#exec()
 	 */
 	public void exec() throws Exception {
 		// If no message queue is specified, then receive message off of program message queue

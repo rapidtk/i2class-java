@@ -29,7 +29,7 @@ public class CALL extends AbstractCommand {
 
 	static final String[] PARM_NAMES={"PGM", "PARM"};
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#getParmNames()
+	 * @see com.i2class.AbstractCommand#getParmNames()
 	 */
 	protected String[] getParmNames() {
 		return PARM_NAMES;
@@ -80,7 +80,7 @@ public class CALL extends AbstractCommand {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICommand#exec()
+	 * @see com.i2class.ICommand#exec()
 	 */
 	public void exec() throws Exception {
 		try

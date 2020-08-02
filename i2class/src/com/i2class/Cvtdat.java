@@ -53,7 +53,7 @@ public class Cvtdat extends AbstractCommand {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICommand#exec()
+	 * @see com.i2class.ICommand#exec()
 	 */
 	public void exec() throws Exception {
 		// From format
@@ -112,7 +112,7 @@ public class Cvtdat extends AbstractCommand {
 
 	static final String[] PARM_NAMES={"DATE", "TOVAR", "FROMFMT", "TOFMT", "TOSEP"};
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#getParmNames()
+	 * @see com.i2class.AbstractCommand#getParmNames()
 	 */
 	protected String[] getParmNames() {
 		return PARM_NAMES;

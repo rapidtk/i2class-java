@@ -62,7 +62,7 @@ class DataAreaJDBC implements IClosable
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IClosable#close()
+	 * @see com.i2class.IClosable#close()
 	 */
 	public void close() throws Exception
 	{

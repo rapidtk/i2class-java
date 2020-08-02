@@ -14,21 +14,21 @@ public class I2AS400 implements IRHost {
 		this.app=app;
 	}
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IHost#close()
+	 * @see com.i2class.IHost#close()
 	 */
 	public void close() throws SQLException {
 		as400.disconnectAllServices();
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IHost#getHost()
+	 * @see com.i2class.IHost#getHost()
 	 */
 	public Object getHost() 
 	{
 		return as400;
 	}
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IHost#setHost(java.lang.Object)
+	 * @see com.i2class.IHost#setHost(java.lang.Object)
 	public void setHost(Object o)
 	{
 		as400 = (AS400)o;
@@ -49,7 +49,7 @@ public class I2AS400 implements IRHost {
 		super.finalize();
 	}
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IHost#deactivate()
+	 * @see com.i2class.IHost#deactivate()
 	 */
 	public void invalidate() throws Throwable
 	{
@@ -57,7 +57,7 @@ public class I2AS400 implements IRHost {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRHost#getApp()
+	 * @see com.i2class.IRHost#getApp()
 	 */
 	public Application getApp()
 	{

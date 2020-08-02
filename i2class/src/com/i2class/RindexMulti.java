@@ -34,7 +34,7 @@ public class RindexMulti extends RindexJDBC
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.RindexJDBC#next()
+	 * @see com.i2class.RindexJDBC#next()
 	 */
 	protected boolean next() throws Exception
 	{
@@ -61,7 +61,7 @@ public class RindexMulti extends RindexJDBC
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.RfileJDBC#buildSelect()
+	 * @see com.i2class.RfileJDBC#buildSelect()
 	 */
 	protected StringBuffer buildSelect() throws Exception
 	{

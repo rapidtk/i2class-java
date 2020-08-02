@@ -194,14 +194,14 @@ public class I2ConnectionBase implements IRHost, Cloneable
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IHost#getHost()
+	 * @see com.i2class.IHost#getHost()
 	 */
 	public Object getHost() 
 	{
 		return conn;
 	}
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IHost#setHost(java.lang.Object)
+	 * @see com.i2class.IHost#setHost(java.lang.Object)
 	public void setHost(Object o)
 	{
 		conn = (Connection)o;
@@ -455,7 +455,7 @@ public class I2ConnectionBase implements IRHost, Cloneable
 		super.finalize();
 	}
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IHost#deactivate()
+	 * @see com.i2class.IHost#deactivate()
 	 */
 	public void invalidate() throws Throwable
 	{
@@ -463,7 +463,7 @@ public class I2ConnectionBase implements IRHost, Cloneable
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRHost#getApp()
+	 * @see com.i2class.IRHost#getApp()
 	 */
 	public Application getApp()
 	{

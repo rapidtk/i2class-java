@@ -98,7 +98,7 @@ public void out() throws Exception
  * Retrieve a packed decimal value from the specified data area.
  * @param host AS400 The OS/400 host that contains that specified data area.
  * @param dtaara java.lang.String The name of the data area to retrieve data from.
- * @return com.asc.rio.packed The returned data
+ * @return com.i2class.packed The returned data
  */
 public static BigDecimal rtvdtaara(AS400 host, String dtaara) throws Exception
 {

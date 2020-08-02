@@ -23,7 +23,7 @@ public class Chgdtaara extends com.i2class.ChgdtaaraBase {
 
 	static final String[] PARM_NAMES={"DTAARA", "VALUE"};
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#getParmNames()
+	 * @see com.i2class.AbstractCommand#getParmNames()
 	 */
 	protected String[] getParmNames() {
 		return PARM_NAMES;

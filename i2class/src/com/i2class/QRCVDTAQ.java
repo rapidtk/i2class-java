@@ -16,9 +16,6 @@ import com.i2class.cmd.*;
  */
 public class QRCVDTAQ extends Application {
 	
-	Driver driver = registerDriver("com.ibm.as400.access.AS400JDBCDriver");
-	I2Connection host = getConnection("jdbc:as400://ASC406", "ANDREWC", "SP8DS");
-	
 	public QRCVDTAQ(Application app) throws Exception {
 	   super(app);
 	}

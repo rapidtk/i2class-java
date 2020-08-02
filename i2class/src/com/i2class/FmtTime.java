@@ -22,11 +22,11 @@ public class FmtTime extends ZonedDecimal
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#toFixedChar()
+	 * @see com.i2class.FixedData#toFixedChar()
 	 */
 	//public FixedData toFixedChar() {
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#readSubfields()
+	 * @see com.i2class.FixedData#readSubfields()
 	 */
 	protected void readSubfields() {
 		movel(m_simpleDateFormat.format(new Date()));

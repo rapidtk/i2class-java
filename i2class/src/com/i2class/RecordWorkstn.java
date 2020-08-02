@@ -374,7 +374,7 @@ public class RecordWorkstn extends RrecordX2
 	/**
 	 * Set the file object for a specific record format.
 	 * @version 11/20/2002 8:52:31 AM
-	 * @param file com.asc.rio.RdspfThread
+	 * @param file com.i2class.RdspfThread
 	 */
 	void setFile(RfileWorkstn file) throws Exception
 	{

@@ -293,7 +293,7 @@ public class CharDtaara extends FixedChar
 	 * @param dtaara The lib/name of the data area to retrieve data from.
 	 * @param start The 1-based start position of the substring to return
 	 * @param length The length of the substring to return
-	 * @return com.asc.rio.fixed The returned data
+	 * @return com.i2class.fixed The returned data
 	 */
 	public static String rtvdtaara(
 		AS400 host,

@@ -241,7 +241,7 @@ public /*final*/ class ShortDecimal extends DecimalData implements IFixed {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.INumeric#negate()
+	 * @see com.i2class.INumeric#negate()
 	public decimal negate() {
 		decimalValue_.unscaledValue = -unscaledValue;
 		return decimalValue_;
@@ -288,7 +288,7 @@ public /*final*/ class ShortDecimal extends DecimalData implements IFixed {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.INumeric#toNumericString()
+	 * @see com.i2class.INumeric#toNumericString()
 	 */
 	public String toNumericString() {
 		String s = Long.toString(unscaledValue);

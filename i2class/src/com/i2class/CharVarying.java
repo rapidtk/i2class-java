@@ -42,7 +42,7 @@ public class CharVarying extends FixedChar {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#len()
+	 * @see com.i2class.FixedData#len()
 	 */
 	final public int len() {
 		return (int)getBinary(-2, 2);
@@ -55,7 +55,7 @@ public class CharVarying extends FixedChar {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#getBytes()
+	 * @see com.i2class.FixedData#getBytes()
 	public byte[] getBytes() {
 		if (voverlay==null)
 			voverlay = new fixed(m_size+2);
@@ -67,7 +67,7 @@ public class CharVarying extends FixedChar {
 
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#setVlength(int)
+	 * @see com.i2class.FixedData#setVlength(int)
 	 */
 	protected void setVlength(int vlength)
 	{
@@ -76,7 +76,7 @@ public class CharVarying extends FixedChar {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#msize()
+	 * @see com.i2class.FixedData#msize()
 	 */
 	final int msize()
 	{

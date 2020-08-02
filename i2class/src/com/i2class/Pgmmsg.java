@@ -70,7 +70,7 @@ public class Pgmmsg extends Exception {
 
 	public static ResourceBundle resolveResourceBundle(String msgf)
 	{
-		String bundleName = "com.asc.rio.msgf." + msgf;
+		String bundleName = "com.i2class.msgf." + msgf;
 		return ResourceBundle.getBundle(bundleName);
 	}
 	/** Build error message from specified message file, message id, and message data. */

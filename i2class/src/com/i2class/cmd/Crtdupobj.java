@@ -29,7 +29,7 @@ public class Crtdupobj extends AbstractCommand {
 
 	static final String[] PARM_NAMES={"OBJ", "FROMLIB", "OBJTYPE", "TOLIB", "NEWOBJ"};
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#getParmNames()
+	 * @see com.i2class.AbstractCommand#getParmNames()
 	 */
 	protected String[] getParmNames() {
 		return PARM_NAMES;
@@ -79,7 +79,7 @@ public class Crtdupobj extends AbstractCommand {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICommand#exec()
+	 * @see com.i2class.ICommand#exec()
 	 */
 	public void exec() throws Exception {
 		if (!m_objtype.equals("*FILE"))

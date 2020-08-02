@@ -421,7 +421,7 @@ public class ZonedDecimal extends AbstractNumeric {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractNumeric#assignZoned(com.asc.rio.zoned)
+	 * @see com.i2class.AbstractNumeric#assignZoned(com.i2class.zoned)
 	 */
 	protected void assignZoned(ZonedDecimal z) {
 		// Nothing gets done here because we are assigning a value to itself

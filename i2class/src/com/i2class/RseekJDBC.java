@@ -185,7 +185,7 @@ public class RseekJDBC extends RkeyedJDBC
 		eof=false;
 	}
 	/* (non-Javadoc)
-	 * @see com.asc.rio.RkeyedJDBC#set_checkKey(int, java.lang.Comparable)
+	 * @see com.i2class.RkeyedJDBC#set_checkKey(int, java.lang.Comparable)
 	 */
 	protected void set_checkKey(int i, Comparable checkKeyi) {
 		_checkKey[i]=checkKeyi;
@@ -403,7 +403,7 @@ public class RseekJDBC extends RkeyedJDBC
 	public static void main(String args[])
 	{
 		Driver driver = Application.registerDriver(com.ibm.as400.access.AS400JDBCDriver.class);
-		Connection host=Application.getI2Connection("jdbc:as400://ASC406","ANDREWC","SP8DS");
+		Connection host=Application.getI2Connection("jdbc:as400://IBMI_SERVER","USER_ID","XXXXX");
 		try
 		{
 			Statement stmt = host.createStatement();

@@ -16,7 +16,7 @@ public class FixedFloat extends FixedBinary {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.fixedBin#assign(double)
+	 * @see com.i2class.fixedBin#assign(double)
 	 */
 	public void assign(double value) {
 		if (size()==4)
@@ -44,14 +44,14 @@ public class FixedFloat extends FixedBinary {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractNumeric#intValue()
+	 * @see com.i2class.AbstractNumeric#intValue()
 	 */
 	public int intValue() {
 		return (int)doubleValue();
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.fixedBin#longValue()
+	 * @see com.i2class.fixedBin#longValue()
 	 */
 	public long longValue() {
 		return (long)doubleValue();
@@ -59,7 +59,7 @@ public class FixedFloat extends FixedBinary {
 
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.fixedBin#doubleValue()
+	 * @see com.i2class.fixedBin#doubleValue()
 	 */
 	public double doubleValue() {
 		if (size()<=4)

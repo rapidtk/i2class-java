@@ -18,7 +18,7 @@ abstract public class RfilePrint extends Rfile
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.Rfile#setRecord(com.asc.rio.IRecord)
+	 * @see com.i2class.Rfile#setRecord(com.i2class.IRecord)
 	 */
 	void setRecord(IRecord rcd)
 	{

@@ -107,7 +107,7 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	public abstract void assign(INumeric value);
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.FixedData#clear()
+	 * @see com.i2class.FixedData#clear()
 	 */
 	public void clear() {
 		assign(0);
@@ -367,7 +367,7 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.INumeric#negate()
+	 * @see com.i2class.INumeric#negate()
 	 */
 	public INumeric negate() {
 		toDecimal();
@@ -513,7 +513,7 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.INumeric#toNumericString()
+	 * @see com.i2class.INumeric#toNumericString()
 	 */
 	public String toNumericString() {
 		return toZoned().toNumericString();

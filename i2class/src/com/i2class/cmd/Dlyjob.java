@@ -25,7 +25,7 @@ public class Dlyjob extends AbstractCommand {
 
 	static final String[] PARM_NAMES={"DLY"};
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#getParmNames()
+	 * @see com.i2class.AbstractCommand#getParmNames()
 	 */
 	protected String[] getParmNames() {
 		return PARM_NAMES;

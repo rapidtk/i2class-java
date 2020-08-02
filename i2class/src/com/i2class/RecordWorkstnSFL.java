@@ -32,7 +32,7 @@ public class RecordWorkstnSFL extends RecordWorkstn implements IRecordSFL//, IRe
 	*/ 
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRecordSFL#addChangedValue(java.lang.Integer)
+	 * @see com.i2class.IRecordSFL#addChangedValue(java.lang.Integer)
 	 */
 	public void addChangedValue(Integer rrn) {
 		sfl_.addChangedRRN(rrn);
@@ -140,14 +140,14 @@ public class RecordWorkstnSFL extends RecordWorkstn implements IRecordSFL//, IRe
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRecordSFL#getSFLCTL()
+	 * @see com.i2class.IRecordSFL#getSFLCTL()
 	public IRecordSFLCTL getSFLCTL() {
 		return sflctl;
 	}
 	 */
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRecordSFL#checkSFLNXTCHG()
+	 * @see com.i2class.IRecordSFL#checkSFLNXTCHG()
 	 */
 	public void checkSFLNXTCHG() {
 		// TODO Auto-generated method stub
@@ -155,14 +155,14 @@ public class RecordWorkstnSFL extends RecordWorkstn implements IRecordSFL//, IRe
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRecordSFL#getSubfileSize()
+	 * @see com.i2class.IRecordSFL#getSubfileSize()
 	 */
 	public int getSubfileSize() {
 		return sfl_.subfileSize;
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.IRecordSFL#sflinz()
+	 * @see com.i2class.IRecordSFL#sflinz()
 	 */
 	public void sflinz() {
 		sfl_.sflinz();

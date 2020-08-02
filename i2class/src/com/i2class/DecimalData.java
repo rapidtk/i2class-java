@@ -309,7 +309,7 @@ abstract class DecimalData implements INumeric, IFixed, Cloneable, Serializable 
 	public abstract void mult(INumeric value);
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.INumeric#negate()
+	 * @see com.i2class.INumeric#negate()
 	 */
 	public INumeric negate() {
 		DecimalData dec = (DecimalData)clone();

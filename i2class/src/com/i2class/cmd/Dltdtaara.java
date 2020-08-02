@@ -25,7 +25,7 @@ public class Dltdtaara extends AbstractCommand {
 
 	static final String[] PARM_NAMES={"DTAARA"};
 	/* (non-Javadoc)
-	 * @see com.asc.rio.AbstractCommand#getParmNames()
+	 * @see com.i2class.AbstractCommand#getParmNames()
 	 */
 	protected String[] getParmNames() {
 		return PARM_NAMES;
@@ -45,7 +45,7 @@ public class Dltdtaara extends AbstractCommand {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.ICommand#exec()
+	 * @see com.i2class.ICommand#exec()
 	 */
 	public void exec() throws Exception {
 		I2Connection rconn = getRconn();

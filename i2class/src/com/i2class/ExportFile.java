@@ -66,9 +66,9 @@ public class ExportFile {
 	}
 	public ExportFile(String toUsrid, String toPassword, String toDriver, String toConnectionString, String toServerType) throws Exception
 	{
-		//String dconnectStr = "jdbc:as400://asc406";
+		//String dconnectStr = "jdbc:as400://IBMI_SERVER";
 		//String dconnectStr = "jdbc:as400://*LOCAL";
-		//String dconnectStr = "jdbc:as400://ASC404";
+		//String dconnectStr = "jdbc:as400://IBMI_SERVER";
 		String dconnectStr = "jdbc:db2:localhost";
 		
 		// Translate binary data so that CCSID 65535 comes across as character
@@ -899,100 +899,98 @@ public class ExportFile {
 		}
 	}
 	
+	/*
 	public static void main(String[] args)
 	{ 
 		try {
-			//ExportFile xf = new ExportFile("ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://asc404", "*ISERIES");
-			//ExportFile xf = new ExportFile("CDBELMS", "CDBELMS", "com.microsoft.jdbc.sqlserver.SQLServerDriver", "jdbc:microsoft:sqlserver://192.168.1.162:1433;DatabaseName=CDBELMS");
-			//ExportFile xf = new ExportFile("DBUSER", "dbuserpwd", "com.ibm.db2.jcc.DB2Driver", "jdbc:db2://ASCSERVER2:50000/SAMPLE", "*DB2");
-			//xf.exportFileData("APLSAMPLE","ORDLINE",null,"APLSAMPLE.");
+			//ExportFile xf = new ExportFile("USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://IBMI_SERVER", "*ISERIES");
+			//ExportFile xf = new ExportFile("DBUSER", "dbuserpwd", "com.ibm.db2.jcc.DB2Driver", "jdbc:db2://WINDOWS_SERVER:50000/SAMPLE", "*DB2");
+			//xf.exportFileData("SCHEMA","ORDLINE",null,"SCHEMA.");
 			
 			// iSeries->SQLserver
-			ExportFile xf = new ExportFile("ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", 
-			 "jdbc:as400://asc404", "*SQLSERVER", "ABLE", "ablepwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
-			 "jdbc:microsoft:sqlserver://ASCServer2:1433;SelectMethod=cursor" 
+			ExportFile xf = new ExportFile("USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", 
+			 "jdbc:as400://IBMI_SERVER", "*SQLSERVER", "ROLE", "ROLEpwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
+			 "jdbc:microsoft:sqlserver://WINDOWS_SERVER:1433;SelectMethod=cursor" 
 			 
 			);
-			/*
 			// iSeries->DB2
 			ExportFile xf = new ExportFile("DBUSER", "dbuserpwd", "com.ibm.db2.jcc.DB2Driver", 
-			 "jdbc:db2://ASCSERVER2:50000/APLSAMPL:retrieveMessagesFromServerOnGetMessage=true;", "*DB2",
-			 "ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://asc404"
+			 "jdbc:db2://WINDOWS_SERVER:50000/SCHEMA:retrieveMessagesFromServerOnGetMessage=true;", "*DB2",
+			 "USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://IBMI_SERVER"
 			// iSeries->Oracle
 			ExportFile xf = new ExportFile("DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver", 
-			 "jdbc:oracle:thin:@ASCSERVER2:1521:ORCL", "*ORACLE",
-			 "ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://asc404"
+			 "jdbc:oracle:thin:@WINDOWS_SERVER:1521:ORCL", "*ORACLE",
+			 "USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://IBMI_SERVER"
 			};
 			// iSeries->MySQL
-			ExportFile xf = new ExportFile("ascas400", "aJ7xtu92", "com.mysql.jdbc.Driver", 
-			 "jdbc:mysql://www.asc-iseries.com:3306/ascas400", "*MYSQL",
-			 "ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://asc404"
+			ExportFile xf = new ExportFile("IBMI_SERVER", "XXXXX", "com.mysql.jdbc.Driver", 
+			 "jdbc:mysql://WINDOWS_SERVER:3306/mysql_instance", "*MYSQL",
+			 "USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://IBMI_SERVER"
 			};
 
 			// Oracle->iSeries
-			ExportFile xf = new ExportFile("ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", 
-          	"jdbc:as400://asc404", "*ISERIES", 
+			ExportFile xf = new ExportFile("USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", 
+          	"jdbc:as400://IBMI_SERVER", "*ISERIES", 
 				"DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver", 
-			 	"jdbc:oracle:thin:@ASCSERVER2:1521:ORCL"
+			 	"jdbc:oracle:thin:@WINDOWS_SERVER:1521:ORCL"
 			// SQLserver->iSeries
-			ExportFile xf = new ExportFile("ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", 
-				"jdbc:as400://asc404", "*ISERIES", 
-				"APLSAMPLE", "aplsamplepwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
-				"jdbc:microsoft:sqlserver://ASCServer2:1433;SelectMethod=cursor"
+			ExportFile xf = new ExportFile("USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", 
+				"jdbc:as400://IBMI_SERVER", "*ISERIES", 
+				"SCHEMA", "SCHEMApwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
+				"jdbc:microsoft:sqlserver://WINDOWS_SERVER:1433;SelectMethod=cursor"
 			// DB2->iSeries 
-			ExportFile xf = new ExportFile("ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", 
-				"jdbc:as400://asc404", "*ISERIES", 
+			ExportFile xf = new ExportFile("USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", 
+				"jdbc:as400://IBMI_SERVER", "*ISERIES", 
 				"DBUSER", "dbuserpwd", "com.ibm.db2.jcc.DB2Driver", 
-			 	"jdbc:db2://ASCSERVER2:50000/APLSAMPL:retrieveMessagesFromServerOnGetMessage=true;" 
+			 	"jdbc:db2://WINDOWS_SERVER:50000/SCHEMA:retrieveMessagesFromServerOnGetMessage=true;" 
 			// MySQL->iSeries
-			ExportFile xf = new ExportFile("ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", 
-			   "jdbc:as400://asc404", "*ISERIES",
-			   "ascas400", "aJ7xtu92", "com.mysql.jdbc.Driver", "jdbc:mysql://www.asc-iseries.com:3306/ascas400"
+			ExportFile xf = new ExportFile("USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", 
+			   "jdbc:as400://IBMI_SERVER", "*ISERIES",
+			   "WINDOWS_SERVER", "XXXXX", "com.mysql.jdbc.Driver", "jdbc:mysql://WINDOWS_SERVER:3306/mysql_instance"
 
 			// Oracle->SQLServer
-			ExportFile xf = new ExportFile("APLSAMPLE", "aplsamplepwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
-			 "jdbc:microsoft:sqlserver://ASCServer2:1433;SelectMethod=cursor", "*SQLSERVER",
-			 "DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@ASCSERVER2:1521:ORCL"
+			ExportFile xf = new ExportFile("SCHEMA", "SCHEMApwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
+			 "jdbc:microsoft:sqlserver://WINDOWS_SERVER:1433;SelectMethod=cursor", "*SQLSERVER",
+			 "DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@WINDOWS_SERVER:1521:ORCL"
 			// Oracle->DB2
 			ExportFile xf = new ExportFile("DBUSER", "dbuserpwd", "com.ibm.db2.jcc.DB2Driver", 
-			 "jdbc:db2://ASCSERVER2:50000/APLSAMPL:retrieveMessagesFromServerOnGetMessage=true;", "*DB2",
-			 "DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@ASCSERVER2:1521:ORCL"
+			 "jdbc:db2://WINDOWS_SERVER:50000/SCHEMA:retrieveMessagesFromServerOnGetMessage=true;", "*DB2",
+			 "DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver", "jdbc:oracle:thin:@WINDOWS_SERVER:1521:ORCL"
 
 			// SQLserver->Oracle
 			ExportFile xf = new ExportFile("DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver", 
-			 "jdbc:oracle:thin:@ASCSERVER2:1521:ORCL", "*ORACLE", 
-				"APLSAMPLE", "aplsamplepwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
-				"jdbc:microsoft:sqlserver://ASCServer2:1433;SelectMethod=cursor"
+			 "jdbc:oracle:thin:@WINDOWS_SERVER:1521:ORCL", "*ORACLE", 
+				"SCHEMA", "SCHEMApwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
+				"jdbc:microsoft:sqlserver://WINDOWS_SERVER:1433;SelectMethod=cursor"
 			// SQLserver->DB2
 			ExportFile xf = new ExportFile("DBUSER", "dbuserpwd", "com.ibm.db2.jcc.DB2Driver", 
-			 "jdbc:db2://ASCSERVER2:50000/APLSAMPL:retrieveMessagesFromServerOnGetMessage=true;", "*DB2", 
-				"APLSAMPLE", "aplsamplepwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
-				"jdbc:microsoft:sqlserver://ASCServer2:1433;SelectMethod=cursor"
+			 "jdbc:db2://WINDOWS_SERVER:50000/SCHEMA:retrieveMessagesFromServerOnGetMessage=true;", "*DB2", 
+				"SCHEMA", "SCHEMApwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
+				"jdbc:microsoft:sqlserver://WINDOWS_SERVER:1433;SelectMethod=cursor"
 
 			// DB2->SQLserver
-			ExportFile xf = new ExportFile("APLSAMPLE", "aplsamplepwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
-			 "jdbc:microsoft:sqlserver://ASCServer2:1433;SelectMethod=cursor", "*SQLSERVER", 
+			ExportFile xf = new ExportFile("SCHEMA", "SCHEMApwd", "com.microsoft.jdbc.sqlserver.SQLServerDriver", 
+			 "jdbc:microsoft:sqlserver://WINDOWS_SERVER:1433;SelectMethod=cursor", "*SQLSERVER", 
 				"DBUSER", "dbuserpwd", "com.ibm.db2.jcc.DB2Driver", 
-				"jdbc:db2://ASCSERVER2:50000/APLSAMPL:retrieveMessagesFromServerOnGetMessage=true;" 
+				"jdbc:db2://WINDOWS_SERVER:50000/SCHEMA:retrieveMessagesFromServerOnGetMessage=true;" 
 			// DB2->Oracle
 			ExportFile xf = new ExportFile("DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver", 
-			 "jdbc:oracle:thin:@ASCSERVER2:1521:ORCL", "*ORACLE", 
+			 "jdbc:oracle:thin:@WINDOWS_SERVER:1521:ORCL", "*ORACLE", 
 				"DBUSER", "dbuserpwd", "com.ibm.db2.jcc.DB2Driver", 
-				"jdbc:db2://ASCSERVER2:50000/APLSAMPL:retrieveMessagesFromServerOnGetMessage=true;" 
+				"jdbc:db2://WINDOWS_SERVER:50000/SCHEMA:retrieveMessagesFromServerOnGetMessage=true;" 
 			*/
 
 	
 	// iSeries->Oracle
 	/*
-	//ExportFile xf = new ExportFile("ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://asc406",
-		"*ORACLE","DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver","jdbc:oracle:thin:@ASCSERVER2:1521:ORCL"
+	//ExportFile xf = new ExportFile("USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://IBMI_SERVER",
+		"*ORACLE","DBUSER", "dbuserpwd", "oracle.jdbc.OracleDriver","jdbc:oracle:thin:@WINDOWS_SERVER:1521:ORCL"
 	 
 	
 	// iSeries->iSeries
-	/*ExportFile xf = new ExportFile("ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://asc406",
+	/*ExportFile xf = new ExportFile("USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://IBMI_SERVER",
 		"*ISERIES",
-				                      "ANDREWC", "SP8DS", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://asc404;translate binary=true;"
-	*/			                       
+				                      "USER_ID", "XXXXX", "com.ibm.as400.access.AS400JDBCDriver", "jdbc:as400://IBMI_SERVER;translate binary=true;"
 	 
 			try
 			{
@@ -1017,13 +1015,14 @@ public class ExportFile {
 			*/
 			//xf.exportFile("TEST", "ONEFLD", "COLLSAVE.RCD132", xf.conn.getMetaData());
 			/*
-			xf.exportFileData("ANDREWC", "RCD132", "", "ANDREWC.");
+			xf.exportFileData("USER_ID", "RCD132", "", "USER_ID.");
 							 //"FROM LOCL_DTYPE", "LOCL_DTYPE");
-			*/
-			xf.exportSQL("SELECT * FROM rmt01.custmast01","ABLE.CUSTMAST");
+			xf.exportSQL("SELECT * FROM rmt01.custmast01","ROLE.CUSTMAST");
 		} catch (Exception e) {
 			//I2logger.logger.printStackTrace(e);
 			e.printStackTrace();
 		}
 	}
+	*/
+	
 }

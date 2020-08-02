@@ -64,7 +64,7 @@ public class FixedTimestamp extends FixedDate {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.date#newDate0(java.lang.String, com.asc.rio.date)
+	 * @see com.i2class.date#newDate0(java.lang.String, com.i2class.date)
 	 */
 	protected FixedDate newDate0(String datfmt400, FixedDate value)
 	{
@@ -104,13 +104,13 @@ public class FixedTimestamp extends FixedDate {
 	}
 
 	/* (non-Javadoc)
-	 * @see com.asc.rio.date#getMicroseconds()
+	 * @see com.i2class.date#getMicroseconds()
 	 */
 	protected int getMicrorem() {
 		return Integer.parseInt(toFixedString().substring(23));
 	}
 	/* (non-Javadoc)
-	 * @see com.asc.rio.date#setMicroseconds(int)
+	 * @see com.i2class.date#setMicroseconds(int)
 	 */
 	protected void setMicrorem(int microrem) {
 		String ms = "00" + Integer.toString(microrem);
@@ -119,7 +119,7 @@ public class FixedTimestamp extends FixedDate {
 
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.date#toDate()
+	 * @see com.i2class.date#toDate()
 	 */
 	public java.sql.Date toDate() throws ParseException {
 		// The java Date value is everything but the last 3 positions of the timestamp (strip off the microsecond part)
@@ -130,14 +130,14 @@ public class FixedTimestamp extends FixedDate {
 	}
 	
 	/* (non-Javadoc)
-	 * @see com.asc.rio.date#format(Date value)
+	 * @see com.i2class.date#format(Date value)
 	 */
 	protected String format(Date value)
 	{
 		return super.format(value) + "000";
 	}
 	/* (non-Javadoc)
-	 * @see com.asc.rio.date#formatMicro(java.util.Date)
+	 * @see com.i2class.date#formatMicro(java.util.Date)
 	 */
 	protected String formatMicro(Date value) {
 		return super.format(value) + toFixedString().substring(23);

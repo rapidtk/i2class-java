@@ -295,7 +295,7 @@ public class RfileJDBC
 			}
 		}
 
-		// Add this becuase Oracle (and others?) can't reflect changes from underlying database unless the
+		// Add this because Oracle (and others?) can't reflect changes from underlying database unless the
 		// fetch size is 1
 		/* Is this necessary !!!
 		if (openType != Application.READ_ONLY)
