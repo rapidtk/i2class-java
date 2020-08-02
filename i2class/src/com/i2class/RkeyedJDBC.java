@@ -1,10 +1,9 @@
 package com.i2class;
 
-import java.util.*;
-import java.math.BigDecimal;
-import java.sql.*;
-
-import com.ibm.as400.access.AS400JDBCDriver;
+import java.sql.DatabaseMetaData;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Vector;
 
 /**
  * A database file class for keyed JDBC access.
@@ -57,7 +56,9 @@ public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 	public boolean chainn()
 		throws Exception //ConnectionException, ConnectionSecurityException, ConnectionDroppedException, InterruptedException, IOException
 	{
-		return chain();
+		boolean noRecord = chain();
+		unlock();
+		return noRecord;
 	}
 	public boolean chainn(RecordJDBC r)
 		throws Exception //ConnectionException, ConnectionSecurityException, ConnectionDroppedException, InterruptedException, IOException
@@ -133,6 +134,7 @@ public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 			String comma="";
 			// Build list of all fields in SELECT clause.  Do this instead of SELECT * so that we can add the ROWID field to the end
 			// of the SELECT clause
+			// (also, some databases like Oracle and SQL Server seem to require it for updatable cursor support)
 			int fieldCount = dbRecord.fldNames.size();
 			for (int i=0; i<fieldCount; i++)
 			{
@@ -143,39 +145,35 @@ public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 			StringBuffer sqlBuf = buildSelect();
 			DatabaseMetaData connMetaData = null;
 			// If this is an updatable cursor, then we need to add ROWID to the list of selected fields
-			String dbName = null;
 			boolean nativeRowid = false;
 			String rowid = null;
-			String rowidQuote = "";
-			if (openType == com.ibm.as400.access.AS400File.READ_WRITE)
+			if ((openType & Application.READ_WRITE) == Application.READ_WRITE)
 			{
+				connMetaData = getMetaData(rconn.getConn(commit));
 				// Try to get a rowid-like equivalent.  
-				//connMetaData = conn.getMetaData();
-				connMetaData = rconn.getConn(commit).getMetaData();
-				dbName = connMetaData.getDatabaseProductName();		
-				//FIXME: This isn't actually rowid and could return an incorrect value...
-				// DB2/400 
-				if (dbName.indexOf("400") >= 0)
+				// DB2/i 
+				//if (dbName.indexOf("400") >= 0)
+				if (isDB2i())
 				{
 					rowid = "rrn(xxx)";
 					correlation = " xxx";
 				}
-				else if (dbName.compareTo("PostgreSQL") == 0)		
-					//TODO: oid is not supported in V12+ and must be explicitly added...??
+				else if (databaseName.compareTo("PostgreSQL") == 0)		
+					// oid is not supported in V12+ and must be explicitly added...
 					// https://www.postgresql.org/docs/12/release-12.html#id-1.11.6.5.4
 					rowid = "oid";
-				// Any other database has to implement rowid
+				// Any other database has to implement rowid (either natively or as an additional identity field named "rowid")
 				else
 				{
 					rowid = "rowid";
-					rowidQuote = "'";
+					//rowidQuote = "'";
 				}
 				// Oracle, Informix, and OS/390 support a rowid function, so add to select list.  
 				// Everything else has to have a row named "rowid"
 				nativeRowid =
-					(dbName.indexOf("Oracle") >= 0
-						|| dbName.indexOf("Informix") >= 0
-						|| dbName.indexOf("OS/390") >= 0);
+					(isOracle() 
+						|| databaseName.indexOf("Informix") >= 0
+						|| databaseName.indexOf("OS/390") >= 0);
 				// Always do this, since we are always building a list of fields to support SQL server
 				//if (rowid != "rowid" || nativeRowid)
 				sqlBuf.append(',').append(rowid);
@@ -198,7 +196,7 @@ public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 			connMetaData =
 				concurCommit(openType, blockFactor, commit, connMetaData);
 			// Create identity clause
-			if (openType == Application.READ_WRITE)
+			if ((openType & Application.READ_WRITE) == Application.READ_WRITE)
 			{
 				// If we are stuck with rowid, and the database does not natively support it, then build identity column list
 				identityFields = new Vector();
@@ -344,7 +342,9 @@ public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 	public boolean readen()
 		throws Exception //ConnectionException, ConnectionSecurityException, ConnectionDroppedException, InterruptedException, IOException
 	{
-		return reade();
+		boolean eof=reade();
+		unlock();
+		return eof;
 	}
 	public boolean readen(RecordJDBC r)
 		throws Exception //ConnectionException, ConnectionSecurityException, ConnectionDroppedException, InterruptedException, IOException, java.beans.PropertyVetoException
@@ -396,7 +396,9 @@ public abstract class RkeyedJDBC extends RfileJDBC implements IKeyedFile
 	public boolean readpen()
 		throws Exception //ConnectionException, ConnectionSecurityException, ConnectionDroppedException, InterruptedException, IOException
 	{
-		return readpe();
+		boolean bof = readpe();
+		unlock();
+		return bof;
 	}
 	public boolean readpen(RecordJDBC r)
 		throws Exception //ConnectionException, ConnectionSecurityException, ConnectionDroppedException, InterruptedException, IOException, java.beans.PropertyVetoException

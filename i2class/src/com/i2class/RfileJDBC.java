@@ -19,16 +19,20 @@ public class RfileJDBC
 	 *  'C'=Chain: read moves to next record, readp moves to previous record.
 	 */
 	protected char direction;
+	protected boolean movedToInsertRow;
 	protected Connection conn;
 	protected I2Connection rconn;
 	ResultSet rs;
 	protected int concur;
-	protected boolean _updatable;
+	protected String databaseName;
+	protected Boolean _updatable;
+	static Boolean FALSE=false;
 	protected boolean readOnlyWrite;
 	// Are changes made through an updatable cursor visible?
 	protected boolean deletesAreVisible;
 	protected boolean updatesAreVisible;
 	protected boolean insertsAreVisible;
+	protected boolean updatesAreDetected;
 	protected Statement stmt;
 	protected Statement stmtWork;
 	String sql;
@@ -104,7 +108,7 @@ public class RfileJDBC
 			// Make calls to input() and output() to build the field select list
 			dbRecord.input();
 			// Have to make sure that _updatable is true to ensure that field list is built correctly
-			boolean supdatable = _updatable;
+			Boolean supdatable = _updatable;
 			_updatable=true;
 			dbRecord.output();
 			_updatable = supdatable;
@@ -219,6 +223,20 @@ public class RfileJDBC
 		checkOverrides();
 	}
 	
+	protected DatabaseMetaData getMetaData(java.sql.Connection conn) throws SQLException {
+		DatabaseMetaData md = conn.getMetaData();
+		databaseName = md.getDatabaseProductName();
+		return md;
+	}
+	
+	protected boolean isDB2i() {
+		return databaseName.indexOf("400")>0;
+	}
+	
+	protected boolean isOracle() {
+		return databaseName.indexOf("Oracle")>0;
+	}
+	
 	/**
 	 * Use the open type, block factor, and commit level from an open() statement to create the JDBC statement 
 	 * with the correct concur level and commitment type.  
@@ -242,9 +260,9 @@ public class RfileJDBC
 					+ actualFileName
 					+ " can be opened");
 
-		// Set cursor stability
+		// Set cursor concurrency
 		this.openType = openType;
-		if (openType == Application.READ_ONLY)
+		if (openType == Application.READ_ONLY || openType == Application.READ_WRITE_DIRTY || openType==Application.READ_WRITE_OPTIMISTIC)
 			concur = ResultSet.CONCUR_READ_ONLY;
 		else
 			concur = ResultSet.CONCUR_UPDATABLE;
@@ -253,6 +271,14 @@ public class RfileJDBC
 		// If this is not a READ_ONLY open, then set appropriate INSERT/UPDATE/DELETE flags
 		if (openType != Application.READ_ONLY)
 		{
+			/* After much research, consternation and trial-and-error this appears to be the "definitive" answer:
+			 *  As of now (JDBC4.0 circa 2020) there is *no* way to definitively determine if a ResultSet is truly updatable
+			 *  {i.e. if updateRow() will succeed} using any of the JDBC metadata functions
+			 *   Oracle and DB2/i *do* seem to natively support updatable result sets
+			 *   DB2/z and DB2/luw do seem to support it if the correct driver (Data Server Driver for JDBC and SQLJ) and DatabaseMetaData settings are enabled:
+			 *    https://www.ibm.com/support/knowledgecenter/en/SSEPGG_10.5.0/com.ibm.db2.luw.apdv.java.doc/src/tpc/imjcc_r0052607.html
+			 *   Assume everything else does *not* support it (MySQL, Postgres and SQLServer *all* require that a PK be part of the SELECT statement for it to work)
+			 
 			// getConcurrency() doesn't seem to really return 'downgraded' value, use isDefinitelyWritable() instead
 			//_updatable = (rs.getConcurrency()==ResultSet.CONCUR_UPDATABLE);
 			//This doesn't work either!  Just assume: _updatable = !RindexJDBC
@@ -261,8 +287,17 @@ public class RfileJDBC
 			// For WRITE_ONLY opens, we want to always do external writes since there is no reason to actually
 			// open the result set.
 			_updatable = (connMetaData==null && openType!=Application.WRITE_ONLY);
+			 */
 			if (connMetaData == null)
-				connMetaData = conn.getMetaData();
+				connMetaData = getMetaData(conn);
+
+			// Only DB2/i and Oracle natively support updatable result sets...
+			if (openType == Application.READ_WRITE && (isDB2i() || isOracle()))
+				_updatable = true;
+			// TODO: allow null here to allow try/catch attempt to do updateRow()
+			else
+				_updatable = FALSE;
+			
 			// The type of result set actually returned.  This may be different than what was asked for because the
 			// driver may 'downgrade' it to deal with certain SQL statements (e.g. ORDER BY)
 			//int rsType = rs.getType();
@@ -270,11 +305,11 @@ public class RfileJDBC
 			// anyway, or nothing is going to work.
 			int rsType = ResultSet.TYPE_SCROLL_SENSITIVE;
 			// Set appropriate flags
-			if (_updatable)
+			if (_updatable != FALSE)
 			{
-				deletesAreVisible = connMetaData.ownDeletesAreVisible(rsType);
-				updatesAreVisible = connMetaData.ownUpdatesAreVisible(rsType);
-				insertsAreVisible = connMetaData.ownInsertsAreVisible(rsType);
+				deletesAreVisible = connMetaData.ownDeletesAreVisible(rsType) && connMetaData.othersDeletesAreVisible(rsType);
+				updatesAreVisible = connMetaData.ownUpdatesAreVisible(rsType) && connMetaData.othersUpdatesAreVisible(rsType);
+				insertsAreVisible = connMetaData.ownInsertsAreVisible(rsType) && connMetaData.othersInsertsAreVisible(rsType);
 				// If this is READ_WRITE updatable result set, set the block size to 1
 				// so that changes are always visible
 					
@@ -288,11 +323,13 @@ public class RfileJDBC
 				deletesAreVisible = connMetaData.othersDeletesAreVisible(rsType);
 				updatesAreVisible = connMetaData.othersUpdatesAreVisible(rsType);
 				insertsAreVisible = connMetaData.othersInsertsAreVisible(rsType);
-				// DB2/400 allows writes through result sets that are not updatable
-				readOnlyWrite = (connMetaData.getDatabaseProductName().indexOf("400")>=0);
+				// DB2/i allows writes through result sets that are not updatable
+				//readOnlyWrite = (connMetaData.getDatabaseProductName().indexOf("400")>=0);
+				readOnlyWrite = isDB2i();
 				// Create work statement for external updates/etc.
 				stmtWork = conn.createStatement();
 			}
+			updatesAreDetected = connMetaData.updatesAreDetected(ResultSet.TYPE_SCROLL_SENSITIVE);
 		}
 
 		// Add this because Oracle (and others?) can't reflect changes from underlying database unless the
@@ -313,7 +350,7 @@ public class RfileJDBC
 		
 		// If this is READ_WRITE updatable result set and (any kind of) changes are not visible, set the block size to 1
 		// so that changes are always visible
-		if (openType==Application.READ_WRITE && !(deletesAreVisible && updatesAreVisible && insertsAreVisible))
+		if ((openType & Application.READ_WRITE) == Application.READ_WRITE && !(deletesAreVisible && updatesAreVisible && insertsAreVisible))
 			blockFactor = 1;
 		if (blockFactor > 0)
 			stmt.setFetchSize(blockFactor);
@@ -391,6 +428,8 @@ public class RfileJDBC
 		
 		boolean firstOpen=(rs==null);
 		rs = rsNew;
+		movedToInsertRow = false;
+
 		// Only do the mapping the first time that the result set is opened
 		if (firstOpen)
 		{
@@ -414,7 +453,7 @@ public class RfileJDBC
 	
 	public boolean delete() throws Exception
 	{
-		if (_updatable)
+		if (_updatable != FALSE)
 			rs.deleteRow();
 		else
 		{
@@ -609,11 +648,20 @@ public class RfileJDBC
 		return false;
 	}
 	
+	void moveToCurrentRow() throws SQLException {
+		if (movedToInsertRow) {
+			rs.moveToCurrentRow();
+			movedToInsertRow = false;
+		}
+	}
+	
 	/** Read the next undeleted record.  In a TYPE_SCROLL_SENSITIVE result set, changes from other processes
 	 * might delete the record after it has already been read.
 	 */
 	protected boolean next() throws Exception
 	{
+		moveToCurrentRow();
+		
 		/*
 		boolean found;
 		do 
@@ -630,6 +678,8 @@ public class RfileJDBC
 	 */
 	protected boolean previous() throws Exception
 	{
+		moveToCurrentRow();
+		
 		return rs.previous();
 	}
 
@@ -793,42 +843,68 @@ public class RfileJDBC
 		int rowInt = row.intValue();
 		return setll(record, rowInt);
 	}
+	
 	public void setRecordFormat(RecordJDBC r)
 		throws Exception
 	{
 		setFormat(r);
 	}
+	
 	/** Remove the record lock from the current record. */
-	public void unlock() 
+	public void unlock() throws Exception
 	{
-		//TODO We can do this by just updating the record with current values???
-		/*
-		if (_updatable && !bof && !eof)
-		{
-			try
+		if (!bof && !eof) {
+			// For updatable result sets, just update with current values should unlock row...
+			if (_updatable != FALSE)
 			{
 				rs.cancelRowUpdates();
+				// Seems like Oracle (and maybe others?) require at least one field to be updated for an update to actually happen...
+				rs.updateObject(1, rs.getObject(1));
 				rs.updateRow();
 			}
-			catch (Exception e) {}
+			// ...for everything else, move to insertRow and pray that works...
+			else if (openType == Application.READ_WRITE) {
+				rs.moveToInsertRow();
+				movedToInsertRow = true;
+			}
+		}
+	}
+	
+	/**
+	 * See if the current record has been updated since it was last read
+	 * @throws Exception 
+	 */
+	private void checkOptimisticUpdate(RecordJDBC dbRecord) throws SQLException {
+		boolean rowUpdated=false;
+		if (updatesAreDetected)
+			rowUpdated = rs.rowUpdated();
+		/*TODO: re-get record by rowid and compare values
+		else {
 		}
 		*/
+		if (rowUpdated)
+			throw new SQLException("Current record updated by external process");
 	}
+	
 	public void update()
 		throws Exception //ConnectionException, ConnectionSecurityException, ConnectionDroppedException, InterruptedException, IOException
 	{
 		RecordJDBC dbRecord = (RecordJDBC)irecord;
 		dbRecord.output();
 		// If the recordset is updatable, just update directly (this will essentially unlock the record if there are no fields
-		if (_updatable)
+		if (_updatable != FALSE)
 			rs.updateRow();
-		// If the cursor is not updatable (no driver than I've found supports it), then update the record
+		// If the cursor is not updatable, then update the record
 		// with a separate UPDATE ... SET ... WHERE CURRENT OF ... clause
-		// Don't update the record if no fields have been changed
-		else if (dbRecord.updateCount>0)
-
-		{
-			{
+		else {
+			//TODO: check movedToInsertRow flag and throw error if true???
+			
+			// Don't update the record if no fields have been changed
+			if (dbRecord.updateCount>0){
+				// If we're doing an optimistic update, check to see if the underlying record has been changed by an external process
+				if (openType == Application.READ_WRITE_OPTIMISTIC)
+					checkOptimisticUpdate(dbRecord);
+				
 				//int updateCount = dbRecord.updateFields.size();
 				StringBuffer sqlUpdate =
 					new StringBuffer("UPDATE " + actualFileName + correlation);
@@ -935,7 +1011,7 @@ public class RfileJDBC
 		RecordJDBC dbRecord = (RecordJDBC)irecord;
 		// If the cursor is updatable, or if this is a driver (e.g. OS/400) that allows writes through read-only
 		// result sets, then do internal write.
-		if (_updatable || readOnlyWrite)
+		if (_updatable != FALSE || readOnlyWrite)
 		{
 			// Open the result set if it has not already been opened.
 			openResultSet();

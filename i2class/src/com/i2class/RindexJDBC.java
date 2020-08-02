@@ -258,7 +258,7 @@ public class RindexJDBC extends RkeyedJDBC
 	 */
 	protected boolean next() throws Exception
 	{
-		boolean foundNext = rs.next();
+		boolean foundNext = super.next();
 		// If no keyed access has been done, then just use 'default' result set
 		if (preparedStrings!=null)
 		{
@@ -283,7 +283,7 @@ public class RindexJDBC extends RkeyedJDBC
 	 */
 	protected boolean previous() throws Exception
 	{
-		boolean found = rs.previous();
+		boolean found = super.previous();
 		while (!found && pindex > 0)
 		{
 			pindex--;

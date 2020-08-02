@@ -90,6 +90,10 @@ public class Application implements Runnable, Serializable
 	/** Open a file for read-write access (reads and updates are allowed). */
 	public static final int READ_WRITE =
 		/*com.ibm.as400.access.AS400File.READ_WRITE*/1;
+	// Optimistic record locking
+	public static final int READ_WRITE_OPTIMISTIC = 0x80 + READ_WRITE;
+	// Allow "dirty" updates
+	public static final int READ_WRITE_DIRTY = 0x40 + READ_WRITE;
 	/** Open a file for write-only access (no reads are allowed). */
 	public static final int WRITE_ONLY =
 		/*com.ibm.as400.access.AS400File.WRITE_ONLY*/2;
