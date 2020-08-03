@@ -236,7 +236,7 @@ public class RecordJDBC extends RrecordX2
 	public void setValue(int fieldIndex, BigDecimal value) throws SQLException
 	{
 		RfileJDBC file = (RfileJDBC)this.file;
-		if (file._updatable != RfileJDBC.FALSE)
+		if (file._updatable != Boolean.FALSE)
 		{
 			//((RfileJDBC)file).rs.updateDouble(fieldIndex+1, value);
 			int actualIndex = getActualIndex(fieldIndex);
@@ -279,7 +279,7 @@ public class RecordJDBC extends RrecordX2
 	public void setValue(int fieldIndex, double value) throws SQLException
 	{
 		RfileJDBC file = (RfileJDBC)this.file;
-		if (file._updatable != RfileJDBC.FALSE)
+		if (file._updatable != Boolean.FALSE)
 		{
 			//((RfileJDBC)file).rs.updateDouble(fieldIndex+1, value);
 			int actualIndex = getActualIndex(fieldIndex);
@@ -308,7 +308,7 @@ public class RecordJDBC extends RrecordX2
 	public void setValue(int fieldIndex, java.util.Date value) throws SQLException
 	{
 		RfileJDBC file = (RfileJDBC)this.file;
-		if (file._updatable != RfileJDBC.FALSE)
+		if (file._updatable != Boolean.FALSE)
 		{
 			java.sql.Date sqlDate = new java.sql.Date(value.getTime());
 			//((RfileJDBC)file).rs.updateDouble(fieldIndex+1, value);
@@ -328,7 +328,7 @@ public class RecordJDBC extends RrecordX2
 			((RfileJDBC)file).rs.updateString(fieldIndex+1, value);
 		*/
 		RfileJDBC file = (RfileJDBC)this.file;
-		if (file._updatable != RfileJDBC.FALSE)
+		if (file._updatable != Boolean.FALSE)
 		{
 			//((RfileJDBC)file).rs.updateString(fieldIndex+1, value);
 			int actualIndex=getActualIndex(fieldIndex);
@@ -345,7 +345,7 @@ public class RecordJDBC extends RrecordX2
 		java.sql.Time sqlTime = new java.sql.Time(value.toDate().getTime());
 		//((RfileJDBC)file).rs.updateDouble(fieldIndex+1, value);
 		RfileJDBC file = (RfileJDBC)this.file;
-		if (file._updatable != RfileJDBC.FALSE)
+		if (file._updatable != Boolean.FALSE)
 		{
 			int actualIndex=getActualIndex(fieldIndex);
 			file.rs.updateTime(actualIndex, sqlTime);
@@ -360,7 +360,7 @@ public class RecordJDBC extends RrecordX2
 		java.sql.Timestamp sqlTimestamp = value.toTimestamp();
 		//((RfileJDBC)file).rs.updateDouble(fieldIndex+1, value);
 		RfileJDBC file = (RfileJDBC)this.file;
-		if (file._updatable != RfileJDBC.FALSE)
+		if (file._updatable != Boolean.FALSE)
 		{
 			int actualIndex=getActualIndex(fieldIndex);
 			file.rs.updateTimestamp(actualIndex, sqlTimestamp);
