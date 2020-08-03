@@ -29,6 +29,7 @@ public class RfileJDBC
 	protected int concur;
 	protected String databaseName;
 	protected Boolean _updatable;
+	//protected boolean readOnlyWrite;
 	// Are changes made through an updatable cursor visible?
 	protected boolean deletesAreVisible;
 	protected boolean updatesAreVisible;
@@ -324,6 +325,10 @@ public class RfileJDBC
 				deletesAreVisible = connMetaData.othersDeletesAreVisible(rsType);
 				updatesAreVisible = connMetaData.othersUpdatesAreVisible(rsType);
 				insertsAreVisible = connMetaData.othersInsertsAreVisible(rsType);
+				/* Apparently this no longer works or this support has been dropped?!?  It was always kind of non-standard anyway...
+				// DB2/i allows writes through result sets that are not updatable
+				readOnlyWrite = isDB2i();
+				*/
 				// Create work statement for external updates/etc.
 				stmtWork = conn.createStatement();
 			}
@@ -1007,6 +1012,9 @@ public class RfileJDBC
 		throws Exception //ConnectionException, ConnectionSecurityException, ConnectionDroppedException, InterruptedException, IOException
 	{
 		RecordJDBC dbRecord = (RecordJDBC)irecord;
+		/* See readOnlyWrite support dropped, above...
+		if (_updatable != Boolean.FALSE || readOnlyWrite)
+		*/
 		// If the cursor is updatable, then do internal write...
 		if (_updatable != Boolean.FALSE)
 		{
