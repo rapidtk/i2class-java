@@ -821,6 +821,10 @@ public class Application implements Runnable, Serializable
 		return Long.toString(value);
 	}
 	
+	public static String ucs2(CharSequence seq) {
+		return seq.toString();
+	}
+	
 	/**
 	 * Return the first position of the string <code>base</code> that contains a character that 
 	 * does not appear in string <code>comparator</code>.
@@ -2829,6 +2833,26 @@ public class Application implements Runnable, Serializable
 	public static boolean open(Rfile file)
 	{
 		return file.opened; 
+	}
+	
+	@SuppressWarnings("rawtypes")
+	static public Comparable max(Comparable... values) {
+		Comparable max = values[0];
+		for (int i=1; i<values.length; i++) {
+			if (values[i].compareTo(max) > 0)
+				max = values[i];
+		}
+		return max;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	static public Comparable min(Comparable... values) {
+		Comparable min = values[0];
+		for (int i=1; i<values.length; i++) {
+			if (values[i].compareTo(min) < 0)
+				min = values[i];
+		}
+		return min;
 	}
 	
 	/** Return the value raised to the specified power. */
