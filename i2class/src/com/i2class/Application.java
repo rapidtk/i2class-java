@@ -3131,8 +3131,12 @@ public class Application implements Runnable, Serializable
 	
 	public static String scanrpl(CharSequence string, CharSequence replacement, CharSequence source) {
 		String strSource = source.toString();
-		strSource.replace(string,  replacement);
-		return strSource;
+		return strSource.replace(string,  replacement);
+	}
+	
+	public static String scanrpl(CharSequence string, CharSequence replacement, CharSequence source, int start) {
+		String strSource = source.toString().substring(start-1);
+		return strSource.replace(string,  replacement);
 	}
 
 	/** Return a SECOND duration */
