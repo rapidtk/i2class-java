@@ -1755,10 +1755,15 @@ public class Application implements Runnable, Serializable
 	}
 	
 	/** Return the integer equivalent of the value. */
+	static public long Int(double value)
+	{
+		return (long)value;
+	}
 	static public long Int(Object value)
 	{
-		return (long)Double.parseDouble(value.toString());
+		return Int(Double.parseDouble(value.toString()));
 	}
+	
 	/** Return the half-adjusted integer equivalent of the value. */
 	static public long inth(double value)
 	{
