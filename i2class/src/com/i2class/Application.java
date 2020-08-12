@@ -3143,6 +3143,9 @@ public class Application implements Runnable, Serializable
 		String strSource = source.toString().substring(start-1);
 		return strSource.replace(string,  replacement);
 	}
+	public static String scanrpl(CharSequence string, CharSequence replacement, CharSequence source, INumeric start) {
+		return scanrpl(string, replacement, source, start.intValue());
+	}
 
 	/** Return a SECOND duration */
 	static public Duration seconds(int seconds)
