@@ -8,9 +8,6 @@ package com.i2class;
  */
 public class subst extends FixedChar
 {
-	private int offset;
-	private int length;
-	private byte overlay[];
 	/**
 	 * @param fStr The referenced <code>fixed</code> type 
 	 * @param start The start of the substring
@@ -32,6 +29,17 @@ public class subst extends FixedChar
 	{
 		this(fStr, start.intValue(), len.intValue());
 	}
+	
+	public subst(FixedChar fStr, int start)
+	{
+		super(fStr.len()-start+1, new FixedPointer(fStr, start-1));
+	}
+	public subst(FixedChar fStr, INumeric start)
+	{
+		this(fStr, start.intValue());
+	}
+	
+	
 	/*
 	public static void main(String[] args) 
 	{
