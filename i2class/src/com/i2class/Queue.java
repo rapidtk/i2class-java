@@ -355,6 +355,11 @@ class Queue {
 			notifyAll();
 		}
 	}
+	
+	public void clear() {
+		m_keys.clear();
+		m_queueData.clear();
+	}
 
 	/*	
 	public static void main(String[] args)
