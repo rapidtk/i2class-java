@@ -3379,6 +3379,11 @@ public class Application implements Runnable, Serializable
 	{
 		return value.trim();
 	}
+	static public String trim(char value)
+	{
+		return Character.valueOf(value).toString().trim();
+	}
+
 	/**
 	 * Trim blanks from the left edge of a fixed-length string
 	 * @param fStr The fixed-length string to trim
@@ -3401,6 +3406,12 @@ public class Application implements Runnable, Serializable
 			value = value.substring(i);
 		return value;
 	}
+	static public String triml(char value)
+	{
+		// For character values, trim/triml/trimr are all equivalent...
+		return trim(value);
+	}
+	
 	/**
 	 * Trim blanks from the right edge of a fixed-length string
 	 * @param fStr The fixed-length string to trim
@@ -3429,7 +3440,8 @@ public class Application implements Runnable, Serializable
 
 	static public String trimr(char value)
 	{
-		return new Character(value).toString();
+		// For character values, trim/triml/trimr are all equivalent...
+		return trim(value);
 	}
 
 	/** Return the fixed equivalent of a character value. */
