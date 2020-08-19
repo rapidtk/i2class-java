@@ -79,9 +79,9 @@ public class Application implements Runnable, Serializable
 	* For example, when applied to a fixed-length CHAR 3 field, *ONES would mean '111'.  
 	* When applied to a numeric field, *ONES means 1.
 	*/
-	static final FigConst ONES = new FigConst('1');
+	public static final FigConst ONES = new FigConst('1');
 	
-	static final Object NULL = null;
+	public static final Object NULL = null;
 
 
 	// File constants
@@ -3137,6 +3137,12 @@ public class Application implements Runnable, Serializable
 	public static String scanrpl(CharSequence string, CharSequence replacement, CharSequence source) {
 		String strSource = source.toString();
 		return strSource.replace(string,  replacement);
+	}
+	public static String scanrpl(char c, CharSequence replacement, CharSequence source) {
+		return scanrpl(Character.valueOf(c).toString(), replacement, source);
+	}
+	public static String scanrpl(CharSequence string, char replacement, CharSequence source) {
+		return scanrpl(string, Character.valueOf(replacement).toString(), source);
 	}
 	
 	public static String scanrpl(CharSequence string, CharSequence replacement, CharSequence source, int start) {
