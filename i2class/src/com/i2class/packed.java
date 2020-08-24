@@ -35,5 +35,9 @@ public class packed extends PackedDecimal {
 	public packed(int length, int scale, FigConstNum fc) {
 		super(length, scale, fc);
 	}
+	
+	public packed(int length, int scale, InitialValue inz) {
+		super(length, scale, inz);
+	}
 
 }

@@ -118,6 +118,12 @@ public class PackedDecimal extends AbstractNumericCoded
 		this(length, scale);
 		assign(fc);
 	}
+	public PackedDecimal(int length, int scale, InitialValue inz)
+	{
+		this(length, scale);
+		assign(inz);
+	}
+
 	
 	/** Assign a double value to this variable. */
 	public void assign(double d)

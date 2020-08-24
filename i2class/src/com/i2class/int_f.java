@@ -21,4 +21,8 @@ public class int_f extends FixedBinary {
 		super(sz, fc);
 	}
 
+	public int_f(int sz, InitialValue inz) {
+		super(sz, inz);
+	}
+
 }

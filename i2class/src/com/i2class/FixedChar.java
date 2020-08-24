@@ -1,5 +1,7 @@
 package com.i2class;
 
+import java.security.InvalidParameterException;
+
 /**
  * A mutable fixed-length character string class.
  * The data for the class is stored in <code>overlay</code>, which is a <code>byte</code> array -- double-byte data would have to be stored across multiple elements.
@@ -109,6 +111,21 @@ public class FixedChar extends FixedData implements CharSequence
 		super(sz);
 		assign(str);
 	}
+	
+	public FixedChar(int sz, InitialValue inz)
+	{
+		super(sz);
+		Object value = inz.value();
+		if (value instanceof FigConst)
+			assign((FigConst)value);
+		else if (value instanceof CharSequence)
+			assign(value.toString());
+		else if (value instanceof Character)
+			assign((Character)value);
+		else
+			throw new InvalidParameterException(inz.toString());
+	}
+	
 	/**
 	 * Assign a boolean value to a fixed-length string - true='1', false='0'.
 	 */

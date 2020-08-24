@@ -108,6 +108,11 @@ public class ZonedDecimal extends AbstractNumeric {
 		this(length, scale);
 		assign(fc);
 	}
+	public ZonedDecimal(int length, int scale, InitialValue inz)
+	{
+		this(length, scale);
+		assign(inz);
+	}
 	
 	/** Assign a rounded double value to this number. */
 	public void assign(double d, int roundingMode) {

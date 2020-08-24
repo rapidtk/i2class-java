@@ -2,6 +2,7 @@ package com.i2class;
 
 import java.math.BigDecimal;
 import java.math.BigInteger;
+import java.security.InvalidParameterException;
 /**
  * A mutable fixed-length and scale Numeric type.
  * 
@@ -105,6 +106,21 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 
 	/** Assign a decimal value to this Numeric. */
 	public abstract void assign(INumeric value);
+	
+	
+	protected void assign(InitialValue inz)
+	{
+		Object value = inz.value();
+		if (value instanceof FigConstNum)
+			assign((FigConstNum)value);
+		else if (value instanceof BigDecimal)
+			assign((BigDecimal)value);
+		else if (value instanceof Double)
+			assign((Long)value);
+		else
+			throw new InvalidParameterException(inz.toString());
+	}
+
 
 	/* (non-Javadoc)
 	 * @see com.i2class.FixedData#clear()

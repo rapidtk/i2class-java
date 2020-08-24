@@ -1,6 +1,7 @@
 package com.i2class;
 
 import java.math.*;
+import java.security.InvalidParameterException;
 /**
  * A mutable class that represents a java binary (int/float) value stored in fixed-length data.
  *  
@@ -42,6 +43,17 @@ public class FixedBinary extends AbstractNumericCoded
 	{
 		this(sz);
 		assign(fc);
+	}
+	public FixedBinary(int sz, InitialValue inz)
+	{
+		this(sz);
+		Object value = inz.value();
+		if (value instanceof FigConstNum)
+			assign((FigConstNum)value);
+		else if (value instanceof Long)
+			assign((Long)value);
+		else
+			throw new InvalidParameterException(inz.toString());
 	}
 
 	/** Assign a long value to this variable. */

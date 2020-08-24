@@ -4,6 +4,8 @@
  */
 package com.i2class;
 
+import java.math.BigDecimal;
+
 /**
  * An abstract class for numeric data that is 'coded' i.e. not zoned.
  * 
@@ -31,8 +33,8 @@ abstract public class AbstractNumericCoded extends AbstractNumeric {
 	 * @param scale
 	 * @param digits
 	 */
-	public AbstractNumericCoded(int len, int digits, int scale) {
-		super(len, digits, scale);
+	public AbstractNumericCoded(int size, int digits, int scale) {
+		super(size, digits, scale);
 	}
 	
 	/** 
