@@ -3691,6 +3691,11 @@ public class Application implements Runnable, Serializable
 		return new ZonedDecimal(10,0, i);
 	}
 	
+	/** @return Initialization value */
+	static public InitialValue inz(Object value) {
+		return new InitialValue(value);
+	}
+	
 	/**
 	 * For RPG Cycle processing, add a detail file/format pair. 
 	 */
