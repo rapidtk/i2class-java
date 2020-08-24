@@ -28,5 +28,9 @@ public class varying extends CharVarying {
 	{
 		super(sz, overlay);
 	}
+	public varying(int sz, InitialValue inz)
+	{
+		super(sz, inz);
+	}
 
 }

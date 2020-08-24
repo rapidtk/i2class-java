@@ -25,7 +25,7 @@ public class CharVarying extends FixedChar {
 	}
 	public CharVarying(int sz, FixedPointer overlay)
 	{
-		super(sz, overlay);
+		super(sz+2, overlay);
 	}
 
 	public CharVarying(int sz, char c)
@@ -39,6 +39,10 @@ public class CharVarying extends FixedChar {
 	public CharVarying(int sz, String str)
 	{
 		super(sz+2, str);
+	}
+	public CharVarying(int sz, InitialValue inz)
+	{
+		super(sz+2, inz);
 	}
 
 	/* (non-Javadoc)
