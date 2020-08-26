@@ -184,8 +184,9 @@ public class FixedChar extends FixedData implements CharSequence
 	/**
 	 * Assign a string value to this fixed-length string.
 	 */
-	public void assign(String value)
+	public void assign(CharSequence seq)
 	{
+		String value=seq.toString();
 		int vlength = java.lang.Math.min(value.length(), msize());
 		pad(vlength);
 		movelString(value);
