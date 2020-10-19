@@ -225,7 +225,7 @@ public class I2Connection extends I2ConnectionBase implements Connection
 		return 0;
 	}
 
-	/* Java 1.7 Interface
+	/* Java 1.6 Interface */
 	public NClob createNClob() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
@@ -242,5 +242,4 @@ public class I2Connection extends I2ConnectionBase implements Connection
 		// TODO Auto-generated method stub
 		
 	}
-	*/
 }

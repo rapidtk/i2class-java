@@ -1386,12 +1386,12 @@ public class FieldSet implements ResultSet {
 		return null;
 	}
 
-	/* Java 1.7 interface
 	public <T> T getObject(String columnLabel, Class<T> type) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
+	/* Java 1.6 Interface */
 	public void updateNClob(int columnIndex, NClob nClob) throws SQLException {
 		// TODO Auto-generated method stub
 		
@@ -1450,5 +1450,4 @@ public class FieldSet implements ResultSet {
 		// TODO Auto-generated method stub
 		
 	}
-	*/
 }
