@@ -250,7 +250,7 @@ public class RfileDB400
 			dbRecord.record = record;
 			isFound = (record != null);
 		}
-		setI2Eof(eof);
+		setI2Eof(!isFound);
 		return isFound;
 	}
 	
