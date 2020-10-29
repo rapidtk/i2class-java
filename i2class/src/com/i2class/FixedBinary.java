@@ -51,7 +51,7 @@ public class FixedBinary extends AbstractNumericCoded
 		if (value instanceof FigConstNum)
 			assign((FigConstNum)value);
 		else if (value instanceof Long)
-			assign((Long)value);
+			assign(((Long)value).longValue());
 		else
 			throw new InvalidParameterException(inz.toString());
 	}

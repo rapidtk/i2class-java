@@ -66,7 +66,7 @@ public class RfileSpool extends RfilePrint
 	 * Creation date: (11/19/2001 11:03:32 AM)
 	 * @return boolean
 	 */
-	@Override
+	//@Override
 	public void close() throws java.io.IOException
 	{
 		file.close();
@@ -76,7 +76,7 @@ public class RfileSpool extends RfilePrint
 	/**
 	 * Open this printer file.
 	 */
-	@Override
+	//@Override
 	public void open(int openType)
 	{
 		// This is nuts, but you can't open() a file, but you can close() it.  So, if someone closes the file and then
@@ -94,7 +94,7 @@ public class RfileSpool extends RfilePrint
 		// Add this file to the list of open files so that they can be closed during the RETURN step
 		addToOpenFiles();
 	}
-	@Override
+	//@Override
 	public void setFormat(IRecord rcd)
 	{
 		setRecord(rcd);
@@ -115,7 +115,7 @@ public class RfileSpool extends RfilePrint
 	 * @param c char
 	 */
 
-	@Override
+	//@Override
 	public boolean write() throws Exception
 	{
 		prtRecord.cur_page_line_num = cur_page_line_num;

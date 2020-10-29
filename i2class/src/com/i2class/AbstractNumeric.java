@@ -116,7 +116,7 @@ public abstract class AbstractNumeric extends FixedData implements INumeric
 		else if (value instanceof BigDecimal)
 			assign((BigDecimal)value);
 		else if (value instanceof Double)
-			assign((Long)value);
+			assign(((Long)value).longValue());
 		else
 			throw new InvalidParameterException(inz.toString());
 	}

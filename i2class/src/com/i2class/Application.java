@@ -371,7 +371,7 @@ public class Application implements Runnable, Serializable
 		{
 			super(99);
 		}
-		@Override
+		//@Override
 		protected void readSubfields()
 		{
 			I = 0;
@@ -483,7 +483,7 @@ public class Application implements Runnable, Serializable
 				getOverlay()[I] = (byte) '0';
 			I++;
 		}
-		@Override
+		//@Override
 		protected void updateSubfields()
 		{
 			
@@ -738,7 +738,7 @@ public class Application implements Runnable, Serializable
 	}
 	
 	// Clean up any resources associated with this application
-	@Override
+	//@Override
 	protected void finalize() throws Throwable
 	{
 		
@@ -1676,6 +1676,8 @@ public class Application implements Runnable, Serializable
 	/** Remove a I2 host from the connection pool. */
 	protected void removeI2Host(IRHost rhost)
 	{
+		if (rhost==null)
+			return;
 		if (I2Logger.logger.isTraceable())
 			I2Logger.logger.trace("Removing I2 host " + rhost);
 		removeHost(rhost.getHost());
@@ -2840,26 +2842,6 @@ public class Application implements Runnable, Serializable
 		return file.opened; 
 	}
 	
-	@SuppressWarnings("rawtypes")
-	static public Comparable max(Comparable... values) {
-		Comparable max = values[0];
-		for (int i=1; i<values.length; i++) {
-			if (values[i].compareTo(max) > 0)
-				max = values[i];
-		}
-		return max;
-	}
-	
-	@SuppressWarnings("rawtypes")
-	static public Comparable min(Comparable... values) {
-		Comparable min = values[0];
-		for (int i=1; i<values.length; i++) {
-			if (values[i].compareTo(min) < 0)
-				min = values[i];
-		}
-		return min;
-	}
-	
 	/** Return the value raised to the specified power. */
 	static public double pow(double value, double power)
 	{
@@ -3877,7 +3859,7 @@ public class Application implements Runnable, Serializable
 		Rreturn(host);
 	}
 	
-	protected void Rreturn(IRHost rhost) throws Pgmmsg
+	public void Rreturn(IRHost rhost) throws Pgmmsg
 	{
 		// Set job switches
 		StringBuffer sws = new StringBuffer("00000000");
@@ -4271,6 +4253,28 @@ public class Application implements Runnable, Serializable
 		}
 		RETURN(rhost);
 	}
+
+	/* Java 1.5
+	@SuppressWarnings("rawtypes")
+	static public Comparable max(Comparable... values) {
+		Comparable max = values[0];
+		for (int i=1; i<values.length; i++) {
+			if (values[i].compareTo(max) > 0)
+				max = values[i];
+		}
+		return max;
+	}
+	
+	@SuppressWarnings("rawtypes")
+	static public Comparable min(Comparable... values) {
+		Comparable min = values[0];
+		for (int i=1; i<values.length; i++) {
+			if (values[i].compareTo(min) < 0)
+				min = values[i];
+		}
+		return min;
+	}
+	*/
 	
 	/*TODO: Setting/reading number of parameters isn't really supported...
 	// Return number of parameters passed to routine

@@ -152,14 +152,6 @@ public class I2Connection extends I2ConnectionBase implements Connection
 		// TODO Auto-generated method stub
 		return null;
 	}
-	public <T> T unwrap(Class<T> iface) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
 	public Savepoint setSavepoint() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
@@ -224,8 +216,18 @@ public class I2Connection extends I2ConnectionBase implements Connection
 		// TODO Auto-generated method stub
 		return 0;
 	}
+	
+	/* Java 1.5 Interface
+	public <T> T unwrap(Class<T> iface) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public boolean isWrapperFor(Class<?> iface) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 
-	/* Java 1.6 Interface */
+	/* Java 1.6 Interface
 	public NClob createNClob() throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
@@ -242,4 +244,5 @@ public class I2Connection extends I2ConnectionBase implements Connection
 		// TODO Auto-generated method stub
 		
 	}
+	*/
 }

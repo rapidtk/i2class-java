@@ -24,7 +24,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(5, 0);
 		}
-		@Override
+		//@Override
 		public FixedData getFixedType()
 		{
 			return new FixedBinary(2);
@@ -37,7 +37,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(10, 0);
 		}
-		@Override
+		//@Override
 		public FixedData getFixedType()
 		{
 			return new FixedBinary(4);
@@ -50,7 +50,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(19, 0);
 		}
-		@Override
+		//@Override
 		public FixedData getFixedType()
 		{
 			return new FixedBinary(8);
@@ -62,7 +62,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(size, precision);
 		}
-		@Override
+		//@Override
 		public FixedData getFixedType()
 		{
 			return new PackedDecimal(size, precision);
@@ -74,7 +74,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(size, precision);
 		}
-		@Override
+		//@Override
 		public FixedData getFixedType()
 		{
 			return new ZonedDecimal(size, precision);
@@ -86,7 +86,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(30, 9);
 		}
-		@Override
+		//@Override
 		public FixedData getFixedType()
 		{
 			return new FixedFloat(4);
@@ -98,7 +98,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(63, 17);
 		}
-		@Override
+		//@Override
 		public FixedData getFixedType()
 		{
 			return new FixedFloat(8);
@@ -110,7 +110,7 @@ class RrecordX2 extends RrecordX implements IRecordFormat
 		{
 			super(length, -1);
 		}
-		@Override
+		//@Override
 		public FixedData getFixedType()
 		{
 			return new FixedChar(size);

@@ -27,14 +27,14 @@ public class Binary400 extends FixedBinary {
 		return 9;
 	}
 	
-	@Override
+	//@Override
 	public void assign(long value)
 	{
 		if (m_scale >0)
 			value = (long) (value * Math.pow(10, m_scale));
 		super.assign(value);
 	}
-	@Override
+	//@Override
 	public void assign(double value) {
 		if (m_scale >0)
 			value = value * Math.pow(10, m_scale);
@@ -42,7 +42,7 @@ public class Binary400 extends FixedBinary {
 	}
 
 	
-	@Override
+	//@Override
 	public long longValue()
 	{
 		long l = super.longValue();
@@ -51,7 +51,7 @@ public class Binary400 extends FixedBinary {
 		return l;
 	}
 
-	@Override
+	//@Override
 	public double doubleValue()
 	{
 		double d = super.longValue();

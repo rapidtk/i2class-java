@@ -121,7 +121,7 @@ public class FixedChar extends FixedData implements CharSequence
 		else if (value instanceof CharSequence)
 			assign(value.toString());
 		else if (value instanceof Character)
-			assign((Character)value);
+			assign(((Character)value).charValue());
 		else
 			throw new InvalidParameterException(inz.toString());
 	}

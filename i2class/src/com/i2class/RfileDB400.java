@@ -38,7 +38,7 @@ public class RfileDB400
 	}
 	
 	/** Destroy the connection objects that this object references. */
-	@Override
+	//@Override
 	protected void finalize() throws Throwable
 	{
 		super.finalize();
@@ -103,7 +103,7 @@ public class RfileDB400
 	/**
 	 * Close the file.
 	 */
-	@Override
+	//@Override
 	public void close()
 		throws
 			java.lang.InterruptedException,
@@ -168,7 +168,7 @@ public class RfileDB400
 	 * Open the file.
 	 * @param openType How the file should be opened: READ_ONLY, READ_WRITE, WRITE_ONLY.
 	 */
-	@Override
+	//@Override
 	public void open(int openType)
 		throws
 			AS400Exception,
@@ -237,7 +237,7 @@ public class RfileDB400
 	/**
 	 * Read from file but don't update input fields
 	 */
-	@Override
+	//@Override
 	boolean readCycle() throws Exception
 	{
 		boolean isFound = false;
@@ -314,7 +314,7 @@ public class RfileDB400
 		return readpn();
 	}
 	
-	@Override
+	//@Override
 	boolean readx() throws Exception
 	{
 		boolean isFound = (record != null);
@@ -347,7 +347,7 @@ public class RfileDB400
 		AS400File.rollback(as400);
 	}
 	
-	@Override
+	//@Override
 	void setFormat(IRecord r) throws Exception
 	{
 		irecord = r;
@@ -455,7 +455,7 @@ public class RfileDB400
 		update();
 	}
 	/** Write the current values out to a new record. */
-	@Override
+	//@Override
 	public boolean write()
 		throws Exception //AS400Exception, AS400SecurityException, ConnectionDroppedException, InterruptedException, IOException
 	{

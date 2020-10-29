@@ -1190,16 +1190,6 @@ public class FieldSet implements ResultSet {
 		
 	}
 
-	public <T> T unwrap(Class<T> iface) throws SQLException {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	public boolean isWrapperFor(Class<?> iface) throws SQLException {
-		// TODO Auto-generated method stub
-		return false;
-	}
-
 
 	public int getHoldability() throws SQLException {
 		// TODO Auto-generated method stub
@@ -1381,6 +1371,16 @@ public class FieldSet implements ResultSet {
 		
 	}
 
+	/* Java 1.5 Interface 
+	public <T> T unwrap(Class<T> iface) throws SQLException {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	public boolean isWrapperFor(Class<?> iface) throws SQLException {
+		// TODO Auto-generated method stub
+		return false;
+	}
 	public <T> T getObject(int columnIndex, Class<T> type) throws SQLException {
 		// TODO Auto-generated method stub
 		return null;
@@ -1391,7 +1391,7 @@ public class FieldSet implements ResultSet {
 		return null;
 	}
 
-	/* Java 1.6 Interface */
+	/* Java 1.6 Interface 
 	public void updateNClob(int columnIndex, NClob nClob) throws SQLException {
 		// TODO Auto-generated method stub
 		
@@ -1450,4 +1450,5 @@ public class FieldSet implements ResultSet {
 		// TODO Auto-generated method stub
 		
 	}
+	*/
 }

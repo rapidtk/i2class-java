@@ -111,7 +111,7 @@ public class RfileJDBC
 			dbRecord.input();
 			// Have to make sure that _updatable is true to ensure that field list is built correctly
 			Boolean supdatable = _updatable;
-			_updatable=true;
+			_updatable=Boolean.TRUE;
 			dbRecord.output();
 			_updatable = supdatable;
 			// Reset so that open builds new ResultSet
@@ -1020,8 +1020,8 @@ public class RfileJDBC
 		{
 			// Open the result set if it has not already been opened.
 			openResultSet();
-			boolean sav_updatable = _updatable;
-			_updatable = true;
+			boolean sav_updatable = _updatable.booleanValue();
+			_updatable = Boolean.TRUE;
 			rs.moveToInsertRow();
 			dbRecord.output();
 			// If this is an empty EXCPT, then just unlock the record
@@ -1030,7 +1030,7 @@ public class RfileJDBC
 			else
 				unlock();
 			rs.moveToCurrentRow();
-			_updatable = sav_updatable;
+			_updatable = Boolean.valueOf(sav_updatable);
 		}
 		// ...otherwise, if the cursor is not updatable, then just do external write
 		else
