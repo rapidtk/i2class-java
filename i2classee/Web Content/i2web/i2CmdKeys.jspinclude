@@ -1,0 +1,33 @@
+<% /* Build command key buttons */ %>
+<% int tableWidth = KEY_WIDTH*KEY_COUNT; %>
+<table cellspacing="4" border="0"><tr><td><table width="<%=tableWidth%>" border="0">
+ <% 
+    int kc=1;
+    functionkeys = screenbuilder.getActiveKeys();
+    while ( functionkeys.hasNext())
+    {
+    	fkey = (com.ibm.as400ad.webfacing.runtime.view.def.AIDKey)functionkeys.next();
+        String keyName = fkey.getKeyName();
+        String vas = keyName;
+        if (fkey.isEnterKey())
+        	vas = "Enter";
+        if (KEY_COUNT==1 || (kc % KEY_COUNT)==1) {
+ %>
+<tr>
+ <%
+        };
+ %>
+<td id="k<%=keyName%>" name="k<%=keyName%>" width="<%=KEY_WIDTH%>" height="<%=KEY_HEIGHT%>" title="<%=keyName%>" onmouseover="bo_ibm(this);" onmouseout="bu_ibm(this);" onClick="bd_ibm(this);;validateAndSubmit('<%=vas%>');"><%=fkey.getKeyLabel()%><script language='JavaScript'>regCmdKey('k<%=keyName%>','<%=keyName%>', '', '');</script></td>
+ <%
+        if ((kc % KEY_COUNT)==0) {
+ %>
+</tr>
+ <%
+        }
+        kc++;
+    };
+ %>
+<tr>
+<td width="<%=KEY_WIDTH%>" height="<%=KEY_HEIGHT%>"><IMG src="<%=ctxPath%>/styles/transparent.gif" width="<%=KEY_WIDTH%>" height="<%=KEY_HEIGHT%>"></td></tr>
+</table></td></tr></table>
+<% /* End of function keys */ %>

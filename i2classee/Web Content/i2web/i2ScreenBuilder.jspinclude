@@ -1,0 +1,37 @@
+<% /* Include format.jsp formats */ %>
+          
+<form  id="SCREEN" name="SCREEN" onSubmit="return false;">
+<TABLE class="wf_font" border="0" cellpadding="0" cellspacing="0"><TR>
+<TD id="l1c1" width="13px"></TD><TD id="l1c2" width="13px"></TD><TD id="l1c3" width="13px"></TD><TD id="l1c4" width="13px"></TD><TD id="l1c5" width="13px"></TD><TD id="l1c6" width="13px"></TD><TD id="l1c7" width="13px"></TD><TD id="l1c8" width="13px"></TD><TD id="l1c9" width="13px"></TD><TD id="l1c10" width="13px"></TD>
+<TD id="l1c11" width="13px"></TD><TD id="l1c12" width="13px"></TD><TD id="l1c13" width="13px"></TD><TD id="l1c14" width="13px"></TD><TD id="l1c15" width="13px"></TD><TD id="l1c16" width="13px"></TD><TD id="l1c17" width="13px"></TD><TD id="l1c18" width="13px"></TD><TD id="l1c19" width="13px"></TD><TD id="l1c20" width="13px"></TD>
+<TD id="l1c21" width="13px"></TD><TD id="l1c22" width="13px"></TD><TD id="l1c23" width="13px"></TD><TD id="l1c24" width="13px"></TD><TD id="l1c25" width="13px"></TD><TD id="l1c26" width="13px"></TD><TD id="l1c27" width="13px"></TD><TD id="l1c28" width="13px"></TD><TD id="l1c29" width="13px"></TD><TD id="l1c30" width="13px"></TD>
+<TD id="l1c31" width="13px"></TD><TD id="l1c32" width="13px"></TD><TD id="l1c33" width="13px"></TD><TD id="l1c34" width="13px"></TD><TD id="l1c35" width="13px"></TD><TD id="l1c36" width="13px"></TD><TD id="l1c37" width="13px"></TD><TD id="l1c38" width="13px"></TD><TD id="l1c39" width="13px"></TD><TD id="l1c40" width="13px"></TD>
+<TD id="l1c41" width="13px"></TD><TD id="l1c42" width="13px"></TD><TD id="l1c43" width="13px"></TD><TD id="l1c44" width="13px"></TD><TD id="l1c45" width="13px"></TD><TD id="l1c46" width="13px"></TD><TD id="l1c47" width="13px"></TD><TD id="l1c48" width="13px"></TD><TD id="l1c49" width="13px"></TD><TD id="l1c50" width="13px"></TD>
+<TD id="l1c51" width="13px"></TD><TD id="l1c52" width="13px"></TD><TD id="l1c53" width="13px"></TD><TD id="l1c54" width="13px"></TD><TD id="l1c55" width="13px"></TD><TD id="l1c56" width="13px"></TD><TD id="l1c57" width="13px"></TD><TD id="l1c58" width="13px"></TD><TD id="l1c59" width="13px"></TD><TD id="l1c60" width="13px"></TD>
+<TD id="l1c61" width="13px"></TD><TD id="l1c62" width="13px"></TD><TD id="l1c63" width="13px"></TD><TD id="l1c64" width="13px"></TD><TD id="l1c65" width="13px"></TD><TD id="l1c66" width="13px"></TD><TD id="l1c67" width="13px"></TD><TD id="l1c68" width="13px"></TD><TD id="l1c69" width="13px"></TD><TD id="l1c70" width="13px"></TD>
+<TD id="l1c71" width="13px"></TD><TD id="l1c72" width="13px"></TD><TD id="l1c73" width="13px"></TD><TD id="l1c74" width="13px"></TD><TD id="l1c75" width="13px"></TD><TD id="l1c76" width="13px"></TD><TD id="l1c77" width="13px"></TD><TD id="l1c78" width="13px"></TD><TD id="l1c79" width="13px"></TD><TD id="l1c80" width="13px"></TD></TR>
+
+	 <%
+          int lastFieldLine=0;
+	  formats = screenbuilder.getWrittenFormatsOrdered();
+	  while ( formats.hasNext()) {
+           rcd = (com.i2class.RecordWebface)formats.next();
+           if (!(rcd instanceof com.i2class.RecordWebfaceSFL)) {
+		//int firstFieldLine = rcd.viewDef.getFirstFieldLine();
+		//for (int i=lastFieldLine+1; i<firstFieldLine; i++)
+		//	out.println("<TR id='l1r" + i + "'><TD>&nbsp;</TD></TR>");
+		//lastFieldLine = rcd.viewDef.getLastFieldLine();
+            String pageName = "/RecordJSPs/" + rcd.getFileName() + "/" + rcd.toString() + ".jsp";
+	      out.flush();
+            javax.servlet.RequestDispatcher rd = request.getRequestDispatcher(pageName);
+            rd.include(request, response);
+           }
+          }
+	 %>
+
+<TR id="MSGLINE$$$COMBOBOX" style="visibility:hidden">
+<TD colspan="79"><INPUT class="cbField" id="MSGLINE$$$cbField" onClick="this.comboBoxField.showList();" READONLY TABINDEX="-1" style="width:100%"></TD>
+<TD class="cbButton"><IMG src="styles/transparent.gif" width='16' height='16' id="MSGLINE$$$cbButton" onClick="this.comboBoxButton.showList();"></TD></TR>
+</TABLE>
+<INPUT type="hidden" maxlength="30" name="CURSOR" id="CURSOR"><INPUT type="hidden" maxlength="30" name="PAGEID" id="PAGEID"></form>
+<% /* End of ScreenBuilder */ %>

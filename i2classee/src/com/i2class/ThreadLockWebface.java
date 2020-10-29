@@ -21,7 +21,7 @@ public class ThreadLockWebface
 	implements IScreenBuilder, IDeviceLayer
 {
 
-	private String styleName, rioWebDirectory;
+	private String styleName, i2WebDirectory;
 	String ctxPath, urlPath, urlDDS;
 	ArrayList layerList;
 	private static final String[] pageUPDNarray = {"", ""}; 
@@ -61,11 +61,11 @@ public class ThreadLockWebface
 		// Get the default I2web directory (this may be moved for secure applications
 		try
 		{
-				rioWebDirectory = prop.getString("I2WebDirectory");
+				i2WebDirectory = prop.getString("i2WebDirectory");
 		}
 		catch (Exception e)
 		{
-			rioWebDirectory = "/I2web";
+			i2WebDirectory = "/i2web";
 		}
 
 		// Create an array list that gets used by getRecordLayersOnDevice()
@@ -642,13 +642,13 @@ public class ThreadLockWebface
 				//printwriter.println("<frame name=\"sender\" src=\"styles/m-t.html\">");
 				//printwriter.println("<frame name='sender' src='" + ctxPath + "styles/m-t.html'>");
 				out.println("<frame name='sender'>");
-				//String src = ctxPath + "/I2web/I2Host.jsp";
+				//String src = ctxPath + "/i2web/I2Host.jsp";
 				// String src = ctxPath + "/I2Host.jsp";
-				// Open I2PageBuilder jsp (e.g. I2web/PageBuilderavenue.jsp) 
+				// Open i2PageBuilder jsp (e.g. i2web/PageBuilderavenue.jsp) 
 				
-				// Allow I2web directory to be configured by user
-				//String src = "/I2web/PageBuilder" + styleName + ".jsp";
-				String src = rioWebDirectory + "/PageBuilder" + styleName + ".jsp";
+				// Allow i2web directory to be configured by user
+				//String src = "/i2web/PageBuilder" + styleName + ".jsp";
+				String src = i2WebDirectory + "/PageBuilder" + styleName + ".jsp";
 				                                                                                                                                                                                                                                              
 				/* This always seems to return an object???
 				RequestDispatcher rd = request.getRequestDispatcher(src);
@@ -695,12 +695,12 @@ public class ThreadLockWebface
 			//String s = request.getContextPath() + "I2/I2pageBuilder.jsp?turnCacheOff=1019136650671'>");
 			//String s = request.getContextPath() + "/I2/I2pageBuilder.jsp";
 			//out.println("<frame name='app' src='" + s + "'>");
-			//out.println("<frame name='app' src='" + request.getContextPath() + "/I2web/I2pageBuilder.jsp'>");
+			//out.println("<frame name='app' src='" + request.getContextPath() + "/i2web/I2pageBuilder.jsp'>");
 			/*
 			out.println(
 				"<frame name='app' src='"
 					+ ctxPath
-					+ "/I2web/PageBuilder"
+					+ "/i2web/PageBuilder"
 					+ styleName
 					+ ".jsp'>");
 			*/

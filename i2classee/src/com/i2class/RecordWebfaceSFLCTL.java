@@ -222,12 +222,12 @@ public class RecordWebfaceSFLCTL
 				// Webfacing 5.1.2 adds ,false to submit request
 				//html.append("validateAndSubmit(\"PAGEUP\");");
 				html.append("validateAndSubmit(\"PAGEUP\",false);");
-			//html.append("' class='scrollbarUpArrow' ><IMG src='" + contextPath + "/I2web/PageUp.gif'></td></tr>\n");
+			//html.append("' class='scrollbarUpArrow' ><IMG src='" + contextPath + "/i2web/PageUp.gif'></td></tr>\n");
 			//html.append("' class='scrollbarUpArrow'><IMG src='" + contextPath + "/styles/transparent.gif' width='16' height='16'></td></tr>\n");
 			html.append(
 				"' class='scrollbarUpArrow'><IMG src='"
 					+ contextPath
-					+ "/I2web/PageUp.gif' width='16' height='16'></td></tr>\n");
+					+ "/i2web/PageUp.gif' width='16' height='16'></td></tr>\n");
 
 			// Build segments
 			html.append("<tr height='100%' ><td>");
@@ -342,12 +342,12 @@ public class RecordWebfaceSFLCTL
 				// Webfacing 5.1.2 adds ,false to submit request
 				//html.append("validateAndSubmit(\"PAGEDOWN\");");
 				html.append("validateAndSubmit(\"PAGEDOWN\",false);");
-			//html.append("' class='scrollbarDownArrow'><IMG src='" + contextPath + "/I2web/PageDown.gif'></td></tr>\n</table>");
+			//html.append("' class='scrollbarDownArrow'><IMG src='" + contextPath + "/i2web/PageDown.gif'></td></tr>\n</table>");
 			//html.append("' class='scrollbarDownArrow' ><IMG src='" + contextPath + "/styles/transparent.gif' width='16' height='16'></td></tr>\n</table>");
 			html.append(
 				"' class='scrollbarDownArrow' ><IMG src='"
 					+ contextPath
-					+ "/I2web/PageDown.gif' width='16' height='16'></td></tr>\n</table>");
+					+ "/i2web/PageDown.gif' width='16' height='16'></td></tr>\n</table>");
 		}
 		return html.toString();
 

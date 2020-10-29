@@ -1,0 +1,138 @@
+<% /* Build valid command key names and do JavaScript setup */ %>
+
+<script language='JavaScript'>var servletPath = "<%= (String)session.getAttribute("ServletPath") %>";</script>
+<script language='JavaScript'>var contextPath = "<%=ctxPath%>";</script>
+<script language='JavaScript' src='i2webface.js'></script>
+<script language='JavaScript' src='<%=ctxPath%>/ClientScript/usr/messages.js'></script>
+
+<script language='JavaScript'>document.body.onload=addStatementToFunction(document.body.onload,'wfBodyOnLoad();',true);
+var isOverriden='false', uriOvr, targetFrameOvr;function setOvrInfo(uri,target){isOverriden='true';uriOvr=uri;targetFrameOvr=target;}var wfCmdKeyDB=new Object();function wfCmdKeyObj(id,key,ovrUri,ovrFrame){this.listOfId=[id];this.keyStr=key;this.uri=ovrUri;this.frame=ovrFrame}wfCmdKeyObj.prototype={listOfId:null,listOfElem:null,keyStr:null};wfCmdKeyObj.UNKNOWN_CMD_KEY='';
+ <% /* Build valid command key string */
+    com.ibm.as400ad.webfacing.runtime.view.def.AIDKey fkey = null;
+    java.util.Iterator functionkeys = screenbuilder.getActiveKeys();
+    StringBuffer fLabels = new StringBuffer("|");
+
+    while ( functionkeys.hasNext())
+    {
+    	fkey = (com.ibm.as400ad.webfacing.runtime.view.def.AIDKey)functionkeys.next();
+        fLabels.append(fkey.getKeyName() + "|");
+    };
+ %>
+wfCmdKeyObj.validCmdKey="<%= fLabels.toString() %>";
+<% 
+ String sflctlName=(String)session.getAttribute("sflctlName");
+ if (sflctlName != "")
+ {
+%>
+    wfCmdKeyObj.recWtPGDN=new Array("<%=sflctlName%>");
+<%
+ }
+%>
+function regCmdKey(id,key,uri,frame){try{var wfkey=calcIndex(key);var t=wfCmdKeyDB[wfkey];if(isUndefined(t)){t=new wfCmdKeyObj(id,key,uri,frame);wfCmdKeyDB[wfkey]=t;}else{t.listOfId[t.listOfId.length]=id;}}catch(any_exp){}}
+function calcIndex(kn){try{var arr=kn.match(/^.*([0-9]{2})$/);if(arr!=null){return 'F'+trimLeadingChars(arr[1],'0');}else if(wfCmdKeyObj.validCmdKey.indexOf('|'+kn+'|')!=-1){return kn;}}catch(any_exp){}return wfCmdKeyObj.UNKNOWN_CMD_KEY;}</script>
+<script language='JavaScript'>var V5R1M1SP1 = 501010100;var V5R1M1SP0 = 501010000;var V5R1M0SP4c = 501000403;var V5R1M0SP5 = 501000500;</script>
+<script language='JavaScript'>function setAttr(){decsep='.';thousandSep=',';jobDatFmt="MDY";jobDatSep="/";jobTimSep=":";hostJobCCSID="37";setUpMT();
+
+  <% /* Include formatJavaScript.jsp formats */
+   String cursorID = screenbuilder.getDspatrPCId();
+   String lastFmtName="";
+   java.util.Vector errmsgs = new java.util.Vector();
+   com.i2class.RecordWebface rcd = null;
+   java.util.Iterator formats = screenbuilder.getWrittenFormatsOrdered();
+   while ( formats.hasNext()) {
+      rcd = (com.i2class.RecordWebface)formats.next();
+      if (!(rcd instanceof com.i2class.RecordWebfaceSFL)) {
+         lastFmtName = rcd.toString();
+         request.setAttribute(lastFmtName, rcd);
+         if (rcd instanceof com.i2class.RecordWebfaceSFLCTL)
+         {
+            sflctlName = lastFmtName;
+	        request.setAttribute(sflctlName+"$Scrollbar", rcd);
+	     }
+         out.flush();
+         String pageName = "/RecordJSPs/" + rcd.getFileName() + "/" + lastFmtName + "JavaScript.jsp"; 
+         javax.servlet.RequestDispatcher rd = request.getRequestDispatcher(pageName);
+         rd.include(request, response);
+         errmsgs.addAll(rcd.getErrorCollection());
+      } 
+   }
+  %>
+
+<%-- setCursorForTagID("l1_<%=lastFmtName%>$<%=lastFieldName%>$1"); --%>
+setCursorForEDTMSK_DBCS("<%= cursorID %>",0);
+
+document.SCREEN.PAGEID.value=1;WFFieldExitKeyCode=17;
+<% 
+ if (sflctlName != "")
+ {
+%>
+    firstPageUpEnabledRec='l1_<%=sflctlName%>';
+    firstPageDnEnabledRec='l1_<%=sflctlName%>';
+<%
+ }
+%>
+ 
+
+projectRuntimeEnvironment='';projectJ2EELevel='J2EE13';javascriptLoaded=true; try{init_usr();}catch(any_exc){}}
+function setAttrImmediate(){
+
+<% 
+ if (sflctlName != "")
+ {
+%>
+    posScb("l1_<%=sflctlName%>",false,true);
+<%
+ }
+%>
+
+WFInsertMode=false; restrictTabsToDocument();
+setFocusForTagID("<%= cursorID %>",0);
+
+
+  <% /*Build error messages */
+   StringBuffer allmsgs=new StringBuffer();
+   StringBuffer tagIdArr=new StringBuffer();
+   int cbFieldSize=0;
+   int errCount = errmsgs.size();
+   if (errCount>0)
+   {
+      String comma="\"";
+      for (int i=0; i<errCount; i++) {
+         com.ibm.as400ad.webfacing.runtime.view.def.ERRMSGMessageDefinition md = (com.ibm.as400ad.webfacing.runtime.view.def.ERRMSGMessageDefinition)errmsgs.elementAt(i);
+         String msgText = md.getMessageText();
+         int msgTextLength = msgText.length();
+         if (msgTextLength > cbFieldSize)
+            cbFieldSize = msgTextLength;
+         allmsgs.append(comma);
+         /* Double any quotes in msgText */
+         /* msgs.append(msgText); */
+        int q1 = 0;
+		int q2 = msgText.indexOf('"');
+		while (q2>=0)
+		{
+			allmsgs.append(msgText.substring(q1, q2));
+			allmsgs.append('\\');
+			q1=q2;
+			q2 = msgText.indexOf('"', q2+1);
+		}
+		allmsgs.append(msgText.substring(q1));
+         
+
+         String tagId = "l1_" + md.getRecordName() + '$' + md.getFieldName();
+         tagIdArr.append(comma);
+         tagIdArr.append(tagId);
+      
+         comma="\",\"";
+      }
+      allmsgs.append('"');
+      tagIdArr.append('"');
+   }
+  %> 
+msglnInit([<%= allmsgs.toString() %>],<%= cbFieldSize %>,[<%= tagIdArr.toString() %>]);
+
+} 
+
+</script>
+
+
+<% /* End of JavaScript Setup */ %>
