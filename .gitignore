@@ -1,0 +1,9 @@
+.*
+!.gitignore
+!.mvn
+!.project
+!.classpath
+**/target
+**/bin
+**/*.class
+workspace/
