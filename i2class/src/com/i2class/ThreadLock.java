@@ -1,9 +1,9 @@
 package com.i2class;
 
 import java.io.PrintStream;
-import java.io.PrintWriter;
 import java.io.Serializable;
-import java.util.*;
+import java.util.Iterator;
+import java.util.Vector;
 
 /**
  * Stalled thread class to implement READ/EXFMT functionallity.
@@ -207,6 +207,57 @@ public class ThreadLock implements Serializable
 		}
 		return xml.toString();
 	}
+	
+	/**
+	 * Return the JSON representation of the values of all formats on the current display like: 
+	 * {formats: [{
+	 *   name: "FORMAT_NAME",
+	 *   fields: []}],
+	 *  fkeys: []
+	 * }
+	 * 
+	 * */
+	public String getJSON() throws Exception
+	{
+		StringBuffer json = new StringBuffer("{\n \"formats\": [\n");
+		StringBuffer fkey = new StringBuffer(" \"fkeys\": [\n");
+		acquiring();
+		try
+		{
+			String rcomma="";
+			String fcomma="";
+			Iterator it = getWrittenFormatsOrdered();
+			while (it.hasNext())
+			{
+				RecordWorkstn rcd = (RecordWorkstn)it.next();
+				String rcdJSON = rcd.getJSON();
+				if (!"".equals(rcdJSON)) {
+					json.append(rcomma);
+					json.append(rcdJSON);
+					rcomma = ",\n";
+				}
+				
+				String rcdJSONfkey = rcd.getJSONfkey();
+				if (!"".equals(rcdJSONfkey)) {
+					fkey.append(fcomma);
+					fkey.append(rcdJSONfkey);
+					fcomma = ",\n";
+				}
+				
+			}
+			// Close out formats array
+			json.append("\n ],\n");
+			// Add function keys
+			json.append(fkey);
+			json.append("\n ]\n");
+			json.append("}");
+		}
+		finally
+		{
+			acquired();
+		}
+		return json.toString();
+	}
 
 	synchronized public void released() throws Exception
 	{
@@ -247,7 +298,7 @@ public class ThreadLock implements Serializable
 			int k = fieldName.indexOf("$");
 			if (k > 0)
 			{
-				// In the 4.0 WebFacing tooling, the first three characters are always "l1_"
+				// In the 4.0 WebFacing tooling, the first three characters are always "l1_" ("el one underscore")
 				//String sflnam = parm.substring(0, j);
 				String sflnam = parm.substring(3, j);
 				int fmtCount = writtenFormats.size();

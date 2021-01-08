@@ -213,31 +213,88 @@ public class RecordWorkstn extends RrecordX2
 		return getString(fieldIndex);
 	}
 
-
-	private static void getXMLaddField(StringBuffer buf, String fldName, String value)
-	{
-		buf.append("  <");
-		fldName = uname(fldName);
-		buf.append(fldName);
-		buf.append(">");
-		buf.append(value);
-		buf.append("</");
-		buf.append(fldName);
-		buf.append(">\n");
+	class XMLFormatter implements IContentFormatter {
+		
+		public void addField(StringBuffer buf, String fldName, String value)
+		{
+			buf.append("  <");
+			fldName = uname(fldName);
+			buf.append(fldName);
+			buf.append(">");
+			buf.append(value);
+			buf.append("</");
+			buf.append(fldName);
+			buf.append(">\n");
+		}
+		
+		public void addFkey(StringBuffer buf, String name) {
+			buf.append("<fkey name='" + name + "' value='" + name + "'/>");
+			
+		}
 	}
+	
+	class JSONFormatter implements IContentFormatter {
+		
+		String fieldComma="";
+		String fkeyComma="";
+		
+		public void addField(StringBuffer buf, String fldName, String value)
+		{
+			buf.append(fieldComma);
+			fldName = uname(fldName);
+			buf.append("    ");
+			buf.append("{\"name\": \"" + fldName + "\", ");
+			// See if this is a valid number
+			try {
+				Double.valueOf(value);
+			// Any error, then the value needs quotes...
+			} catch (Exception e) {
+				value = '"' + value + '"';
+			}
+			buf.append("\"value\": " + value + "}");
+			fieldComma = ",\n";
+		}
+		
+		public void addFkey(StringBuffer buf, String name) {
+			buf.append(fkeyComma);
+			buf.append("  ");
+			buf.append("{\"name\": \"" + name + "\"}");
+			fkeyComma = ",\n";
+		}
+	}
+
+	// Close out record name entity
+	public String getXMLclose(StringBuffer buf)
+	{
+		buf.append(" </");
+		buf.append(recordName);
+		buf.append(">\n");
+		
+		return buf.toString();
+	}
+	public String getJSONclose(StringBuffer buf)
+	{
+		buf.append("}\n");
+		
+		return buf.toString();
+	}
+	
 
 	// Build XML string for this record
 	String getXML()
 	{
 		return getXMLclose(getXMLBuffer());
 	}
-	// Build XML string for this record
-	protected StringBuffer getXMLBuffer()
+
+	// Build JSON string for this record
+	String getJSON()
 	{
-		// The first entity is the record name
-		StringBuffer buf = new StringBuffer(" <");
-		buf.append(uname(recordName));
-		buf.append(">\n");
+		return getJSONBuffer().toString();
+	}
+			
+	// Build Content (XML or JSON) for this record
+	protected StringBuffer getContentBuffer(StringBuffer buf, IContentFormatter formatter)
+	{
 		// Loop through all the fields in the record.  Add entity/value relationship for each one
 		int fldCount = fldValues.size();
 		for (int i = 0; i < fldCount; i++)
@@ -246,10 +303,10 @@ public class RecordWorkstn extends RrecordX2
 			if (value != null)
 			{
 				String fldName = (String) fldNames.elementAt(i);
-				getXMLaddField(buf, fldName, value);
+				formatter.addField(buf, fldName, value);
 			}
 		}
-		// Add inidicators
+		// Add indicators
 		for (int i=0; i<99; i++)
 		{
 			if (indicators[i] != '\0')
@@ -265,23 +322,40 @@ public class RecordWorkstn extends RrecordX2
 				indBuf.setCharAt(2, (char)('0'+(i+1)/10));
 				indBuf.setCharAt(3, (char)('0'+(i+1)%10));
 				String value = new String(indicators, i, 1);
-				getXMLaddField(buf, indBuf.toString(), value);
+				formatter.addField(buf, indBuf.toString(), value);
 			}
 		}
 		return buf;
 	}
-	protected String getXMLclose(StringBuffer buf)
+	
+	// Build XML string for this record
+	protected StringBuffer getXMLBuffer()
 	{
 		// The first entity is the record name
-		buf.append(" </");
-		buf.append(recordName);
+		StringBuffer buf = new StringBuffer(" <");
+		buf.append(uname(recordName));
 		buf.append(">\n");
+		
+		return getContentBuffer(buf, new XMLFormatter()); 
+	}
 	
-		return buf.toString();
+	// Build JSON string for this record
+	protected StringBuffer getJSONBuffer()
+	{
+		// The first entity is the record name
+		StringBuffer buf = new StringBuffer();
+		buf.append("  {\"name\": \"" + uname(recordName) + "\",\n");
+		buf.append("   \"fields\": [\n");
+		
+		getContentBuffer(buf, new JSONFormatter());
+		buf.append('\n');
+		buf.append("   ]\n");
+		buf.append("  }");
+		return buf;
 	}
 
 	// Build XML string for this record's function keys
-	String getXMLfkey()
+	String getContentFkey(IContentFormatter formatter)
 	{
 		StringBuffer buf = new StringBuffer();
 		// Loop through all of the function keys for this format and see if they are available
@@ -307,12 +381,22 @@ public class RecordWorkstn extends RrecordX2
 						name="CA" + key;
 					else
 						name="CF" + key;
-					buf.append("<fkey name='" + name + "' value='" + name + "'/>");
+					formatter.addFkey(buf, name);
 				}
 			}
 		}
 	
 		return buf.toString();
+	}
+	
+	// Build XML string for this record's function keys
+	String getXMLfkey() {
+		return getContentFkey(new XMLFormatter());
+	}
+	
+	// Build JSON string for this record's function keys
+	String getJSONfkey() {
+		return getContentFkey(new JSONFormatter());
 	}
 
 	public int getZOrder()

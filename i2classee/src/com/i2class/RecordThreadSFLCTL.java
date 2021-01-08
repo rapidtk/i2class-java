@@ -68,7 +68,7 @@ public class RecordThreadSFLCTL extends RecordThread implements IRecordSFLCTL
 		def = (DefinitionAID)definitions[AID_PAGEUP-1];
 		if ((def == null || !evaluateIndicatorExpression(def.indicatorExpression)) && topRRN>1)
 			formatter.addFkey(buf, "PAGEDOWN");
-		return super.getContentFkey(formatter) + buf.toString();
+		return buf.toString() + super.getContentFkey(formatter);
 	}
 
 	/**

@@ -236,14 +236,15 @@ public class RecordThread extends RecordWorkstn
 	
 	class JSONFormatter implements IContentFormatter {
 		
-		String comma="";
+		String fieldComma="";
+		String fkeyComma="";
 		
 		public void addField(StringBuffer buf, String fldName, String value)
 		{
-			buf.append(comma);
+			buf.append(fieldComma);
 			fldName = uname(fldName);
 			buf.append("    ");
-			buf.append("{name: \"" + fldName + "\", ");
+			buf.append("{\"name\": \"" + fldName + "\", ");
 			// See if this is a valid number
 			try {
 				Double.valueOf(value);
@@ -251,15 +252,15 @@ public class RecordThread extends RecordWorkstn
 			} catch (Exception e) {
 				value = '"' + value + '"';
 			}
-			buf.append("value: " + value + "}");
-			comma = ",\n";
+			buf.append("\"value\": " + value + "}");
+			fieldComma = ",\n";
 		}
 		
 		public void addFkey(StringBuffer buf, String name) {
-			buf.append(comma);
+			buf.append(fkeyComma);
 			buf.append("  ");
-			buf.append("{name: \"" + name + "\"}");
-			comma = ",\n";
+			buf.append("{\"name\": \"" + name + "\"}");
+			fkeyComma = ",\n";
 		}
 	}
 
@@ -344,8 +345,8 @@ public class RecordThread extends RecordWorkstn
 	{
 		// The first entity is the record name
 		StringBuffer buf = new StringBuffer();
-		buf.append("  {name: \"" + uname(recordName) + "\",\n");
-		buf.append("   fields: [\n");
+		buf.append("  {\"name\": \"" + uname(recordName) + "\",\n");
+		buf.append("   \"fields\": [\n");
 		
 		getContentBuffer(buf, new JSONFormatter());
 		buf.append('\n');

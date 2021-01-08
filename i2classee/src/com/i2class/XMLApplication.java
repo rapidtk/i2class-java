@@ -4,7 +4,7 @@ import javax.servlet.http.*;
 /**
  * A class that encapsulates an XML/XSLT interface 
  */
-public class XMLApplication extends ThreadApplication {
+public class XMLApplication extends ContentApplication {
 	protected XMLApplication() {
 		super();
 	}
@@ -19,16 +19,6 @@ public class XMLApplication extends ThreadApplication {
 	}
 	static public String performThread(HttpServletRequest request, HttpServletResponse response, Class programClass) throws Exception
 	{
-		
-		HttpSession session = request.getSession();
-		Application program = (Application)session.getAttribute("program");
-		if (program==null || program.threadLock.terminated != null)
-		{
-			program = (Application)programClass.newInstance();
-			program.threadLock = new ThreadLockXML();
-			session.setAttribute("program", program);
-			program.start();
-		}
-		return ((ThreadLockServlet)(program.threadLock)).processDisplay(request, response);
+		return ContentApplication.performThread(request, response, programClass, ThreadLockXML.class);
 	}
 }
